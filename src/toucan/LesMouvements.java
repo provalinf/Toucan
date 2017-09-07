@@ -2,52 +2,54 @@ package toucan;
 
 import java.util.ArrayList;
 
-/**
- * Created by Cyril on 06/09/2017.
- */
 public class LesMouvements {
-    private ArrayList<Mouvement> lesMouvs;
-    private int xInit;
-    private int yInit;
+	private ArrayList<Mouvement> lesMouvs;
+	private int xInit;
+	private int yInit;
 
-    public LesMouvements(int xInit, int yInit) {
-        lesMouvs = new ArrayList<>();
-        this.xInit = xInit;
-        this.yInit = yInit;
-    }
+	public LesMouvements(int xInit, int yInit) {
+		lesMouvs = new ArrayList<>();
+		this.xInit = xInit;
+		this.yInit = yInit;
+	}
 
-    public void monter(int dep) {
-        lesMouvs.add(new Mouvement(0, dep, posX(), posY()));
-    }
+	public void monter(int dep) {
+		lesMouvs.add(new MouvementMonter(dep, getPosX(), getPosY()));
+	}
 
-    public int posX() {
-        int horizontal = 0;
-        for (Mouvement mouv : lesMouvs) {
-            if (mouv instanceof MouvementGauche) {
-                horizontal--;
-            } else if (mouv instanceof MouvementDroit) {
-                horizontal++;
-            }
-        }
-        return xInit + horizontal;
-    }
-    public int posY() {
-        int vertical = 0;
-        for (Mouvement mouv : lesMouvs) {
-            if (mouv instanceof MouvementMonter) {
-                vertical++;
-            } else if (mouv instanceof MouvementDescendre) {
-                vertical--;
-            }
-        }
-        return yInit + vertical;
-    }
+	private int getPosX() {
+		return getPosX(lesMouvs.size());
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("Position actuelle/n");
-        sb.append("x").append(posX()).append("/n");
-        sb.append("y").append(posY()).append("/n");
-        return sb.toString();
-    }
+	public int getPosX(int nbMouv) {
+		int i = 0;
+		int horizontal = xInit;
+		while (i < nbMouv) {
+			horizontal = lesMouvs.get(i).getPosX();
+			i++;
+		}
+		return horizontal;
+	}
+
+	private int getPosY() {
+		return getPosY(lesMouvs.size());
+	}
+
+	public int getPosY(int nbMouv) {
+		int i = 0;
+		int vertical = yInit;
+		while (i < nbMouv) {
+			vertical = lesMouvs.get(i).getPosY();
+			i++;
+		}
+		return vertical;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("Position actuelle/n");
+		sb.append("x").append(getPosX()).append("/n");
+		sb.append("y").append(getPosY()).append("/n");
+		return sb.toString();
+	}
 }

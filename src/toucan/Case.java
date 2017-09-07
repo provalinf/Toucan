@@ -1,25 +1,31 @@
 package toucan;
 
-/**
- * Created by Cyril on 05/09/2017.
- */
 public class Case {
-    private int valeur;
-    private LesMouvements pos;
-    public Case(int xInit, int yInit, int val) {
-        valeur = val;
-        pos = new LesMouvements(xInit, yInit);
-    }
+	private int valeur;
+	private LesMouvements pos;
 
-    public int getValeur() {
-        return valeur;
-    }
+	public Case(int xInit, int yInit, int val) {
+		valeur = val;
+		pos = new LesMouvements(xInit, yInit);
+	}
 
-    public void setValeur(int valeur) {
-        this.valeur = valeur;
-    }
+	public int getValeur() {
+		return valeur;
+	}
 
-    public void monter(int d){
-        pos.monter(d);
-    }
+	public void setValeur(int valeur) {
+		this.valeur = valeur;
+	}
+
+	public void monter(int d) {
+		pos.monter(d);
+	}
+
+	public int getPosX(int nbMouv) {
+		return pos.getPosX(nbMouv);
+	}
+
+	public int getPosY(int nbMouv) {
+		return pos.getPosY(nbMouv);
+	}
 }
