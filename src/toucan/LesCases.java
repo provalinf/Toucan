@@ -53,4 +53,8 @@ public class LesCases {
 
 	public void droite(int i, int i1) {
 	}
+
+	public void creerCases(int xInit, int yInit, int val) {
+		lesCases.add(new Case(xInit, yInit, val));
+	}
 }

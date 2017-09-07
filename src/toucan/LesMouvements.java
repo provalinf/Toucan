@@ -8,7 +8,7 @@ public class LesMouvements {
 	private int yInit;
 
 	public LesMouvements(int xInit, int yInit) {
-		lesMouvs = new ArrayList<>();
+		lesMouvs = new ArrayList<>(0);
 		this.xInit = xInit;
 		this.yInit = yInit;
 	}
