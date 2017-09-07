@@ -6,4 +6,5 @@ public abstract class Algo {
 	public Algo(LesCases lesCases) {
 		this.lesCases = lesCases;
 	}
+    protected abstract void trier();
 }
