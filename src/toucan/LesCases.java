@@ -8,12 +8,15 @@ public class LesCases {
 	public void monter(int numCase, int dep) {
 		lesCases.get(numCase).monter(dep);
 	}
+
 	public void droite(int numCase, int dep) {
 		lesCases.get(numCase).droite(dep);
 	}
+
 	public void gauche(int numCase, int dep) {
 		lesCases.get(numCase).gauche(dep);
 	}
+
 	public void descendre(int numCase, int dep) {
 		lesCases.get(numCase).descendre(dep);
 	}
@@ -28,6 +31,10 @@ public class LesCases {
 
 	public void modifier(int numCase, int val) {
 		lesCases.get(numCase).setValeur(val);
+	}
+
+	public Case getCase(int i) {
+		return lesCases.get(i);
 	}
 
 	// fonction toString de la classe toucan.LesCases
@@ -62,5 +69,9 @@ public class LesCases {
 
 	public void creerCases(int xInit, int yInit, int val) {
 		lesCases.add(new Case(xInit, yInit, val));
+	}
+
+	public int getNbCases() {
+		return lesCases.size();
 	}
 }
