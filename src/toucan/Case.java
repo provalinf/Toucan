@@ -20,6 +20,15 @@ public class Case {
 	public void monter(int d) {
 		pos.monter(d);
 	}
+	public void gauche(int d) {
+		pos.gauche(d);
+	}
+	public void droite(int d) {
+		pos.droite(d);
+	}
+	public void descendre(int d) {
+		pos.descendre(d);
+	}
 
 	public int getPosX(int nbMouv) {
 		return pos.getPosX(nbMouv);

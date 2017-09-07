@@ -16,6 +16,15 @@ public class LesMouvements {
 	public void monter(int dep) {
 		lesMouvs.add(new MouvementMonter(dep, getPosX(), getPosY()));
 	}
+	public void gauche(int dep) {
+		lesMouvs.add(new MouvementGauche(dep, getPosX(), getPosY()));
+	}
+	public void droite(int dep) {
+		lesMouvs.add(new MouvementDroite(dep, getPosX(), getPosY()));
+	}
+	public void descendre(int dep) {
+		lesMouvs.add(new MouvementDescendre(dep, getPosX(), getPosY()));
+	}
 
 	private int getPosX() {
 		return getPosX(lesMouvs.size());

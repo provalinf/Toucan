@@ -8,6 +8,15 @@ public class LesCases {
 	public void monter(int numCase, int dep) {
 		lesCases.get(numCase).monter(dep);
 	}
+	public void droite(int numCase, int dep) {
+		lesCases.get(numCase).droite(dep);
+	}
+	public void gauche(int numCase, int dep) {
+		lesCases.get(numCase).gauche(dep);
+	}
+	public void descendre(int numCase, int dep) {
+		lesCases.get(numCase).descendre(dep);
+	}
 
 	public void affecter(int c1, int c2) {
 		lesCases.set(c1, lesCases.get(c2));
@@ -49,9 +58,6 @@ public class LesCases {
 				maxTemps = c.getNbMouv();
 		}
 		return maxTemps;
-	}
-
-	public void droite(int i, int i1) {
 	}
 
 	public void creerCases(int xInit, int yInit, int val) {

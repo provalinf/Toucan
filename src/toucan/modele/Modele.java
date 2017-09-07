@@ -9,8 +9,8 @@ public class Modele {
 
 	public void creerLesMouvements() {
 		lesCases.monter(0, 5);
-		//lesCases.monter(1, 5);
-		//lesCases.monter(2, 5);
+		lesCases.monter(1, 5);
+		//qlesCases.monter(2, 5);
 		//lesCases.droite(0, 10);
 		System.out.println(lesCases.toString());
 	}
