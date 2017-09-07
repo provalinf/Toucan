@@ -1,9 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import toucan.Algo;
-import toucan.AlgoBulle;
-import toucan.AlgoInsert;
-import toucan.LesCases;
+import toucan.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -32,6 +29,19 @@ public class AlgoUnitTest {
 			assertNotEquals(i, tabCases.getCase(i).getValeur());
 
 		bulle.trier();
+
+		for (int i = 0; i < 4; i++)
+			assertEquals(i, tabCases.getCase(i).getValeur());
+	}
+
+	@Test
+	public void AlgoSelectionTest() {
+		Algo select = new AlgoSelection(tabCases);
+
+		for (int i = 0; i < 4; i++)
+			assertNotEquals(i, tabCases.getCase(i).getValeur());
+
+		select.trier();
 
 		for (int i = 0; i < 4; i++)
 			assertEquals(i, tabCases.getCase(i).getValeur());
