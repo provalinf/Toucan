@@ -12,7 +12,7 @@ public class Modele {
 		//lesCases.monter(1, 5);
 		//lesCases.monter(2, 5);
 		//lesCases.droite(0, 10);
-		System.out.println(lesCases);
+		System.out.println(lesCases.toString());
 	}
 
 	public  void creerCase(int xInit, int yInit, int val){

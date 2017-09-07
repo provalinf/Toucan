@@ -24,7 +24,7 @@ public class LesMouvements {
 	public int getPosX(int nbMouv) {
 		int i = 0;
 		int horizontal = xInit;
-		while (i < nbMouv) {
+		while (nbMouv <= nbMouv() && i < nbMouv) {
 			horizontal = lesMouvs.get(i).getPosX();
 			i++;
 		}
@@ -38,7 +38,7 @@ public class LesMouvements {
 	public int getPosY(int nbMouv) {
 		int i = 0;
 		int vertical = yInit;
-		while (i < nbMouv) {
+		while (nbMouv <= nbMouv() && i < nbMouv) {
 			vertical = lesMouvs.get(i).getPosY();
 			i++;
 		}

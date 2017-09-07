@@ -14,10 +14,10 @@ public class Mouvement {
 	}
 
 	public int getPosX() {
-		return xInit - xDepl;
+		return xInit + xDepl;
 	}
 
 	public int getPosY() {
-		return yInit - yDepl;
+		return yInit + yDepl;
 	}
 }
