@@ -74,4 +74,8 @@ public class LesCases {
 	public int getNbCases() {
 		return lesCases.size();
 	}
+
+	public void setCase(int j, Case c1) {
+		lesCases.set(j, c1);
+	}
 }
