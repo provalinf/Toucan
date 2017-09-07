@@ -7,7 +7,7 @@ public class AlgoBulle extends Algo{
     }
 
     @Override
-    protected void trier() {
+	public void trier() {
         int longueur=lesCases.getNbCases();
         boolean inversion;
         do {

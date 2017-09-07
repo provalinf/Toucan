@@ -6,13 +6,11 @@ public class AlgoInsert extends Algo {
 	}
 
 	public void trier() {
-		int n = lesCases.getNbCases() - 1;
-		for (int i = 2; i >= n; i++) {
+		for (int i = 1; i < lesCases.getNbCases(); i++) {
 			Case c1 = lesCases.getCase(i);
 			int j = i;
-			Case c2 = lesCases.getCase(j - 1);
-			while (c2.getValeur() > c1.getValeur()) {
-				lesCases.affecter(j, j - 1);
+			while (j > 0 && lesCases.getCase(j - 1).getValeur() > c1.getValeur()) {
+				lesCases.setCase(j, lesCases.getCase(j - 1));
 				j = j - 1;
 			}
 			lesCases.setCase(j, c1);
