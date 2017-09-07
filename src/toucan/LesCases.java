@@ -10,21 +10,16 @@ public class LesCases {
 	}
 
 	public void affecter(int c1, int c2) {
-		lesCases.get(c1) = lesCases.get(c2);
+		lesCases.set(c1, lesCases.get(c2));
 	}
 
 	public boolean comparer(int c1, int c2) {
 		return lesCases.get(c1).getValeur() == lesCases.get(c2).getValeur();
 	}
 
-	public void ajouter(int numCase, int val) {
-		lesCases.add(new Case(numCase, val));
-	}
-
 	public void modifier(int numCase, int val) {
 		lesCases.get(numCase).setValeur(val);
 	}
-
 
 	// fonction toString de la classe toucan.LesCases
 	@Override
@@ -45,6 +40,15 @@ public class LesCases {
 			sb.append("\n");
 		}
 		return sb.toString();
+	}
+
+	private int getMaxTemps() {
+		int maxTemps = 0;
+		for (Case c : lesCases) {
+			if (c.getNbMouv() > maxTemps)
+				maxTemps = c.getNbMouv();
+		}
+		return maxTemps;
 	}
 
 	public void droite(int i, int i1) {

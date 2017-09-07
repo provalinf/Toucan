@@ -28,4 +28,8 @@ public class Case {
 	public int getPosY(int nbMouv) {
 		return pos.getPosY(nbMouv);
 	}
+
+	public int getNbMouv() {
+		return pos.nbMouv();
+	}
 }

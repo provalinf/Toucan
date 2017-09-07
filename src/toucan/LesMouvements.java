@@ -45,6 +45,10 @@ public class LesMouvements {
 		return vertical;
 	}
 
+	public int nbMouv() {
+		return lesMouvs.size();
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Position actuelle/n");
