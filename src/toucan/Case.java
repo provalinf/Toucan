@@ -33,6 +33,10 @@ public class Case {
 		pos.descendre(d);
 	}
 
+	public void stable() {
+		pos.stable();
+	}
+
 	public int getPosX(int nbMouv) {
 		return pos.getPosX(nbMouv);
 	}

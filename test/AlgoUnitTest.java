@@ -14,7 +14,7 @@ public class AlgoUnitTest {
 
 	@BeforeEach
 	public void initTab() {
-		tabCases = new LesCases();
+		tabCases = new LesCases(4);
 		tabCases.creerCases(1, 1, 1);
 		tabCases.creerCases(0, 0, 0);
 		tabCases.creerCases(3, 3, 3);

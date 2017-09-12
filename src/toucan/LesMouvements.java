@@ -29,6 +29,10 @@ public class LesMouvements {
 		lesMouvs.add(new MouvementDescendre(dep, getPosX(), getPosY()));
 	}
 
+	public void stable() {
+		lesMouvs.add(new MouvementStable(getPosX(), getPosY()));
+	}
+
 	private int getPosX() {
 		return getPosX(lesMouvs.size());
 	}
