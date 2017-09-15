@@ -1,4 +1,4 @@
-package toucan;
+package toucan.mouvement;
 
 public class Mouvement {
 	protected int xDepl;

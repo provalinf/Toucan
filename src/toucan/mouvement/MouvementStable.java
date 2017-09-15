@@ -1,6 +1,6 @@
-package toucan;
+package toucan.mouvement;
 
-import toucan.Mouvement;
+import toucan.mouvement.Mouvement;
 
 public class MouvementStable extends Mouvement {
 	public MouvementStable(int xInit, int yInit) {

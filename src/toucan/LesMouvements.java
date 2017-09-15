@@ -1,5 +1,7 @@
 package toucan;
 
+import toucan.mouvement.*;
+
 import java.util.ArrayList;
 
 public class LesMouvements {

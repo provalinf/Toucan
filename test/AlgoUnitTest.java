@@ -1,6 +1,10 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import toucan.*;
+import toucan.algorithme.Algo;
+import toucan.algorithme.AlgoBulle;
+import toucan.algorithme.AlgoInsert;
+import toucan.algorithme.AlgoSelection;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

@@ -1,4 +1,6 @@
-package toucan;
+package toucan.algorithme;
+
+import toucan.LesCases;
 
 public abstract class Algo {
 	protected LesCases lesCases;
