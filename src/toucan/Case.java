@@ -45,7 +45,7 @@ public class Case {
 		return pos.getPosY(nbMouv);
 	}
 
-	public int getNbMouv() {
-		return pos.nbMouv();
+	public int getMaxTemps() {
+		return pos.tempsMax();
 	}
 }
