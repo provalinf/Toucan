@@ -16,26 +16,26 @@ public class LesMouvements {
 	}
 
 	public void monter(int dep) {
-		lesMouvs.add(new MouvementMonter(dep, getPosXInit(), getPosY()));
+		lesMouvs.add(new MouvementMonter(dep, getPosXInit(), getPosYInit()));
 	}
 
 	public void gauche(int dep) {
-		lesMouvs.add(new MouvementGauche(dep, getPosXInit(), getPosY()));
+		lesMouvs.add(new MouvementGauche(dep, getPosXInit(), getPosYInit()));
 	}
 
 	public void droite(int dep) {
-		lesMouvs.add(new MouvementDroite(dep, getPosXInit(), getPosY()));
+		lesMouvs.add(new MouvementDroite(dep, getPosXInit(), getPosYInit()));
 	}
 
 	public void descendre(int dep) {
-		lesMouvs.add(new MouvementDescendre(dep, getPosXInit(), getPosY()));
+		lesMouvs.add(new MouvementDescendre(dep, getPosXInit(), getPosYInit()));
 	}
 
 	public void stable(int tmps) {
-		lesMouvs.add(new MouvementStable(tmps, getPosX(), getPosY()));
+		lesMouvs.add(new MouvementStable(tmps, getPosXInit(), getPosYInit()));
 	}
 
-	private int getPosX() {
+	private int getPosXInit() {
 		return getPosX(lesMouvs.size());
 	}
 
@@ -52,32 +52,35 @@ public class LesMouvements {
 	public int getPosX(int nbTemps) {
 		int i = 0;
 		int horizontal = xInit;
-		while (nbTemps <= tempsMax() && i < nbTemps) {
-			horizontal = lesMouvs.get(i).getPosXTmps(i);
-			if (nbTemps > lesMouvs.get(i).getTMax())
-				i++;
+		if (nbTemps < tempsMax()) {
+			while (nbTemps > lesMouvs.get(i).getTMax()) i++;
+			return horizontal = lesMouvs.get(i).getPosXTmps(i);
 		}
+		if (lesMouvs.size() > 0)
+			return lesMouvs.get(lesMouvs.size() - 1).getPosX();
 		return horizontal;
 	}
 
-	private int getPosY() {
+	private int getPosYInit() {
 		return getPosY(lesMouvs.size());
 	}
 
-	public int getPosYInit(int nbTemps) {
+	public int getPosY(int nbTemps) {
 		int i = 0;
 		int vertical = yInit;
-		while (nbTemps <= tempsMax() && i < nbTemps) {
-			vertical = lesMouvs.get(i).getPosYTmps(i);
-			i++;
+		if (nbTemps < tempsMax()) {
+			while (nbTemps > lesMouvs.get(i).getTMax()) i++;
+			return vertical = lesMouvs.get(i).getPosYTmps(i);
 		}
+		if (lesMouvs.size() > 0)
+			return lesMouvs.get(lesMouvs.size() - 1).getPosY();
 		return vertical;
 	}
 
-	public int getPosY(int nbMouv) {
+	public int getPosYInit(int nbMouv) {
 		int i = 0;
 		int vertical = yInit;
-		while (nbMouv <= nbMouv() && i < nbMouv) {
+		while (nbMouv <= lesMouvs.size() && i < nbMouv) {
 			vertical = lesMouvs.get(i).getPosY();
 			i++;
 		}
@@ -96,8 +99,8 @@ public class LesMouvements {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Position actuelle/n");
-		sb.append("x").append(getPosX()).append("/n");
-		sb.append("y").append(getPosY()).append("/n");
+		sb.append("x").append(getPosXInit()).append("/n");
+		sb.append("y").append(getPosYInit()).append("/n");
 		return sb.toString();
 	}
 }

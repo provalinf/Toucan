@@ -18,6 +18,7 @@ public class Modele {
 
 	public void creerLesMouvements(int... mouvs) {
 		for (int i = 0; i+3 <= mouvs.length; i+=3) {
+			System.out.println("ok");
 			switch (mouvs[i+1]) {
 				case NORD:
 					lesCases.monter(mouvs[i], mouvs[i+2]);
@@ -32,7 +33,7 @@ public class Modele {
 					lesCases.gauche(mouvs[i], mouvs[i+2]);
 					break;
 				case STABLE:
-					lesCases.stable(mouvs[i]);
+					lesCases.stable(mouvs[i], mouvs[i+2]);
 			}
 		}
 	}

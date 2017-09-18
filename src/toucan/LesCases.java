@@ -26,8 +26,8 @@ public class LesCases {
 		lesCases.get(numCase).descendre(dep);
 	}
 
-	public void stable(int numCase) {
-		lesCases.get(numCase).stable();
+	public void stable(int numCase, int temps) {
+		lesCases.get(numCase).stable(temps);
 	}
 
 	public void affecter(int c1, int c2) {

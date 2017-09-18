@@ -33,8 +33,8 @@ public class Case {
 		pos.descendre(d);
 	}
 
-	public void stable() {
-		pos.stable();
+	public void stable(int tmps) {
+		pos.stable(tmps);
 	}
 
 	public int getPosX(int nbTmps) {
