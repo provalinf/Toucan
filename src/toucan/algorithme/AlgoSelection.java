@@ -13,10 +13,10 @@ public class AlgoSelection extends Algo {
 
     @Override
     public void trier() {
-        for (int i = 0; i < lesCases.getNbCases()-1; i++) {
+        for (int i = 0; i < lesCases.getNbCases() - 1; i++) {
             int mini = i;
-            for (int j = i+1; j < lesCases.getNbCases(); j++) {
-                if(lesCases.getCase(j).getValeur()<lesCases.getCase(mini).getValeur()){
+            for (int j = i + 1; j < lesCases.getNbCases(); j++) {
+                if (lesCases.getCase(j).getValeur() < lesCases.getCase(mini).getValeur()) {
                     mini = j;
                 }
             }
