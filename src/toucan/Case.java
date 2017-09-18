@@ -37,12 +37,12 @@ public class Case {
 		pos.stable();
 	}
 
-	public int getPosX(int nbMouv) {
-		return pos.getPosX(nbMouv);
+	public int getPosX(int nbTmps) {
+		return pos.getPosX(nbTmps);
 	}
 
-	public int getPosY(int nbMouv) {
-		return pos.getPosY(nbMouv);
+	public int getPosY(int nbTmps) {
+		return pos.getPosY(nbTmps);
 	}
 
 	public int getMaxTemps() {

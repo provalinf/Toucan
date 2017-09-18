@@ -32,6 +32,16 @@ public class Mouvement {
 		return yInit + yDepl;
 	}
 
+	public int getPosXTmps(int tmp) {
+		if (tmp < xDepl) return tmp;
+		return xDepl;
+	}
+
+	public int getPosYTmps(int tmp) {
+		if (tmp < yDepl) return tmp;
+		return yDepl;
+	}
+
 	public int getTMax() {
 		return Math.abs(xDepl) + Math.abs(yDepl) + tArriv;
 	}

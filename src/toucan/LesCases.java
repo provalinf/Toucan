@@ -49,8 +49,8 @@ public class LesCases {
 	private int getMaxTemps() {
 		int maxTemps = 0;
 		for (Case c : lesCases) {
-			if (c.getNbMouv() > maxTemps)
-				maxTemps = c.getNbMouv();
+			if (c.getMaxTemps() > maxTemps)
+				maxTemps = c.getMaxTemps();
 		}
 		return maxTemps;
 	}

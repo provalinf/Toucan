@@ -53,14 +53,25 @@ public class LesMouvements {
 		int i = 0;
 		int horizontal = xInit;
 		while (nbTemps <= tempsMax() && i < nbTemps) {
-			horizontal = lesMouvs.get(i).getPosX();
-			i++;
+			horizontal = lesMouvs.get(i).getPosXTmps(i);
+			if (nbTemps > lesMouvs.get(i).getTMax())
+				i++;
 		}
 		return horizontal;
 	}
 
 	private int getPosY() {
 		return getPosY(lesMouvs.size());
+	}
+
+	public int getPosYInit(int nbTemps) {
+		int i = 0;
+		int vertical = yInit;
+		while (nbTemps <= tempsMax() && i < nbTemps) {
+			vertical = lesMouvs.get(i).getPosYTmps(i);
+			i++;
+		}
+		return vertical;
 	}
 
 	public int getPosY(int nbMouv) {

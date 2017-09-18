@@ -16,7 +16,7 @@ public class Modele {
 		lesCases = new LesCases(nbCases);
 	}
 
-	public void creerLesMouvements(int[] mouvs) {
+	public void creerLesMouvements(int... mouvs) {
 		for (int i = 0; i+3 <= mouvs.length; i+=3) {
 			switch (mouvs[i+1]) {
 				case NORD:
