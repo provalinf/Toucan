@@ -84,7 +84,14 @@ public class LesCases {
 			}
 			sb.append("\n");
 		}
+
+		// -- Debug
+		for (Case c : lesCases)
+			System.out.println(c.toString());
+		// --
+
 		return sb.toString();
+
 	}
 
 }

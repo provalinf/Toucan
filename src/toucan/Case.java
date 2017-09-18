@@ -48,4 +48,11 @@ public class Case {
 	public int getMaxTemps() {
 		return pos.tempsMax();
 	}
+
+	@Override
+	public String toString() {
+		return "Case{" +
+				"pos=" + pos +
+				'}';
+	}
 }

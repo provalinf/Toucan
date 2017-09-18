@@ -36,7 +36,7 @@ public class LesMouvements {
 	}
 
 	private int getPosXInit() {
-		return getPosX(lesMouvs.size());
+		return getPosXInit(lesMouvs.size());
 	}
 
 	public int getPosXInit(int nbMouv) {
@@ -52,9 +52,9 @@ public class LesMouvements {
 	public int getPosX(int nbTemps) {
 		int i = 0;
 		int horizontal = xInit;
-		if (nbTemps < tempsMax()) {
+		if (nbTemps < tempsMaxInit()) {
 			while (nbTemps > lesMouvs.get(i).getTMax()) i++;
-			return horizontal = lesMouvs.get(i).getPosXTmps(i);
+			return horizontal = lesMouvs.get(i).getPosXTmps(nbTemps);
 		}
 		if (lesMouvs.size() > 0)
 			return lesMouvs.get(lesMouvs.size() - 1).getPosX();
@@ -62,15 +62,15 @@ public class LesMouvements {
 	}
 
 	private int getPosYInit() {
-		return getPosY(lesMouvs.size());
+		return getPosYInit(lesMouvs.size());
 	}
 
 	public int getPosY(int nbTemps) {
 		int i = 0;
 		int vertical = yInit;
-		if (nbTemps < tempsMax()) {
+		if (nbTemps < tempsMaxInit()) {
 			while (nbTemps > lesMouvs.get(i).getTMax()) i++;
-			return vertical = lesMouvs.get(i).getPosYTmps(i);
+			return vertical = lesMouvs.get(i).getPosYTmps(nbTemps);
 		}
 		if (lesMouvs.size() > 0)
 			return lesMouvs.get(lesMouvs.size() - 1).getPosY();
@@ -87,7 +87,7 @@ public class LesMouvements {
 		return vertical;
 	}
 
-	public int tempsMax() {
+	public int tempsMaxInit() {
 		int tMax = 0;
 		for (Mouvement lesMouv : lesMouvs) {
 			if (lesMouv.getTMax() > tMax)
@@ -96,11 +96,28 @@ public class LesMouvements {
 		return tMax;
 	}
 
-	@Override
+	public int tempsMax() {
+		int tMax = 0;
+		for (Mouvement lesMouv : lesMouvs) {
+			tMax += lesMouv.getTMax();
+		}
+		return tMax;
+	}
+
+	/*@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("Position actuelle/n");
 		sb.append("x").append(getPosXInit()).append("/n");
 		sb.append("y").append(getPosYInit()).append("/n");
 		return sb.toString();
+	}*/
+
+	@Override
+	public String toString() {
+		return "LesMouvements{\n" +
+				"\txInit=" + xInit +
+				", yInit=" + yInit +
+				", \n\tlesMouvs=" + lesMouvs +
+				"\n}";
 	}
 }
