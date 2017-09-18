@@ -1,7 +1,7 @@
 package toucan.algorithme;
 
-import toucan.Case;
-import toucan.LesCases;
+import toucan.modele.Case;
+import toucan.modele.LesCases;
 
 public class AlgoInsert extends Algo {
 	public AlgoInsert(LesCases lesCases) {

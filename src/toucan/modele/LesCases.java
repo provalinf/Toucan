@@ -1,4 +1,4 @@
-package toucan;
+package toucan.modele;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,10 @@ public class LesCases {
 		lesCases = new ArrayList<>(nbCases);
 		for (int i = 0; i < nbCases; i++)
 			creerCases(0, 0, 0);
+	}
+
+	public LesCases() {
+		lesCases = new ArrayList<>();
 	}
 
 	public void monter(int numCase, int dep) {
@@ -79,7 +83,7 @@ public class LesCases {
 		int maxTemps = getMaxTemps();
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < lesCases.size(); i++) {
-			sb.append("toucan.Case ").append(i).append(": ");
+			sb.append("toucan.modele.Case ").append(i).append(": ");
 			Case c = lesCases.get(i);
 			for (int t = 0; t <= maxTemps; t++) {
 				int x = c.getPosX(t);

@@ -1,4 +1,6 @@
-package toucan;
+package toucan.modele;
+
+import toucan.modele.LesMouvements;
 
 public class Case {
 	private int valeur;

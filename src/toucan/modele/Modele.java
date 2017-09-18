@@ -1,7 +1,5 @@
 package toucan.modele;
 
-import toucan.LesCases;
-
 public class Modele {
 
 	public static final int NORD = 0;

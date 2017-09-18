@@ -1,7 +1,7 @@
 package toucan.algorithme;
 
-import toucan.Case;
-import toucan.LesCases;
+import toucan.modele.Case;
+import toucan.modele.LesCases;
 
 public class AlgoBulle extends Algo {
 

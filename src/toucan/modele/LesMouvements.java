@@ -1,4 +1,4 @@
-package toucan;
+package toucan.modele;
 
 import toucan.mouvement.*;
 
