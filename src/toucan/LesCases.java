@@ -8,6 +8,8 @@ public class LesCases {
 
 	public LesCases(int nbCases) {
 		lesCases = new ArrayList<>(nbCases);
+		for (int i = 0; i < nbCases; i++)
+			creerCases(0, 0, 0);
 	}
 
 	public void monter(int numCase, int dep) {
@@ -85,13 +87,12 @@ public class LesCases {
 			sb.append("\n");
 		}
 
-		// -- Debug
-		for (Case c : lesCases)
-			System.out.println(c.toString());
-		// --
+		sb.append("Mouvements des cases\n");
+		for (int i = 0; i < lesCases.size(); i++) {
+			sb.append("n°").append(i).append("\n").append(lesCases.get(i).toString()).append("\n");
+		}
 
 		return sb.toString();
-
 	}
 
 }

@@ -50,15 +50,14 @@ public class LesMouvements {
 	}
 
 	public int getPosX(int nbTemps) {
+		if (lesMouvs.size() == 0) return xInit;
 		int i = 0;
-		int horizontal = xInit;
-		if (nbTemps < tempsMaxInit()) {
-			while (nbTemps > lesMouvs.get(i).getTMax()) i++;
-			return horizontal = lesMouvs.get(i).getPosXTmps(nbTemps);
+
+		while (i + 1 < lesMouvs.size() && nbTemps > lesMouvs.get(i).getTMax()) {
+			i++;
+			nbTemps -= lesMouvs.get(i - 1).getTMax();
 		}
-		if (lesMouvs.size() > 0)
-			return lesMouvs.get(lesMouvs.size() - 1).getPosX();
-		return horizontal;
+		return lesMouvs.get(i).getPosXTmps(nbTemps);
 	}
 
 	private int getPosYInit() {
@@ -66,15 +65,14 @@ public class LesMouvements {
 	}
 
 	public int getPosY(int nbTemps) {
+		if (lesMouvs.size() == 0) return yInit;
 		int i = 0;
-		int vertical = yInit;
-		if (nbTemps < tempsMaxInit()) {
-			while (nbTemps > lesMouvs.get(i).getTMax()) i++;
-			return vertical = lesMouvs.get(i).getPosYTmps(nbTemps);
+
+		while (i + 1 < lesMouvs.size() && nbTemps > lesMouvs.get(i).getTMax()) {
+			i++;
+			nbTemps -= lesMouvs.get(i - 1).getTMax();
 		}
-		if (lesMouvs.size() > 0)
-			return lesMouvs.get(lesMouvs.size() - 1).getPosY();
-		return vertical;
+		return lesMouvs.get(i).getPosYTmps(nbTemps);
 	}
 
 	public int getPosYInit(int nbMouv) {
@@ -119,5 +117,10 @@ public class LesMouvements {
 				", yInit=" + yInit +
 				", \n\tlesMouvs=" + lesMouvs +
 				"\n}";
+	}
+
+	public void setPosition(int xInit, int yInit) {
+		this.xInit = xInit;
+		this.yInit = yInit;
 	}
 }

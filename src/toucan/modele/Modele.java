@@ -17,22 +17,22 @@ public class Modele {
 	}
 
 	public void creerLesMouvements(int... mouvs) {
-		for (int i = 0; i+3 <= mouvs.length; i+=3) {
-			switch (mouvs[i+1]) {
+		for (int i = 0; i + 3 <= mouvs.length; i += 3) {
+			switch (mouvs[i + 1]) {
 				case NORD:
-					lesCases.monter(mouvs[i], mouvs[i+2]);
+					lesCases.monter(mouvs[i], mouvs[i + 2]);
 					break;
 				case SUD:
-					lesCases.descendre(mouvs[i], mouvs[i+2]);
+					lesCases.descendre(mouvs[i], mouvs[i + 2]);
 					break;
 				case EST:
-					lesCases.droite(mouvs[i], mouvs[i+2]);
+					lesCases.droite(mouvs[i], mouvs[i + 2]);
 					break;
 				case OUEST:
-					lesCases.gauche(mouvs[i], mouvs[i+2]);
+					lesCases.gauche(mouvs[i], mouvs[i + 2]);
 					break;
 				case STABLE:
-					lesCases.stable(mouvs[i], mouvs[i+2]);
+					lesCases.stable(mouvs[i], mouvs[i + 2]);
 			}
 		}
 	}
@@ -41,8 +41,8 @@ public class Modele {
 		lesCases.creerCases(xInit, yInit, val);
 	}
 
-	public void setPosition(int i, int i1, int i2) {
-		creerCase(i, i1, i2);
+	public void setPosition(int numCase, int xInit, int yInit) {
+		lesCases.getCase(numCase).setPosition(xInit, yInit);
 	}
 
 	@Override

@@ -13,8 +13,16 @@ public class Case {
 		return valeur;
 	}
 
-	public void setValeur(int valeur) {
-		this.valeur = valeur;
+	public int getPosX(int nbTmps) {
+		return pos.getPosX(nbTmps);
+	}
+
+	public int getPosY(int nbTmps) {
+		return pos.getPosY(nbTmps);
+	}
+
+	public int getMaxTemps() {
+		return pos.tempsMax();
 	}
 
 	public void monter(int d) {
@@ -37,16 +45,12 @@ public class Case {
 		pos.stable(tmps);
 	}
 
-	public int getPosX(int nbTmps) {
-		return pos.getPosX(nbTmps);
+	public void setPosition(int xInit, int yInit) {
+		pos.setPosition(xInit, yInit);
 	}
 
-	public int getPosY(int nbTmps) {
-		return pos.getPosY(nbTmps);
-	}
-
-	public int getMaxTemps() {
-		return pos.tempsMax();
+	public void setValeur(int valeur) {
+		this.valeur = valeur;
 	}
 
 	@Override

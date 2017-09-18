@@ -30,11 +30,13 @@ public class Mouvement {
 	}
 
 	public int getPosXTmps(int tmp) {
+		if (xDepl < 0 && tmp > xDepl) return xInit - tmp;
 		if (tmp < xDepl) return tmp + xInit;
 		return getPosX();
 	}
 
 	public int getPosYTmps(int tmp) {
+		if (yDepl < 0 && tmp > yDepl) return yInit - tmp;
 		if (tmp < yDepl) return tmp + yInit;
 		return getPosY();
 	}
@@ -50,6 +52,8 @@ public class Mouvement {
 				", yInit=" + yInit +
 				",\n\t\txDepl=" + xDepl +
 				", yDepl=" + yDepl +
+				", tStable=" + tStable +
+				",\n\t\tAprès mouvement : x=" + getPosX() + ", y=" + getPosY() +
 				"\n\t}";
 	}
 }
