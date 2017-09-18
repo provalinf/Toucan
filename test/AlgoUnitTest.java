@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import toucan.*;
+import toucan.LesCases;
 import toucan.algorithme.Algo;
 import toucan.algorithme.AlgoBulle;
 import toucan.algorithme.AlgoInsert;
