@@ -57,7 +57,7 @@ public class LesCases {
 	 *
 	 * @return : Integer, Temps max
 	 */
-	private int getMaxTemps() {
+	public int getMaxTemps() {
 		int maxTemps = 0;
 		for (Case c : lesCases) {
 			if (c.getMaxTemps() > maxTemps)

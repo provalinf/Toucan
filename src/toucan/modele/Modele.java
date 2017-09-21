@@ -11,15 +11,14 @@ public class Modele extends Observable {
 	public static final int STABLE = 4;
 
 	private LesCases lesCases;
-
-	private int tempsDeLatence;
+	private final int tempsDeLatence = 8;
 
 	public Modele(int nbCases) {
 		lesCases = new LesCases(nbCases);
 	}
 
-	public int getTempsDeLatence() {
-		return tempsDeLatence;
+	public Modele() {
+		lesCases = new LesCases();
 	}
 
 	/**
@@ -46,6 +45,24 @@ public class Modele extends Observable {
 					lesCases.stable(mouvs[i], mouvs[i + 2]);
 			}
 		}
+		setChanged();
+		notifyObservers();
+	}
+
+	public Case getCase(int i) {
+		return lesCases.getCase(i);
+	}
+
+	public int getNbCases() {
+		return lesCases.getNbCases();
+	}
+
+	public int getTempsDeLatence() {
+		return tempsDeLatence;
+	}
+
+	public int getMaxTemps() {
+		return lesCases.getMaxTemps();
 	}
 
 	/**

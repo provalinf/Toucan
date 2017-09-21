@@ -1,14 +1,22 @@
 package toucan.modele;
 
-import toucan.modele.LesMouvements;
+import toucan.graphique.CaseAnimation;
+
+import java.awt.*;
 
 public class Case {
 	private int valeur;
 	private LesMouvements pos;
+	private CaseAnimation cAnim;
 
 	public Case(int xInit, int yInit, int val) {
 		valeur = val;
 		pos = new LesMouvements(xInit, yInit);
+		cAnim = new CaseAnimation(pos, val, xInit, yInit, Color.BLACK);
+	}
+
+	public void dessiner(Graphics g, int tmps) {
+		cAnim.dessiner(g, tmps);
 	}
 
 	public int getValeur() {

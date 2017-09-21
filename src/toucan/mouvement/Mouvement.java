@@ -33,10 +33,10 @@ public class Mouvement {
 	 * Calcule la position de X à un temps t
 	 *
 	 * @param tmp : Integer, Temps t
-	 * @return, Integer, Position X
+	 * @return Integer, Position X
 	 */
 	public int getPosXTmps(int tmp) {
-		if (xDepl < 0 && tmp > xDepl) return xInit - tmp;
+		if (xDepl < 0 && tmp < Math.abs(xDepl)) return xInit - tmp;
 		if (tmp < xDepl) return tmp + xInit;
 		return getPosX();
 	}
@@ -45,10 +45,10 @@ public class Mouvement {
 	 * Calcule la position de Y à un temps t
 	 *
 	 * @param tmp : Integer, Temps t
-	 * @return, Integer, Position Y
+	 * @return Integer, Position Y
 	 */
 	public int getPosYTmps(int tmp) {
-		if (yDepl < 0 && tmp > yDepl) return yInit - tmp;
+		if (yDepl < 0 && tmp < Math.abs(yDepl)) return yInit - tmp;
 		if (tmp < yDepl) return tmp + yInit;
 		return getPosY();
 	}
