@@ -19,8 +19,6 @@ public class CaseAnimation extends BufferedImage {
 	 *
 	 * @param pos
 	 * @param v   chaîne de caractère à écrire au centre de d'élément graphique
-	 * @param x   abscisse initiale de l'élément graphique dans la fenêtre
-	 * @param y   ordonnée initiale de l'élément graphique dans la fenêtre
 	 */
 	public CaseAnimation(LesMouvements pos, int v, Color coul) {
 		super(150, 150, BufferedImage.TYPE_INT_ARGB);

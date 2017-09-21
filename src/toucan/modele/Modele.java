@@ -29,10 +29,10 @@ public class Modele extends Observable {
 	public void creerLesMouvements(int... mouvs) {
 		for (int i = 0; i + 3 <= mouvs.length; i += 3) {
 			switch (mouvs[i + 1]) {
-				case NORD:
+				case SUD:
 					lesCases.monter(mouvs[i], mouvs[i + 2]);
 					break;
-				case SUD:
+				case NORD:
 					lesCases.descendre(mouvs[i], mouvs[i + 2]);
 					break;
 				case EST:
