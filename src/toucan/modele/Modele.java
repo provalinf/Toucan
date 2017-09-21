@@ -1,6 +1,8 @@
 package toucan.modele;
 
-public class Modele {
+import java.util.Observable;
+
+public class Modele extends Observable {
 
 	public static final int NORD = 0;
 	public static final int SUD = 1;
@@ -10,8 +12,14 @@ public class Modele {
 
 	private LesCases lesCases;
 
+	private int tempsDeLatence;
+
 	public Modele(int nbCases) {
 		lesCases = new LesCases(nbCases);
+	}
+
+	public int getTempsDeLatence() {
+		return tempsDeLatence;
 	}
 
 	/**
