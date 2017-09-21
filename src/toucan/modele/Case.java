@@ -12,7 +12,7 @@ public class Case {
 	public Case(int xInit, int yInit, int val) {
 		valeur = val;
 		pos = new LesMouvements(xInit, yInit);
-		cAnim = new CaseAnimation(pos, val, xInit, yInit, Color.BLACK);
+		cAnim = new CaseAnimation(pos, val, Color.BLACK);
 	}
 
 	public void dessiner(Graphics g, int tmps) {

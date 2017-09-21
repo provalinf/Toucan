@@ -30,11 +30,11 @@ public class Toucan extends JFrame {
 
 		add(new ViewGraphique(model), BorderLayout.CENTER);
 
-		((Modele)model).creerCase(20, 60, 1);
-		((Modele)model).creerCase(100, 60, 2);
-		((Modele)model).creerCase(180, 60, 3);
-		((Modele)model).creerCase(260, 60, 4);
-		((Modele)model).creerLesMouvements(1, Modele.NORD, 30, 2, Modele.SUD, 30, 1, Modele.EST, 80, 2, Modele.STABLE, 80, 2, Modele.OUEST, 80, 1, Modele.SUD, 30, 2, Modele.NORD, 30);
+		((Modele) model).creerCase(20, 60, 1);
+		((Modele) model).creerCase(100, 60, 2);
+		((Modele) model).creerCase(180, 60, 3);
+		((Modele) model).creerCase(260, 60, 4);
+		((Modele) model).creerLesMouvements(1, Modele.NORD, 30, 2, Modele.SUD, 30, 1, Modele.EST, 80, 2, Modele.STABLE, 80, 2, Modele.OUEST, 80, 1, Modele.SUD, 30, 2, Modele.NORD, 30);
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);

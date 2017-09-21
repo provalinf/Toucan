@@ -3,7 +3,6 @@ package toucan.graphique;
 import toucan.modele.Modele;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class LesCasesAnimation {
 
