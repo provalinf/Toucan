@@ -11,7 +11,7 @@ public class AlgoBulle extends Algo {
 
 	@Override
 	public void trier() {
-		int longueur = lesCases.getNbCases();
+		/*int longueur = lesCases.getNbCases();
 		boolean inversion;
 		do {
 			inversion = false;
@@ -22,7 +22,7 @@ public class AlgoBulle extends Algo {
 				}
 			}
 		}
-		while (inversion);
+		while (inversion);*/
 	}
 
 	private void swap(LesCases lesCases, int c1, int c2) {
