@@ -8,18 +8,19 @@ public class Mouvement {
 	protected int tStable;
 	protected int valeur;
 
-	public Mouvement(int xDepl, int yDepl, int xInit, int yInit) {
-		this(0, xInit, yInit);
+	public Mouvement(int xDepl, int yDepl, int xInit, int yInit, int val) {
+		this(0, xInit, yInit, val);
 		this.xDepl = xDepl;
 		this.yDepl = yDepl;
 	}
 
-	public Mouvement(int temps, int xInit, int yInit) {
+	public Mouvement(int temps, int xInit, int yInit, int val) {
 		this.xInit = xInit;
 		this.yInit = yInit;
 		xDepl = 0;
 		yDepl = 0;
 		tStable = temps;
+		valeur = val;
 	}
 
 	public int getPosX() {

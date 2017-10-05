@@ -37,32 +37,48 @@ public class Case {
 		return pos.tempsMax();
 	}
 
+	public void monter(int d, int val) {
+		pos.monter(d, val);
+	}
+
 	public void monter(int d) {
-		pos.monter(d);
+		pos.monter(d, getValeurActuel());
+	}
+
+	public void gauche(int d, int val) {
+		pos.gauche(d, val);
 	}
 
 	public void gauche(int d) {
-		pos.gauche(d);
+		pos.gauche(d, getValeurActuel());
+	}
+
+	public void droite(int d, int val) {
+		pos.droite(d, val);
 	}
 
 	public void droite(int d) {
-		pos.droite(d);
+		pos.droite(d, getValeurActuel());
+	}
+
+	public void descendre(int d, int val) {
+		pos.descendre(d, val);
 	}
 
 	public void descendre(int d) {
-		pos.descendre(d);
+		pos.descendre(d, getValeurActuel());
+	}
+
+	public void stable(int tmps, int val) {
+		pos.stable(tmps, val);
 	}
 
 	public void stable(int tmps) {
-		pos.stable(tmps);
+		pos.stable(tmps, getValeurActuel());
 	}
 
 	public void setPosition(int xInit, int yInit) {
 		pos.setPosition(xInit, yInit);
-	}
-
-	public void setValeur(int valeur) {
-		this.valeur = valeur;
 	}
 
 	@Override

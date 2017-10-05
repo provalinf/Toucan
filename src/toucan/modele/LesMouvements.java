@@ -8,31 +8,33 @@ public class LesMouvements {
 	private ArrayList<Mouvement> lesMouvs;
 	private int xInit;
 	private int yInit;
+	private int valeur;
 
-	public LesMouvements(int xInit, int yInit) {
+	public LesMouvements(int xInit, int yInit, int valeur) {
 		lesMouvs = new ArrayList<>(0);
 		this.xInit = xInit;
 		this.yInit = yInit;
+		this.valeur = valeur;
 	}
 
-	public void monter(int dep) {
-		lesMouvs.add(new MouvementMonter(dep, getPosXInit(), getPosYInit()));
+	public void monter(int dep, int val) {
+		lesMouvs.add(new MouvementMonter(dep, getPosXInit(), getPosYInit(), val));
 	}
 
-	public void gauche(int dep) {
-		lesMouvs.add(new MouvementGauche(dep, getPosXInit(), getPosYInit()));
+	public void gauche(int dep, int val) {
+		lesMouvs.add(new MouvementGauche(dep, getPosXInit(), getPosYInit(), val));
 	}
 
-	public void droite(int dep) {
-		lesMouvs.add(new MouvementDroite(dep, getPosXInit(), getPosYInit()));
+	public void droite(int dep, int val) {
+		lesMouvs.add(new MouvementDroite(dep, getPosXInit(), getPosYInit(), val));
 	}
 
-	public void descendre(int dep) {
-		lesMouvs.add(new MouvementDescendre(dep, getPosXInit(), getPosYInit()));
+	public void descendre(int dep, int val) {
+		lesMouvs.add(new MouvementDescendre(dep, getPosXInit(), getPosYInit(), val));
 	}
 
-	public void stable(int tmps) {
-		lesMouvs.add(new MouvementStable(tmps, getPosXInit(), getPosYInit()));
+	public void stable(int tmps, int val) {
+		lesMouvs.add(new MouvementStable(tmps, getPosXInit(), getPosYInit(), val));
 	}
 
 	private int getPosXInit() {
@@ -148,5 +150,16 @@ public class LesMouvements {
 				", yInit=" + yInit +
 				", \n\tlesMouvs=" + lesMouvs +
 				"\n}";
+	}
+
+	public int getValeur(int nbTemps) {
+		if (lesMouvs.size() == 0) return valeur;
+		int i = 0;
+
+		while (i + 1 < lesMouvs.size() && nbTemps > lesMouvs.get(i).getTMax()) {
+			i++;
+			nbTemps -= lesMouvs.get(i - 1).getTMax();
+		}
+		return lesMouvs.get(i).getValeur();
 	}
 }

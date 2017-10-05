@@ -1,5 +1,8 @@
 package toucan.modele;
 
+import toucan.graphique.animation.AffectationCaseCase;
+import toucan.graphique.animation.IAnimation;
+
 import java.util.Observable;
 
 public class Modele extends Observable {
