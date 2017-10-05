@@ -1,5 +1,8 @@
 package toucan.modele;
 
+import toucan.graphique.animation.AffectationCaseCase;
+import toucan.graphique.animation.IAnimation;
+
 import java.util.Observable;
 
 public class Modele extends Observable {
@@ -10,6 +13,8 @@ public class Modele extends Observable {
 	public static final int OUEST = 3;
 	public static final int STABLE = 4;
 
+	public static final int TAILLE_CASE = 50;
+
 	private LesCases lesCases;
 	private final int tempsDeLatence = 8;
 
@@ -18,7 +23,7 @@ public class Modele extends Observable {
 	}
 
 	public Modele() {
-		lesCases = new LesCases();
+		this(0);
 	}
 
 	/**
@@ -26,7 +31,7 @@ public class Modele extends Observable {
 	 *
 	 * @param mouvs : Numéro de la case, Direction du mouvement, Distance
 	 */
-	public void creerLesMouvements(int... mouvs) {
+	/*public void creerLesMouvements(int... mouvs) {
 		for (int i = 0; i + 3 <= mouvs.length; i += 3) {
 			switch (mouvs[i + 1]) {
 				case SUD:
@@ -45,6 +50,13 @@ public class Modele extends Observable {
 					lesCases.stable(mouvs[i], mouvs[i + 2]);
 			}
 		}
+		setChanged();
+		notifyObservers();
+	}*/
+	public void creerLesMouvements(int... mouvs) {
+		IAnimation affectCases = new AffectationCaseCase();
+		affectCases.executer(lesCases, 0, 1);
+		//affectCases.executer(lesCases, 1, 3);
 		setChanged();
 		notifyObservers();
 	}
