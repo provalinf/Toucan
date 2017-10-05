@@ -56,6 +56,7 @@ public class CaseAnimation extends BufferedImage {
 	 * @param g fenêtre graphique dans laquelle on dessine
 	 */
 	public void dessiner(Graphics g, int t) {
+		valeur = pos.getValeur(t);
 		dessinerCase();
 
 		int positionX = pos.getPosX(t);

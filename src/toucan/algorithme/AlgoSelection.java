@@ -10,7 +10,7 @@ public class AlgoSelection extends Algo {
 
 	@Override
 	public void trier() {
-		for (int i = 0; i < lesCases.getNbCases() - 1; i++) {
+		/*for (int i = 0; i < lesCases.getNbCases() - 1; i++) {
 			int mini = i;
 			for (int j = i + 1; j < lesCases.getNbCases(); j++) {
 				if (lesCases.getCase(j).getValeur() < lesCases.getCase(mini).getValeur()) {
@@ -20,6 +20,6 @@ public class AlgoSelection extends Algo {
 			Case temp = lesCases.getCase(mini);
 			lesCases.setCase(mini, lesCases.getCase(i));
 			lesCases.setCase(i, temp);
-		}
+		}*/
 	}
 }

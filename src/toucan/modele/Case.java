@@ -5,13 +5,11 @@ import toucan.graphique.CaseAnimation;
 import java.awt.*;
 
 public class Case {
-	private int valeur;
 	private LesMouvements pos;
 	private CaseAnimation cAnim;
 
 	public Case(int xInit, int yInit, int val) {
-		valeur = val;
-		pos = new LesMouvements(xInit, yInit);
+		pos = new LesMouvements(xInit, yInit, val);
 		cAnim = new CaseAnimation(pos, val, Color.BLACK);
 	}
 
@@ -19,8 +17,12 @@ public class Case {
 		cAnim.dessiner(g, tmps);
 	}
 
-	public int getValeur() {
-		return valeur;
+	public int getValeurActuel() {
+		return pos.getValeur(getMaxTemps());
+	}
+
+	public int[] getPosActuel() {
+		return new int[]{getPosX(getMaxTemps()), getPosY(getMaxTemps())};
 	}
 
 	public int getPosX(int nbTmps) {

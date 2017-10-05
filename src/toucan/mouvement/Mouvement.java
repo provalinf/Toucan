@@ -6,6 +6,7 @@ public class Mouvement {
 	protected int xInit;
 	protected int yInit;
 	protected int tStable;
+	protected int valeur;
 
 	public Mouvement(int xDepl, int yDepl, int xInit, int yInit) {
 		this(0, xInit, yInit);
@@ -60,6 +61,10 @@ public class Mouvement {
 	 */
 	public int getTMax() {
 		return Math.abs(xDepl) + Math.abs(yDepl) + tStable;
+	}
+
+	public int getValeur() {
+		return valeur;
 	}
 
 	@Override

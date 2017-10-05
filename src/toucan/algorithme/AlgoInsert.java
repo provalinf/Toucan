@@ -9,7 +9,7 @@ public class AlgoInsert extends Algo {
 	}
 
 	public void trier() {
-		for (int i = 1; i < lesCases.getNbCases(); i++) {
+		/*for (int i = 1; i < lesCases.getNbCases(); i++) {
 			Case c1 = lesCases.getCase(i);
 			int j = i;
 			while (j > 0 && lesCases.getCase(j - 1).getValeur() > c1.getValeur()) {
@@ -17,7 +17,7 @@ public class AlgoInsert extends Algo {
 				j = j - 1;
 			}
 			lesCases.setCase(j, c1);
-		}
+		}*/
 	}
 }
 
