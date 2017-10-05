@@ -8,11 +8,17 @@ public class LesMouvements {
 	private ArrayList<Mouvement> lesMouvs;
 	private int xInit;
 	private int yInit;
+	private int valInit;
 
-	public LesMouvements(int xInit, int yInit) {
+	public LesMouvements(int xInit, int yInit, int valInit) {
 		lesMouvs = new ArrayList<>(0);
 		this.xInit = xInit;
 		this.yInit = yInit;
+		this.valInit = valInit;
+	}
+
+	public void setValeur(int valeur) {
+		lesMouvs.add(new MouvementValeur(valeur, getPosXInit(), getPosYInit()));
 	}
 
 	public void monter(int dep) {
@@ -148,5 +154,27 @@ public class LesMouvements {
 				", yInit=" + yInit +
 				", \n\tlesMouvs=" + lesMouvs +
 				"\n}";
+	}
+
+	public int getValeur(int nbTemps) {
+		if (lesMouvs.size() == 0) return valInit;
+		int i = 0;
+		int valtmp = valInit;
+
+		while (i + 1 < lesMouvs.size() && nbTemps > lesMouvs.get(i).getTMax()) {
+			i++;
+			nbTemps -= lesMouvs.get(i - 1).getTMax();
+			if (lesMouvs.get(i - 1).isMouvVal()) {        // Ou alors instance of
+				valtmp = ((MouvementValeur) lesMouvs.get(i - 1)).getValeur();
+			}
+		}
+		if (lesMouvs.get(i).isMouvVal()) {
+			return ((MouvementValeur) lesMouvs.get(i - 1)).getValeur();
+		}
+		return valtmp;
+	}
+
+	public int getValeurInit() {
+		return valInit;
 	}
 }

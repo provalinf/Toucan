@@ -26,12 +26,12 @@ public class AffectationCaseCase implements IAnimation {
 		} else {
 			c2.gauche(c2Pos[0] - c1Pos[0]);
 		}
-		c2.descendre(TAILLE_CASE-10);
+		c2.descendre(TAILLE_CASE - 10);
 
 		//c1.stable(0, c2.getValeurActuel());
+		c1.setValeur(c2.getValeurActuel());
 
-
-		c2.monter(TAILLE_CASE-10);
+		c2.monter(TAILLE_CASE - 10);
 
 
 	}

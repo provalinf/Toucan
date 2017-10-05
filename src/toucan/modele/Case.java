@@ -8,9 +8,9 @@ public class Case {
 	private LesMouvements pos;
 	private CaseAnimation cAnim;
 
-	public Case(int xInit, int yInit, int val) {
-		pos = new LesMouvements(xInit, yInit, val);
-		cAnim = new CaseAnimation(pos, val, Color.BLACK);
+	public Case(int xInit, int yInit, int valInit) {
+		pos = new LesMouvements(xInit, yInit, valInit);
+		cAnim = new CaseAnimation(pos, Color.BLACK);
 	}
 
 	public void dessiner(Graphics g, int tmps) {
@@ -62,7 +62,7 @@ public class Case {
 	}
 
 	public void setValeur(int valeur) {
-		this.valeur = valeur;
+		pos.setValeur(valeur);
 	}
 
 	@Override

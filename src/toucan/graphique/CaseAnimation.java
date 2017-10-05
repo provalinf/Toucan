@@ -20,11 +20,11 @@ public class CaseAnimation extends BufferedImage {
 	 * @param pos
 	 * @param v   chaîne de caractère à écrire au centre de d'élément graphique
 	 */
-	public CaseAnimation(LesMouvements pos, int v, Color coul) {
+	public CaseAnimation(LesMouvements pos, Color coul) {
 		super(150, 150, BufferedImage.TYPE_INT_ARGB);
 		this.pos = pos;
 		rond = createGraphics();
-		valeur = Integer.toString(v);
+		valeur = Integer.toString(pos.getValeurInit());
 		couleur = coul;
 
 		dessinerCase();
@@ -56,7 +56,7 @@ public class CaseAnimation extends BufferedImage {
 	 * @param g fenêtre graphique dans laquelle on dessine
 	 */
 	public void dessiner(Graphics g, int t) {
-		valeur = pos.getValeur(t);
+		valeur = Integer.toString(pos.getValeur(t));
 		dessinerCase();
 
 		int positionX = pos.getPosX(t);
