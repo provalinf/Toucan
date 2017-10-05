@@ -5,8 +5,8 @@ public class Mouvement {
 	protected int yDepl;
 	protected int xInit;
 	protected int yInit;
-	protected int tStable;
-	protected int valeur;
+	private int tStable;
+	protected boolean mouvVal;
 
 	public Mouvement(int xDepl, int yDepl, int xInit, int yInit) {
 		this(0, xInit, yInit);
@@ -15,11 +15,17 @@ public class Mouvement {
 	}
 
 	public Mouvement(int temps, int xInit, int yInit) {
+		this(xInit, yInit);
+		tStable = temps;
+	}
+
+	public Mouvement(int xInit, int yInit) {
 		this.xInit = xInit;
 		this.yInit = yInit;
 		xDepl = 0;
 		yDepl = 0;
-		tStable = temps;
+		tStable = 0;
+		mouvVal = false;
 	}
 
 	public int getPosX() {
@@ -63,8 +69,8 @@ public class Mouvement {
 		return Math.abs(xDepl) + Math.abs(yDepl) + tStable;
 	}
 
-	public int getValeur() {
-		return valeur;
+	public boolean isMouvVal() {
+		return mouvVal;
 	}
 
 	@Override
