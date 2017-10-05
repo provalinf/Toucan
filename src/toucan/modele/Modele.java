@@ -1,5 +1,7 @@
 package toucan.modele;
 
+import toucan.algorithme.Algo;
+import toucan.algorithme.AlgoTest;
 import toucan.graphique.animation.AffectationCaseCase;
 import toucan.graphique.animation.IAnimation;
 
@@ -54,9 +56,12 @@ public class Modele extends Observable {
 		notifyObservers();
 	}*/
 	public void creerLesMouvements(int... mouvs) {
-		IAnimation affectCases = new AffectationCaseCase();
+		AlgoTest algo = new AlgoTest(lesCases);
+		algo.trier();
+/*		IAnimation affectCases = new AffectationCaseCase();
 		affectCases.executer(lesCases, 0, 1);
-		//affectCases.executer(lesCases, 1, 3);
+		affectCases.executer(lesCases, 1, 3);*/
+
 		setChanged();
 		notifyObservers();
 	}

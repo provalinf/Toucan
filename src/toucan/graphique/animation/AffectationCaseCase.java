@@ -13,25 +13,31 @@ public class AffectationCaseCase implements IAnimation {
 
 	@Override
 	public void executer(LesCases cases, int... indices) {
-		if (indices.length != 2) throw new AssertionError("Attention uniquement deux indices");
+        if (indices.length != 2) throw new AssertionError("Attention uniquement deux indices");
 
-		Case c1 = cases.getCase(indices[0]);
-		Case c2 = cases.getCase(indices[1]);
-		int[] c1Pos = c1.getPosActuel();
-		int[] c2Pos = c2.getPosActuel();
+        Case c1 = cases.getCase(indices[0]);
+        Case c2 = cases.getCase(indices[1]);
+        int[] c1Pos = c1.getPosActuel();
+        int[] c2Pos = c2.getPosActuel();
 
-		c2.monter(TAILLE_CASE);
-		if (c2Pos[0] < c1Pos[0]) {    // C2 à gauche de C1
-			c2.droite(c1Pos[0] - c2Pos[0]);
-		} else {
-			c2.gauche(c2Pos[0] - c1Pos[0]);
-		}
-		c2.descendre(TAILLE_CASE-10);
+        c2.monter(TAILLE_CASE);
+        if (c2Pos[0] < c1Pos[0]) {    // C2 à gauche de C1
+            c2.droite(c1Pos[0] - c2Pos[0]);
+            upDown(c1,c2);
+            c2.gauche(c1Pos[0] - c2Pos[0]);
+        } else {
+            c2.gauche(c2Pos[0] - c1Pos[0]);
+            upDown(c1,c2);
+            c2.droite(c2Pos[0] - c1Pos[0]);
+        }
+        c2.descendre(TAILLE_CASE);
+    }
 
-		c1.stable(0, c2.getValeurActuel());
+		private void upDown(Case c1,Case c2){
+        c2.descendre(TAILLE_CASE-10);
+        c1.stable(0, c2.getValeurActuel());
+        c2.monter(TAILLE_CASE-10);
+    }
 
-		c2.monter(TAILLE_CASE-10);
 
-
-	}
 }
