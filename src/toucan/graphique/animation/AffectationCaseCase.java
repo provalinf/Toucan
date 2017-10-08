@@ -20,6 +20,12 @@ public class AffectationCaseCase implements IAnimation {
         int[] c1Pos = c1.getPosActuel();
         int[] c2Pos = c2.getPosActuel();
 
+        for (int i = 0; i < cases.getNbCases(); i++) {
+            if(i != indices[0] && i !=indices[1]){
+                System.out.println(cases.getMaxTemps());
+                cases.getCase(i).stable(10); /// mieux régler le temps
+            }
+        }
         c2.monter(TAILLE_CASE);
         if (c2Pos[0] < c1Pos[0]) {    // C2 à gauche de C1
             c2.droite(c1Pos[0] - c2Pos[0]);

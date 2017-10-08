@@ -17,8 +17,9 @@ public class AlgoTest extends Algo {
     }
 
     public void trier() {
-        affectationCaseCase.executer(lesCases, 0, 1) ;
-        //affectationVarCase.executer(lesCases, 2);
+        //affectationCaseCase.executer(lesCases, 0, 1);
+        affectationVarCase.executer(lesCases, 0);
+        affectationVarCase.executer(lesCases, 1);
         //affectationCaseCase.executer(lesCases, 2, 3) ;
         //affectationCaseCase.executer(lesCases, 0, 3) ;
     }
