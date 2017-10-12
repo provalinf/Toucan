@@ -28,7 +28,7 @@ public class AffectationCaseCase implements IAnimation {
 		}
 		c2.descendre(TAILLE_CASE - 10);
 
-		//c1.stable(0, c2.getValeurActuel());
+		c1.stable(c2.getMaxTemps());
 		c1.setValeur(c2.getValeurActuel());
 
 		c2.monter(TAILLE_CASE - 10);

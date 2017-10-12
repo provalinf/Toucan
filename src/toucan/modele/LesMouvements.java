@@ -161,7 +161,7 @@ public class LesMouvements {
 		int i = 0;
 		int valtmp = valInit;
 
-		while (i + 1 < lesMouvs.size() && nbTemps > lesMouvs.get(i).getTMax()) {
+		while (i + 1 < lesMouvs.size() && nbTemps >= lesMouvs.get(i).getTMax()) {
 			i++;
 			nbTemps -= lesMouvs.get(i - 1).getTMax();
 			if (lesMouvs.get(i - 1).isMouvVal()) {        // Ou alors instance of
@@ -169,7 +169,7 @@ public class LesMouvements {
 			}
 		}
 		if (lesMouvs.get(i).isMouvVal()) {
-			return ((MouvementValeur) lesMouvs.get(i - 1)).getValeur();
+			return ((MouvementValeur) lesMouvs.get(i)).getValeur();
 		}
 		return valtmp;
 	}

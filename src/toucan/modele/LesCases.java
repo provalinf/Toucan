@@ -41,7 +41,7 @@ public class LesCases {
 	}
 
 	public boolean comparer(int c1, int c2) {
-		return lesCases.get(c1).getValeur() == lesCases.get(c2).getValeur();
+		return lesCases.get(c1).getValeurActuel() == lesCases.get(c2).getValeurActuel();
 	}
 
 	public void modifier(int numCase, int val) {

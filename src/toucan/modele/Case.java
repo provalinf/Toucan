@@ -17,6 +17,10 @@ public class Case {
 		cAnim.dessiner(g, tmps);
 	}
 
+	public int getValeur(int nbTmps) {
+		return pos.getValeur(nbTmps);
+	}
+
 	public int getValeurActuel() {
 		return pos.getValeur(getMaxTemps());
 	}

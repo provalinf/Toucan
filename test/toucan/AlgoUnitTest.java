@@ -33,12 +33,12 @@ public class AlgoUnitTest {
 		Algo bulle = new AlgoBulle(tabCases);
 
 		for (int i = 0; i < 4; i++)
-			assertNotEquals(i, tabCases.getCase(i).getValeur());
+			assertNotEquals(i, tabCases.getCase(i).getValeurActuel());
 
 		bulle.trier();
 
 		for (int i = 0; i < 4; i++)
-			assertEquals(i, tabCases.getCase(i).getValeur());
+			assertEquals(i, tabCases.getCase(i).getValeurActuel());
 	}
 
 	@Test
@@ -46,12 +46,12 @@ public class AlgoUnitTest {
 		Algo select = new AlgoSelection(tabCases);
 
 		for (int i = 0; i < 4; i++)
-			assertNotEquals(i, tabCases.getCase(i).getValeur());
+			assertNotEquals(i, tabCases.getCase(i).getValeurActuel());
 
 		select.trier();
 
 		for (int i = 0; i < 4; i++)
-			assertEquals(i, tabCases.getCase(i).getValeur());
+			assertEquals(i, tabCases.getCase(i).getValeurActuel());
 	}
 
 	@Test
@@ -59,11 +59,11 @@ public class AlgoUnitTest {
 		Algo insert = new AlgoInsert(tabCases);
 
 		for (int i = 0; i < 4; i++)
-			assertNotEquals(i, tabCases.getCase(i).getValeur());
+			assertNotEquals(i, tabCases.getCase(i).getValeurActuel());
 
 		insert.trier();
 
 		for (int i = 0; i < 4; i++)
-			assertEquals(i, tabCases.getCase(i).getValeur());
+			assertEquals(i, tabCases.getCase(i).getValeurActuel());
 	}
 }
