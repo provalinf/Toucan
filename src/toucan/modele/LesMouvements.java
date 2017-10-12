@@ -8,33 +8,37 @@ public class LesMouvements {
 	private ArrayList<Mouvement> lesMouvs;
 	private int xInit;
 	private int yInit;
-	private int valeur;
+	private int valInit;
 
-	public LesMouvements(int xInit, int yInit, int valeur) {
+	public LesMouvements(int xInit, int yInit, int valInit) {
 		lesMouvs = new ArrayList<>(0);
 		this.xInit = xInit;
 		this.yInit = yInit;
-		this.valeur = valeur;
+		this.valInit = valInit;
 	}
 
-	public void monter(int dep, int val) {
-		lesMouvs.add(new MouvementMonter(dep, getPosXInit(), getPosYInit(), val));
+	public void setValeur(int valeur) {
+		lesMouvs.add(new MouvementValeur(valeur, getPosXInit(), getPosYInit()));
 	}
 
-	public void gauche(int dep, int val) {
-		lesMouvs.add(new MouvementGauche(dep, getPosXInit(), getPosYInit(), val));
+	public void monter(int dep) {
+		lesMouvs.add(new MouvementMonter(dep, getPosXInit(), getPosYInit()));
 	}
 
-	public void droite(int dep, int val) {
-		lesMouvs.add(new MouvementDroite(dep, getPosXInit(), getPosYInit(), val));
+	public void gauche(int dep) {
+		lesMouvs.add(new MouvementGauche(dep, getPosXInit(), getPosYInit()));
 	}
 
-	public void descendre(int dep, int val) {
-		lesMouvs.add(new MouvementDescendre(dep, getPosXInit(), getPosYInit(), val));
+	public void droite(int dep) {
+		lesMouvs.add(new MouvementDroite(dep, getPosXInit(), getPosYInit()));
 	}
 
-	public void stable(int tmps, int val) {
-		lesMouvs.add(new MouvementStable(tmps, getPosXInit(), getPosYInit(), val));
+	public void descendre(int dep) {
+		lesMouvs.add(new MouvementDescendre(dep, getPosXInit(), getPosYInit()));
+	}
+
+	public void stable(int tmps) {
+		lesMouvs.add(new MouvementStable(tmps, getPosXInit(), getPosYInit()));
 	}
 
 	private int getPosXInit() {
@@ -153,13 +157,24 @@ public class LesMouvements {
 	}
 
 	public int getValeur(int nbTemps) {
-		if (lesMouvs.size() == 0) return valeur;
+		if (lesMouvs.size() == 0) return valInit;
 		int i = 0;
+		int valtmp = valInit;
 
-		while (i + 1 < lesMouvs.size() && nbTemps > lesMouvs.get(i).getTMax()) {
+		while (i + 1 < lesMouvs.size() && nbTemps >= lesMouvs.get(i).getTMax()) {
 			i++;
 			nbTemps -= lesMouvs.get(i - 1).getTMax();
+			if (lesMouvs.get(i - 1).isMouvVal()) {        // Ou alors instance of
+				valtmp = ((MouvementValeur) lesMouvs.get(i - 1)).getValeur();
+			}
 		}
-		return lesMouvs.get(i).getValeur();
+		if (lesMouvs.get(i).isMouvVal()) {
+			return ((MouvementValeur) lesMouvs.get(i)).getValeur();
+		}
+		return valtmp;
+	}
+
+	public int getValeurInit() {
+		return valInit;
 	}
 }

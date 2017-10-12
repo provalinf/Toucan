@@ -8,13 +8,17 @@ public class Case {
 	private LesMouvements pos;
 	private CaseAnimation cAnim;
 
-	public Case(int xInit, int yInit, int val) {
-		pos = new LesMouvements(xInit, yInit, val);
-		cAnim = new CaseAnimation(pos, val, Color.BLACK);
+	public Case(int xInit, int yInit, int valInit) {
+		pos = new LesMouvements(xInit, yInit, valInit);
+		cAnim = new CaseAnimation(pos, Color.BLACK);
 	}
 
 	public void dessiner(Graphics g, int tmps) {
 		cAnim.dessiner(g, tmps);
+	}
+
+	public int getValeur(int nbTmps) {
+		return pos.getValeur(nbTmps);
 	}
 
 	public int getValeurActuel() {
@@ -37,48 +41,32 @@ public class Case {
 		return pos.tempsMax();
 	}
 
-	public void monter(int d, int val) {
-		pos.monter(d, val);
-	}
-
 	public void monter(int d) {
-		pos.monter(d, getValeurActuel());
-	}
-
-	public void gauche(int d, int val) {
-		pos.gauche(d, val);
+		pos.monter(d);
 	}
 
 	public void gauche(int d) {
-		pos.gauche(d, getValeurActuel());
-	}
-
-	public void droite(int d, int val) {
-		pos.droite(d, val);
+		pos.gauche(d);
 	}
 
 	public void droite(int d) {
-		pos.droite(d, getValeurActuel());
-	}
-
-	public void descendre(int d, int val) {
-		pos.descendre(d, val);
+		pos.droite(d);
 	}
 
 	public void descendre(int d) {
-		pos.descendre(d, getValeurActuel());
-	}
-
-	public void stable(int tmps, int val) {
-		pos.stable(tmps, val);
+		pos.descendre(d);
 	}
 
 	public void stable(int tmps) {
-		pos.stable(tmps, getValeurActuel());
+		pos.stable(tmps);
 	}
 
 	public void setPosition(int xInit, int yInit) {
 		pos.setPosition(xInit, yInit);
+	}
+
+	public void setValeur(int valeur) {
+		pos.setValeur(valeur);
 	}
 
 	@Override
