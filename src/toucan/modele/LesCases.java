@@ -1,6 +1,7 @@
 package toucan.modele;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class LesCases {
 

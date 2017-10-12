@@ -6,8 +6,8 @@ import toucan.modele.LesCases;
  * Created by Cyril on 05/10/2017.
  */
 public class ComparaisonCaseCase implements IAnimation {
-    @Override
-    public void executer(LesCases cases, int... indices) {
+	@Override
+	public void executer(LesCases cases, int... indices) {
 
-    }
+	}
 }
