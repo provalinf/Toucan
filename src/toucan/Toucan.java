@@ -40,7 +40,7 @@ public class Toucan extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		System.out.println(model.toString());
+		//System.out.println(model.toString());
 	}
 
 	public static void main(String[] args) {

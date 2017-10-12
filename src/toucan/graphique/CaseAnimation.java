@@ -12,19 +12,19 @@ public class CaseAnimation extends BufferedImage {
 
 	protected int cote = 50;
 	protected Color couleur;
-	protected int valeur;
+	protected String valeur;
 
 	/**
 	 * Instanciation d'un élément graphique à dessiner (ici un carré)
 	 *
 	 * @param pos
-	 * @param val   valeur à écrire au centre de d'élément graphique
+	 * @param v   chaîne de caractère à écrire au centre de d'élément graphique
 	 */
-	public CaseAnimation(LesMouvements pos, int val, Color coul) {
+	public CaseAnimation(LesMouvements pos, Color coul) {
 		super(150, 150, BufferedImage.TYPE_INT_ARGB);
 		this.pos = pos;
 		rond = createGraphics();
-		valeur = val;
+		valeur = Integer.toString(pos.getValeurInit());
 		couleur = coul;
 
 		dessinerCase();
@@ -45,9 +45,9 @@ public class CaseAnimation extends BufferedImage {
 		rond.setFont(new Font("Arial", Font.BOLD, 16));
 
 		FontMetrics fm = rond.getFontMetrics();
-		int xC = (cote - fm.stringWidth(Integer.toString(valeur)) / 2);
+		int xC = (cote - fm.stringWidth(valeur)) / 2;
 		int yC = (fm.getAscent() + (cote - (fm.getAscent() + fm.getDescent())) / 2);
-		rond.drawString(Integer.toString(valeur), xC, yC);
+		rond.drawString(valeur, xC, yC);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class CaseAnimation extends BufferedImage {
 	 * @param g fenêtre graphique dans laquelle on dessine
 	 */
 	public void dessiner(Graphics g, int t) {
-		valeur = pos.getValeur(t);
+		valeur = Integer.toString(pos.getValeur(t));
 		dessinerCase();
 
 		int positionX = pos.getPosX(t);
