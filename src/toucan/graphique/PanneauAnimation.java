@@ -32,13 +32,14 @@ public class PanneauAnimation extends JPanel {
 		g2.fillRect(0, 0, w, h);
 
 		lesCasesAnimation.dessiner(g, tempsActuel);    // temps à incrementer
-		if (tempsActuel < modele.getMaxTemps()) tempsActuel++;
-
-		try {
-			Thread.sleep(modele.getTempsDeLatence());
-		} catch (InterruptedException ex) {
-			Logger.getLogger(PanneauAnimation.class.getName()).log(Level.SEVERE, null, ex);
+		if (tempsActuel < modele.getMaxTemps()){
+			tempsActuel++;
+			try {
+				Thread.sleep(modele.getTempsDeLatence());
+			} catch (InterruptedException ex) {
+				Logger.getLogger(PanneauAnimation.class.getName()).log(Level.SEVERE, null, ex);
+			}
+			repaint();
 		}
-		repaint();
 	}
 }

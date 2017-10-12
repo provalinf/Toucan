@@ -19,13 +19,9 @@ public class AffectationCaseCase implements IAnimation {
         Case c2 = cases.getCase(indices[1]);
         int[] c1Pos = c1.getPosActuel();
         int[] c2Pos = c2.getPosActuel();
+        int sumTemps = 0;
 
-        for (int i = 0; i < cases.getNbCases(); i++) {
-            if(i != indices[0] && i !=indices[1]){
-                System.out.println(cases.getMaxTemps());
-                cases.getCase(i).stable(10); /// mieux régler le temps
-            }
-        }
+
         c2.monter(TAILLE_CASE);
         if (c2Pos[0] < c1Pos[0]) {    // C2 à gauche de C1
             c2.droite(c1Pos[0] - c2Pos[0]);
@@ -37,6 +33,20 @@ public class AffectationCaseCase implements IAnimation {
             c2.droite(c2Pos[0] - c1Pos[0]);
         }
         c2.descendre(TAILLE_CASE);
+
+        if (c1.getMaxTemps() > c2.getMaxTemps()) {
+            sumTemps = c1.getMaxTemps();
+        } else {
+            sumTemps = c2.getMaxTemps();
+        }
+
+        System.out.println("Le temps est : "+sumTemps);
+
+        for (int i = 0; i < cases.getNbCases(); i++) {
+            if(i != cases.getNbCases()-1 && i!= indices[0]){
+                cases.getCase(i).stable(sumTemps);
+            }
+        }
     }
 
 		private void upDown(Case c1,Case c2){
