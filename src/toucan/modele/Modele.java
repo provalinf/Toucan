@@ -18,7 +18,7 @@ public class Modele extends Observable {
 	public static final int TAILLE_CASE = 50;
 
 	private LesCases lesCases;
-	private final int tempsDeLatence = 3;
+	private final int tempsDeLatence = 20;
 
 	public Modele(int nbCases) {
 		lesCases = new LesCases(nbCases);
