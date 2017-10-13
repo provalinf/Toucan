@@ -48,11 +48,6 @@ public class AffectationCaseCase implements IAnimation {
 		}
 		c2.descendre(TAILLE_CASE);
 
-		if (c1.getMaxTemps() > c2.getMaxTemps()) {
-			sumTemps = c1.getMaxTemps();
-		} else {
-			sumTemps = c2.getMaxTemps();
-		}
 
 		System.out.println("Le temps est : " + sumTemps);
 		int maxtemps = cases.getMaxTemps();
