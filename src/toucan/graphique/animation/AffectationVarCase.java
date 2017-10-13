@@ -33,27 +33,25 @@ public class AffectationVarCase implements IAnimation {
             }
         }*/
 
-		v2.stable(posV2[1] - TAILLE_CASE + posC1[0] - posV2[0] - 2 * TAILLE_CASE); // somme de tout les temps que c1 travaille
-		c1.descendre(posV2[1] - TAILLE_CASE); //rustine de 8 (a voir pourquoi)
-		System.out.println(c1.getPosActuel()[1]);
-		System.out.println(v2.getPosActuel()[1]);
-
-
+		v2.stable(posV2[1] - posC1[1] + posC1[0] - posV2[0] - 2 * TAILLE_CASE); // somme de tout les temps que c1 travaille
+		c1.descendre(posV2[1] - posC1[1]);
 		c1.gauche(posC1[0] - posV2[0] - 2 * TAILLE_CASE);
 
 		c1.monter(TAILLE_CASE);
 		v2.monter(TAILLE_CASE);
-		v2.stable(TAILLE_CASE * 2);
-		c1.gauche(TAILLE_CASE);
+        v2.stable(TAILLE_CASE);
+		v2.setValeur(c1.getValeurActuel());
+		v2.stable(TAILLE_CASE);
+        c1.gauche(TAILLE_CASE);
 
-		c1.droite(TAILLE_CASE);
-		v2.descendre(TAILLE_CASE);
+        c1.droite(TAILLE_CASE);
+        v2.descendre(TAILLE_CASE);
 		c1.descendre(TAILLE_CASE);
 
 		v2.stable(posC1[0] - posV2[0] - 2 * TAILLE_CASE + posV2[1] - TAILLE_CASE);
 
 		c1.droite(posC1[0] - posV2[0] - 2 * TAILLE_CASE);
-		c1.monter(posV2[1] - TAILLE_CASE); //rustine de 8 (a voir pourquoi)
+		c1.monter(posV2[1] - posC1[1]);
 
 		int tempsC1initactuel = c1.getMaxTemps() - tempsC1init;
 		int tempsV2initactuel = v2.getMaxTemps() - tempsV2init;
@@ -64,18 +62,10 @@ public class AffectationVarCase implements IAnimation {
 			sumTemps = tempsC1initactuel;
 		}
 
-		System.out.println("Le temps est : " + sumTemps);
-
 		for (int i = 0; i < cases.getNbCases(); i++) {
 			if (i != cases.getNbCases() - 1 && i != indices[0]) {
 				cases.getCase(i).stable(sumTemps);
 			}
 		}
-
-		System.out.println("↡ -- STOP --- STOP -- ↡");
-		for (int i = 0; i < cases.getNbCases(); i++) {
-			System.out.println("\tcase " + i + " : " + cases.getCase(i).getMaxTemps());
-		}
-		System.out.println("↟ -- STOP --- STOP -- ↟");
 	}
 }
