@@ -39,16 +39,17 @@ public class AffectationVarCase implements IAnimation {
 
 		c1.monter(TAILLE_CASE);
 		v2.monter(TAILLE_CASE);
-        v2.stable(TAILLE_CASE);
+        v2.stable(TAILLE_CASE+TAILLE_CASE/5);
 		v2.setValeur(c1.getValeurActuel());
 		v2.stable(TAILLE_CASE);
-        c1.gauche(TAILLE_CASE);
+        c1.gauche(TAILLE_CASE+TAILLE_CASE/5);
 
-        c1.droite(TAILLE_CASE);
+        c1.droite(TAILLE_CASE+TAILLE_CASE/5);
         v2.descendre(TAILLE_CASE);
 		c1.descendre(TAILLE_CASE);
 
 		v2.stable(posC1[0] - posV2[0] - 2 * TAILLE_CASE + posV2[1] - TAILLE_CASE);
+		v2.stable(TAILLE_CASE/5);
 
 		c1.droite(posC1[0] - posV2[0] - 2 * TAILLE_CASE);
 		c1.monter(posV2[1] - posC1[1]);

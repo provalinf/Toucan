@@ -34,7 +34,7 @@ public class Toucan extends JFrame {
 		((Modele) model).creerCase(280, 60, 5);
 		((Modele) model).creerCase(360, 60, 2);
 		((Modele) model).creerCase(440, 60, 4);
-		//((Modele) model).creerCase(10, 400, 0); //Case de stockage pour swap
+		((Modele) model).creerCase(10, 400, 0); //Case de stockage pour swap
 		((Modele) model).creerLesMouvements(1, Modele.NORD, 30, 2, Modele.SUD, 30, 1, Modele.EST, 80, 2, Modele.STABLE, 80, 2, Modele.OUEST, 80, 1, Modele.SUD, 30, 2, Modele.NORD, 30);
 		pack();
 		setLocationRelativeTo(null);
