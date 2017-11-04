@@ -18,7 +18,7 @@ public class CaseAnimation extends BufferedImage {
 	 * Instanciation d'un élément graphique à dessiner (ici un carré)
 	 *
 	 * @param pos
-	 * @param v   chaîne de caractère à écrire au centre de d'élément graphique
+	 * @param coul
 	 */
 	public CaseAnimation(LesMouvements pos, Color coul) {
 		super(150, 150, BufferedImage.TYPE_INT_ARGB);
@@ -27,7 +27,7 @@ public class CaseAnimation extends BufferedImage {
 		valeur = Integer.toString(pos.getValeurInit());
 		couleur = coul;
 
-		dessinerCase();
+		if (pos.isVisibleInit()) dessinerCase();
 	}
 
 	/**
@@ -56,6 +56,7 @@ public class CaseAnimation extends BufferedImage {
 	 * @param g fenêtre graphique dans laquelle on dessine
 	 */
 	public void dessiner(Graphics g, int t) {
+		if (!pos.isVisible(t)) return;
 		valeur = Integer.toString(pos.getValeur(t));
 		dessinerCase();
 

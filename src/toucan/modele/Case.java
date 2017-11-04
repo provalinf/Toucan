@@ -3,7 +3,6 @@ package toucan.modele;
 import toucan.graphique.CaseAnimation;
 
 import java.awt.*;
-import java.util.Objects;
 
 public class Case {
 	private LesMouvements pos;
@@ -60,6 +59,10 @@ public class Case {
 
 	public void stable(int tmps) {
 		pos.stable(tmps);
+	}
+
+	public void setVisible(boolean visible) {
+		pos.setVisible(visible);
 	}
 
 	public void setPosition(int xInit, int yInit) {

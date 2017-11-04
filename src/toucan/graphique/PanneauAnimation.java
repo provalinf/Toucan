@@ -17,7 +17,7 @@ public class PanneauAnimation extends JPanel {
 		this.modele = modele;
 		lesCasesAnimation = new LesCasesAnimation(modele);
 		tempsActuel = 0;
-		this.setPreferredSize(new Dimension(500, 500));
+		this.setPreferredSize(new Dimension(600, 500));
 		repaint();    // Appel paintComponent(...)
 	}
 

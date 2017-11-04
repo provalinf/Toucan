@@ -66,7 +66,7 @@ public class AffectationCaseCase implements IAnimation {
 	}
 
 	private void upDown(Case c1, Case c2) {
-		c2.descendre(TAILLE_CASE - 10);
+		c2.descendre(TAILLE_CASE - TAILLE_CASE / 5);
 
 		int tempsC1initactuel = c1.getMaxTemps() - tempsC1init;
 		int tempsC2initactuel = c2.getMaxTemps() - tempsC2init;
@@ -79,7 +79,7 @@ public class AffectationCaseCase implements IAnimation {
 			tempsC1init = c1.getMaxTemps();
 		}
 		c1.setValeur(c2.getValeurActuel());
-		c2.monter(TAILLE_CASE - 10);
+		c2.monter(TAILLE_CASE - TAILLE_CASE / 5);
 	}
 
 

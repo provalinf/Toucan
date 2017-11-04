@@ -1,13 +1,14 @@
 package toucan.modele;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class LesCases {
 
 	private ArrayList<Case> lesCases;
+	private int NbVariable;
 
 	public LesCases(int nbCases) {
+		NbVariable = 0;
 		lesCases = new ArrayList<>(nbCases);
 		for (int i = 0; i < nbCases; i++)
 			creerCases(0, 0, 0);
@@ -53,6 +54,12 @@ public class LesCases {
 		return lesCases.get(i);
 	}
 
+	public Case getVariable(int i) {
+		if (getNbCases() + i >= getNbCases() + getNbVariables())
+			throw new AssertionError("Erreur, sortie de tableau lors de la sélection de la variable n°" + i);
+		return lesCases.get(getNbCases() + i);
+	}
+
 	/**
 	 * Calcule le temps max pour le mouvement des cases
 	 *
@@ -68,11 +75,20 @@ public class LesCases {
 	}
 
 	public void creerCases(int xInit, int yInit, int val) {
+		lesCases.add(getNbCases(), new Case(xInit, yInit, val));
+	}
+
+	public void creerVariable(int xInit, int yInit, int val) {
 		lesCases.add(new Case(xInit, yInit, val));
+		NbVariable++;
 	}
 
 	public int getNbCases() {
-		return lesCases.size();
+		return lesCases.size() - getNbVariables();
+	}
+
+	public int getNbVariables() {
+		return NbVariable;
 	}
 
 	public void setCase(int j, Case c1) {

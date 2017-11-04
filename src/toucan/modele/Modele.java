@@ -93,6 +93,10 @@ public class Modele extends Observable {
 		lesCases.creerCases(xInit, yInit, val);
 	}
 
+	public void creerVariable(int xInit, int yInit, int val) {
+		lesCases.creerVariable(xInit, yInit, val);
+	}
+
 	/**
 	 * Redéfinie la position initiale d'une case
 	 *
@@ -107,5 +111,9 @@ public class Modele extends Observable {
 	@Override
 	public String toString() {
 		return lesCases.toString();
+	}
+
+	public int getNbVariables() {
+		return lesCases.getNbVariables();
 	}
 }

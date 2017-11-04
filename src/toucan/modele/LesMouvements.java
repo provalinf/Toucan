@@ -21,6 +21,10 @@ public class LesMouvements {
 		lesMouvs.add(new MouvementValeur(valeur, getPosXInit(), getPosYInit()));
 	}
 
+	public void setVisible(boolean visible) {
+		lesMouvs.add(new MouvementVisible(visible, getPosXInit(), getPosYInit()));
+	}
+
 	public void monter(int dep) {
 		lesMouvs.add(new MouvementMonter(dep, getPosXInit(), getPosYInit()));
 	}
@@ -157,9 +161,9 @@ public class LesMouvements {
 	}
 
 	public int getValeur(int nbTemps) {
-		if (lesMouvs.size() == 0) return valInit;
+		if (lesMouvs.size() == 0) return getValeurInit();
 		int i = 0;
-		int valtmp = valInit;
+		int valtmp = getValeurInit();
 
 		while (i + 1 < lesMouvs.size() && nbTemps >= lesMouvs.get(i).getTMax()) {
 			i++;
@@ -174,7 +178,30 @@ public class LesMouvements {
 		return valtmp;
 	}
 
+	public boolean isVisible(int nbTemps) {
+		if (lesMouvs.size() == 0) return isVisibleInit();
+		int i = 0;
+		boolean visibtmp = isVisibleInit();
+
+		while (i + 1 < lesMouvs.size() && nbTemps >= lesMouvs.get(i).getTMax()) {
+			i++;
+			nbTemps -= lesMouvs.get(i - 1).getTMax();
+			if (lesMouvs.get(i - 1).isMouvVisib()) {        // Ou alors instance of
+				visibtmp = ((MouvementVisible) lesMouvs.get(i - 1)).isVisible();
+			}
+		}
+		if (lesMouvs.get(i).isMouvVisib()) {
+			return ((MouvementVisible) lesMouvs.get(i)).isVisible();
+		}
+		return visibtmp;
+	}
+
 	public int getValeurInit() {
 		return valInit;
 	}
+
+	public boolean isVisibleInit() {
+		return true;
+	}
+
 }

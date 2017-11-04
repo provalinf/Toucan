@@ -17,7 +17,7 @@ public class LesCasesAnimation {
 	}
 
 	public void dessiner(Graphics g, int tmps) {
-		for (int i = 0; i < modele.getNbCases(); i++) {
+		for (int i = 0; i < modele.getNbCases() + modele.getNbVariables(); i++) {
 			modele.getCase(i).dessiner(g, tmps);
 		}
 	}
