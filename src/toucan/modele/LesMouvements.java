@@ -204,4 +204,7 @@ public class LesMouvements {
 		return true;
 	}
 
+	public void clearMouv() {
+		lesMouvs.clear();
+	}
 }

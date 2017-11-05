@@ -20,8 +20,8 @@ public class AlgoTest extends Algo {
 		affectationCaseCase.executer(lesCases, 0, 1);
 		equilibreStable();
 		lesCases.getVariable(1).setVisible(false);
-		//new AlgoBulle(lesCases).trier();
-		new AlgoInsert(lesCases).trier();
+		new AlgoBulle(lesCases).trier();
+		//new AlgoInsert(lesCases).trier();
 		/*affectationVarCase.executer(lesCases, 3);
 		affectationVarCase.executer(lesCases, 1);*/
 		/*affectationVarCase.executer(lesCases, 0);

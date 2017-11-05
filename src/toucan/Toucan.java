@@ -2,6 +2,8 @@ package toucan;
 
 import toucan.modele.Modele;
 import toucan.view.ViewGraphique;
+import toucan.view.ViewMenubar;
+import toucan.view.ViewToolbar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +18,7 @@ public class Toucan extends JFrame {
 		mod.creerCase(3, 3, 3);
 		mod.creerCase(4, 4, 4);
 
-		mod.creerLesMouvements(0, Modele.NORD, 5, 0, Modele.SUD, 10, 0, Modele.EST, 10, 1, Modele.STABLE, 10, 1, Modele.SUD, 10);
+		mod.creerLesMouvements(1, Modele.NORD, 30, 2, Modele.SUD, 30, 1, Modele.EST, 80, 2, Modele.STABLE, 80, 2, Modele.OUEST, 80, 1, Modele.SUD, 30, 2, Modele.NORD, 30);
 		System.out.println(mod);
 	}*/
 
@@ -28,15 +30,21 @@ public class Toucan extends JFrame {
 
 		Observable model = new Modele();
 
+		add(new ViewMenubar(model), BorderLayout.PAGE_START);
 		add(new ViewGraphique(model), BorderLayout.CENTER);
+		add(new ViewToolbar(model), BorderLayout.PAGE_END);
+		Modele modele = (Modele) model;
 
-		((Modele) model).creerCase(200, 60, 3);
-		((Modele) model).creerCase(280, 60, 5);
-		((Modele) model).creerCase(360, 60, 2);
-		((Modele) model).creerCase(440, 60, 4);
-		((Modele) model).creerVariable(10, 300, 0); //Case de stockage pour swap
-		((Modele) model).creerVariable(10, 360, 0); //Case de stockage pour swap
-		((Modele) model).creerLesMouvements(1, Modele.NORD, 30, 2, Modele.SUD, 30, 1, Modele.EST, 80, 2, Modele.STABLE, 80, 2, Modele.OUEST, 80, 1, Modele.SUD, 30, 2, Modele.NORD, 30);
+		modele.creerCase(200, 60, 3);
+		modele.creerCase(280, 60, 5);
+		modele.creerCase(360, 60, 2);
+		modele.creerCase(440, 60, 4);
+		modele.creerVariable(10, 300, 0); //Case de stockage pour swap
+		modele.creerVariable(10, 360, 0); //Case de stockage pour swap
+		//modele.creerLesMouvements();
+		/*Thread creerMouv = new Thread((Runnable) modele, "Toucan");
+		creerMouv.start();*/
+
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -45,6 +53,6 @@ public class Toucan extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new Toucan();
+		SwingUtilities.invokeLater(Toucan::new);
 	}
 }

@@ -16,7 +16,7 @@ public class PanneauAnimation extends JPanel {
 	public PanneauAnimation(Modele modele) {
 		this.modele = modele;
 		lesCasesAnimation = new LesCasesAnimation(modele);
-		tempsActuel = 0;
+		resetTempsActuel();
 		this.setPreferredSize(new Dimension(600, 500));
 		repaint();    // Appel paintComponent(...)
 	}
@@ -32,7 +32,7 @@ public class PanneauAnimation extends JPanel {
 		g2.fillRect(0, 0, w, h);
 
 		lesCasesAnimation.dessiner(g, tempsActuel);    // temps à incrementer
-		if (tempsActuel < modele.getMaxTemps()){
+		if (tempsActuel < modele.getMaxTemps() && !modele.isThreadSleep()) {
 			tempsActuel++;
 			try {
 				Thread.sleep(modele.getTempsDeLatence());
@@ -41,5 +41,9 @@ public class PanneauAnimation extends JPanel {
 			}
 			repaint();
 		}
+	}
+
+	public void resetTempsActuel() {
+		tempsActuel = 0;
 	}
 }

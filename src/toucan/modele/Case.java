@@ -79,4 +79,8 @@ public class Case {
 				"pos=" + pos +
 				'}';
 	}
+
+	public void resetMouv() {
+		pos.clearMouv();
+	}
 }

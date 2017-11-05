@@ -18,6 +18,10 @@ public class LesCases {
 		lesCases = new ArrayList<>();
 	}
 
+	public void resetMouv() {
+		for (Case c : lesCases) c.resetMouv();
+	}
+
 	public void monter(int numCase, int dep) {
 		lesCases.get(numCase).monter(dep);
 	}

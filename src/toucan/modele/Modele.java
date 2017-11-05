@@ -1,13 +1,10 @@
 package toucan.modele;
 
-import toucan.algorithme.Algo;
 import toucan.algorithme.AlgoTest;
-import toucan.graphique.animation.AffectationCaseCase;
-import toucan.graphique.animation.IAnimation;
 
 import java.util.Observable;
 
-public class Modele extends Observable {
+public class Modele extends Observable implements Runnable {
 
 	public static final int NORD = 0;
 	public static final int SUD = 1;
@@ -19,6 +16,8 @@ public class Modele extends Observable {
 
 	private LesCases lesCases;
 	private final int tempsDeLatence = 4;
+	private boolean threadLaunch;
+	private boolean threadSleep;
 
 	public Modele(int nbCases) {
 		lesCases = new LesCases(nbCases);
@@ -26,6 +25,11 @@ public class Modele extends Observable {
 
 	public Modele() {
 		this(0);
+	}
+
+	private void initAndReset() {
+		threadLaunch = false;
+		threadSleep = false;
 	}
 
 	/**
@@ -55,15 +59,15 @@ public class Modele extends Observable {
 		setChanged();
 		notifyObservers();
 	}*/
-	public void creerLesMouvements(int... mouvs) {
+	public void run() {
+		setThreadLaunch(true);
 		AlgoTest algo = new AlgoTest(lesCases);
 		algo.trier();
 /*		IAnimation affectCases = new AffectationCaseCase();
 		affectCases.executer(lesCases, 0, 1);
 		affectCases.executer(lesCases, 1, 3);*/
 
-		setChanged();
-		notifyObservers();
+		refreshUI();
 	}
 
 	public Case getCase(int i) {
@@ -108,6 +112,11 @@ public class Modele extends Observable {
 		lesCases.getCase(numCase).setPosition(xInit, yInit);
 	}
 
+	public void refreshUI() {
+		setChanged();
+		notifyObservers();
+	}
+
 	@Override
 	public String toString() {
 		return lesCases.toString();
@@ -115,5 +124,34 @@ public class Modele extends Observable {
 
 	public int getNbVariables() {
 		return lesCases.getNbVariables();
+	}
+
+	public void setThreadLaunch(boolean threadLaunch) {
+		this.threadLaunch = threadLaunch;
+	}
+
+	public void setThreadSleep(boolean threadSleep) {
+		this.threadSleep = threadSleep;
+	}
+
+	public boolean isThreadLaunch() {
+		return threadLaunch;
+	}
+
+	public boolean isThreadSleep() {
+		return threadSleep;
+	}
+
+	public void inversThreadState() {
+		threadSleep = !threadSleep;
+		refreshUI();	// Pour relancer l'UI si elle sort de pause
+	}
+
+	public void stopAndReset() {
+		setThreadSleep(true);
+		lesCases.resetMouv();
+		setThreadSleep(false);
+		setThreadLaunch(false);
+		refreshUI();
 	}
 }
