@@ -1,7 +1,11 @@
 package toucan.modele;
 
-import toucan.algorithme.AlgoTest;
+import toucan.algorithme.Algo;
+import toucan.algorithme.AlgoBulle;
+import toucan.algorithme.AlgoInsert;
+import toucan.algorithme.AlgoSelection;
 
+import java.util.HashMap;
 import java.util.Observable;
 
 public class Modele extends Observable implements Runnable {
@@ -19,13 +23,27 @@ public class Modele extends Observable implements Runnable {
 	private boolean threadLaunch;
 	private boolean mouvCalc;
 
+	private HashMap<Integer, Algo> collectionAlgo;
+	private int selectionAlgo;
+
 	public Modele(int nbCases) {
 		lesCases = new LesCases(nbCases);
+		declareAlgo();
 		initAndReset();
 	}
 
 	public Modele() {
 		this(0);
+	}
+
+	/**
+	 * Temporaire, sera remplacé par une detection des classes afin de rendre le tout automatique et propre
+	 */
+	private void declareAlgo() {
+		collectionAlgo = new HashMap<>(3);
+		collectionAlgo.put(0, new AlgoBulle(lesCases));
+		collectionAlgo.put(1, new AlgoInsert(lesCases));
+		collectionAlgo.put(2, new AlgoSelection(lesCases));
 	}
 
 	private void initAndReset() {
@@ -64,14 +82,27 @@ public class Modele extends Observable implements Runnable {
 		setThreadLaunch(true);
 		refreshUI();
 		if (!isMouvCalc()) {
-			AlgoTest algo = new AlgoTest(lesCases);
-			algo.trier();
+			/*AlgoTest algo = new AlgoTest(lesCases);
+			algo.trier();*/
+			collectionAlgo.get(getSelectionAlgo()).trier();
 			/*IAnimation affectCases = new AffectationCaseCase();
 			affectCases.executer(lesCases, 0, 1);
 			affectCases.executer(lesCases, 1, 3);*/
 			setMouvCalc(true);
 		}
 		setThreadLaunch(false);
+	}
+
+	public int getNbAlgo() {
+		return collectionAlgo.size();
+	}
+
+	public int getSelectionAlgo() {
+		return selectionAlgo;
+	}
+
+	public void setSelectionAlgo(int selectionAlgo) {
+		this.selectionAlgo = selectionAlgo;
 	}
 
 	public void genererMouvements() {
