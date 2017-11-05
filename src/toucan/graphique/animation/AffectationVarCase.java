@@ -13,14 +13,14 @@ public class AffectationVarCase implements IAnimation {
 	public void executer(LesCases cases, int... indices) {
 		if (indices.length != 1) throw new AssertionError("Attention uniquement 1 indice");
 		Case c1 = cases.getCase(indices[0]);
-		Case v2 = cases.getCase(cases.getNbCases() - 1);
+		Case v1 = cases.getCase(cases.getNbCases()+cases.getNbVariables()-2);
 
 		int posC1[] = c1.getPosActuel();
-		int posV2[] = v2.getPosActuel();
+		int posv1[] = v1.getPosActuel();
 		int sumTemps = 0;
 
 		int tempsC1init = c1.getMaxTemps();
-		int tempsV2init = v2.getMaxTemps();
+		int tempsv1init = v1.getMaxTemps();
 
        /* for (int i = 0; i < cases.getNbCases(); i++) {
 		  sumTemps = sumTemps + cases.getCase(i).getMaxTemps();
@@ -33,32 +33,32 @@ public class AffectationVarCase implements IAnimation {
             }
         }*/
 
-		v2.stable(posV2[1] - posC1[1] + posC1[0] - posV2[0] - 2 * TAILLE_CASE); // somme de tout les temps que c1 travaille
-		c1.descendre(posV2[1] - posC1[1]);
-		c1.gauche(posC1[0] - posV2[0] - 2 * TAILLE_CASE);
+		v1.stable(posv1[1] - posC1[1] + posC1[0] - posv1[0] - 2 * TAILLE_CASE); // somme de tout les temps que c1 travaille
+		c1.descendre(posv1[1] - posC1[1]);
+		c1.gauche(posC1[0] - posv1[0] - 2 * TAILLE_CASE);
 
 		c1.monter(TAILLE_CASE);
-		v2.monter(TAILLE_CASE);
-        v2.stable(TAILLE_CASE+TAILLE_CASE/5);
-		v2.setValeur(c1.getValeurActuel());
-		v2.stable(TAILLE_CASE);
+		v1.monter(TAILLE_CASE);
+        v1.stable(TAILLE_CASE+TAILLE_CASE/5);
+		v1.setValeur(c1.getValeurActuel());
+		v1.stable(TAILLE_CASE);
         c1.gauche(TAILLE_CASE+TAILLE_CASE/5);
 
         c1.droite(TAILLE_CASE+TAILLE_CASE/5);
-        v2.descendre(TAILLE_CASE);
+        v1.descendre(TAILLE_CASE);
 		c1.descendre(TAILLE_CASE);
 
-		v2.stable(posC1[0] - posV2[0] - 2 * TAILLE_CASE + posV2[1] - TAILLE_CASE);
-		v2.stable(TAILLE_CASE/5);
+		v1.stable(posC1[0] - posv1[0] - 2 * TAILLE_CASE + posv1[1] - TAILLE_CASE);
+		v1.stable(TAILLE_CASE/5);
 
-		c1.droite(posC1[0] - posV2[0] - 2 * TAILLE_CASE);
-		c1.monter(posV2[1] - posC1[1]);
+		c1.droite(posC1[0] - posv1[0] - 2 * TAILLE_CASE);
+		c1.monter(posv1[1] - posC1[1]);
 
 		int tempsC1initactuel = c1.getMaxTemps() - tempsC1init;
-		int tempsV2initactuel = v2.getMaxTemps() - tempsV2init;
+		int tempsv1initactuel = v1.getMaxTemps() - tempsv1init;
 
-		if (tempsC1initactuel < tempsV2initactuel) {
-			sumTemps = tempsV2initactuel;
+		if (tempsC1initactuel < tempsv1initactuel) {
+			sumTemps = tempsv1initactuel;
 		} else {
 			sumTemps = tempsC1initactuel;
 		}
