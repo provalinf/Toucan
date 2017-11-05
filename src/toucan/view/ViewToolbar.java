@@ -32,11 +32,11 @@ public class ViewToolbar extends JToolBar implements Observer {
 
 		playPause = (JButton) add(new JButton("Play/Pause"));
 		playPause.addActionListener(e -> {
-			if (m.isMouvCalc()) {
-				panAnim.inversPause();
-			} else if (!m.isThreadLaunch()) {
+			if (!m.isThreadLaunch() && !m.isMouvCalc()) {
 				panAnim.setPause(false);
 				m.genererMouvements();
+			} else {
+				panAnim.inversPause();
 			}
 			m.refreshUI();
 		});
