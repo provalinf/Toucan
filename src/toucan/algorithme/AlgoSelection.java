@@ -28,7 +28,7 @@ public class AlgoSelection extends Algo {
 				equilibreStable();
 				c1.executer(lesCases, mini, i);
 				equilibreStable();
-				c2.executer(lesCases, i); // modifier
+				c2.executer(lesCases, i);
 				equilibreStable();
 				/*Case temp = lesCases.getCase(mini);
 				Case casei = lesCases.getCase(i);

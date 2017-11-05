@@ -1,5 +1,8 @@
 package toucan.algorithme;
 
+import toucan.graphique.animation.AffectationCaseCase;
+import toucan.graphique.animation.AffectationCaseVar;
+import toucan.graphique.animation.AffectationVarCase;
 import toucan.modele.Case;
 import toucan.modele.LesCases;
 
@@ -19,37 +22,21 @@ public class AlgoBulle extends Algo {
 			for (int i = 0; i < lesCases.getNbCases() - 1; i++) {
 				Case c1 = lesCases.getCase(i);
 				Case c2 = lesCases.getCase(i + 1);
-				int[] posC1 = c1.getPosActuel();
-				int[] posC2 = c2.getPosActuel();
-
-				c1.descendre(TAILLE_CASE * 2);
-				c2.descendre(TAILLE_CASE * 2);
 
 				if (c1.getValeurActuel() > c2.getValeurActuel()) {
-					int diff = (posC2[0] - posC1[0]) / 2;
-					int repl = (posC2[0] - posC1[0]) / 2;
-					int valC1 = c1.getValeurActuel();
-					c1.droite(diff);
-					c2.gauche(diff);
-					c1.setValeur(c2.getValeurActuel());
-					c2.setValeur(valC1);
-					c1.gauche(diff);
-					c2.droite(diff);
+					AffectationVarCase aVC1 = new AffectationVarCase();
+					AffectationCaseCase aCC1 = new AffectationCaseCase();
+					AffectationCaseVar aCV1 = new AffectationCaseVar();
+					aVC1.executer(lesCases, i);
+					equilibreStable();
+					aCC1.executer(lesCases, i, i+1);
+					equilibreStable();
+					aCV1.executer(lesCases, i+1);
+					equilibreStable();
 					inversion = true;
 				} else {
-					int diff = (posC2[0] - posC1[0]) / 2 - TAILLE_CASE / 5;
-
-					c1.droite(diff);
-					c2.gauche(diff);
-
-					c1.gauche(diff);
-					c2.droite(diff);
-
+					// couleur quand on affecte pas
 				}
-
-				c1.monter(TAILLE_CASE * 2);
-				c2.monter(TAILLE_CASE * 2);
-
 				equilibreStable();
 			}
 		}
