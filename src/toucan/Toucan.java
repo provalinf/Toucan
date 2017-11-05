@@ -31,8 +31,9 @@ public class Toucan extends JFrame {
 		Observable model = new Modele();
 
 		add(new ViewMenubar(model), BorderLayout.PAGE_START);
-		add(new ViewGraphique(model), BorderLayout.CENTER);
-		add(new ViewToolbar(model), BorderLayout.PAGE_END);
+		ViewGraphique vueGraph = new ViewGraphique(model);
+		add(vueGraph, BorderLayout.CENTER);
+		add(new ViewToolbar(model, vueGraph.getPanAnim()), BorderLayout.PAGE_END);
 		Modele modele = (Modele) model;
 
 		modele.creerCase(200, 60, 3);
@@ -41,6 +42,7 @@ public class Toucan extends JFrame {
 		modele.creerCase(440, 60, 4);
 		modele.creerVariable(10, 300, 0); //Case de stockage pour swap
 		modele.creerVariable(10, 360, 0); //Case de stockage pour swap
+		//modele.genererMouvements();
 		//modele.creerLesMouvements();
 		/*Thread creerMouv = new Thread((Runnable) modele, "Toucan");
 		creerMouv.start();*/

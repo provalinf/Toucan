@@ -13,10 +13,12 @@ public class PanneauAnimation extends JPanel {
 	private LesCasesAnimation lesCasesAnimation;
 	private int tempsActuel;
 
+	private boolean pause;
+
 	public PanneauAnimation(Modele modele) {
 		this.modele = modele;
 		lesCasesAnimation = new LesCasesAnimation(modele);
-		resetTempsActuel();
+		resetAndInit();
 		this.setPreferredSize(new Dimension(600, 500));
 		repaint();    // Appel paintComponent(...)
 	}
@@ -30,20 +32,64 @@ public class PanneauAnimation extends JPanel {
 		GradientPaint gp = new GradientPaint(-w, -h, Color.LIGHT_GRAY, w, h, Color.WHITE);
 		g2.setPaint(gp);
 		g2.fillRect(0, 0, w, h);
-
+		System.out.println(". " + modele.getMaxTemps() + " " + tempsActuel);
 		lesCasesAnimation.dessiner(g, tempsActuel);    // temps à incrementer
-		if (tempsActuel < modele.getMaxTemps() && !modele.isThreadSleep()) {
-			tempsActuel++;
-			try {
-				Thread.sleep(modele.getTempsDeLatence());
-			} catch (InterruptedException ex) {
-				Logger.getLogger(PanneauAnimation.class.getName()).log(Level.SEVERE, null, ex);
+
+		try {
+			Thread.sleep(modele.getTempsDeLatence());
+		} catch (InterruptedException ex) {
+			Logger.getLogger(PanneauAnimation.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		if (modele.isThreadLaunch() || tempsActuel < modele.getMaxTemps()) {    // Permet à l'animation de fonctionner AVANT la fin du calcul des mouvements
+			//System.out.println("làààààààààààààà " + !isPause());
+			if (!isPause()) {
+				tempsActuel++;
+				//System.out.println("ça dessine un temps sup");
+				repaint();
 			}
-			repaint();
+		} else if (modele.isMouvCalc()) {
+			//System.out.println("hooopppp");
+			modele.refreshUI();    // Pour update l'état des boutons (/!\ à ne pas faire de loop)
 		}
 	}
 
-	public void resetTempsActuel() {
+	public boolean isPause() {
+		return pause;
+	}
+
+	public void setPause(boolean pause) {
+		this.pause = pause;
+	}
+
+	public void inversPause() {
+		System.out.println("TAC");
+		pause = !pause;
+	}
+
+	public void resetAndInit() {
 		tempsActuel = 0;
+		setPause(true);
+	}
+
+	public void defineDebTemps() {
+		System.out.println("direction début");
+		tempsActuel = 0;
+		setPause(true);
+		repaint();
+	}
+
+	public void defineFinTemps() {
+		System.out.println("direction fin");
+		tempsActuel = modele.getMaxTemps();
+		setPause(true);    // Facultatif
+		repaint();
+	}
+
+	public boolean isStart() {
+		return tempsActuel == 0;
+	}
+
+	public boolean isEnd() {
+		return tempsActuel == modele.getMaxTemps();
 	}
 }

@@ -140,8 +140,11 @@ public class LesMouvements {
 	 */
 	public int tempsMax() {
 		int tMax = 0;
-		for (Mouvement lesMouv : lesMouvs) {
+		/*for (Mouvement lesMouv : lesMouvs) {
 			tMax += lesMouv.getTMax();
+		}*/
+		for (int i = 0; i < lesMouvs.size(); i++) {		// /!\ Évite l'erreur "ConcurrentModificationException"
+			tMax += lesMouvs.get(i).getTMax();
 		}
 		return tMax;
 	}

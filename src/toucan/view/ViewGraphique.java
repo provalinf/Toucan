@@ -22,11 +22,19 @@ public class ViewGraphique extends JPanel implements Observer {
 		add(panAnim);
 	}
 
+	public PanneauAnimation getPanAnim() {
+		return panAnim;
+	}
+
 	@Override
 	public void update(Observable o, Object arg) {
 		Runnable run = () -> {
-			panAnim.repaint();
-			if (!((Modele) (o)).isThreadLaunch()) panAnim.resetTempsActuel();	// Permet de réinitialiser le temps d'affichage après un appuie sur stop par ex
+			if (!((Modele) o).isMouvCalc() || !panAnim.isEnd()) {
+				panAnim.repaint();
+			} else if (!panAnim.isPause()) {
+				panAnim.setPause(true);
+				((Modele) o).refreshUI();
+			}
 		};
 		if (SwingUtilities.isEventDispatchThread()) {
 			run.run();

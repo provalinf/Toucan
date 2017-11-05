@@ -15,12 +15,13 @@ public class Modele extends Observable implements Runnable {
 	public static final int TAILLE_CASE = 50;
 
 	private LesCases lesCases;
-	private final int tempsDeLatence = 4;
+	private final int tempsDeLatence = 1;
 	private boolean threadLaunch;
-	private boolean threadSleep;
+	private boolean mouvCalc;
 
 	public Modele(int nbCases) {
 		lesCases = new LesCases(nbCases);
+		initAndReset();
 	}
 
 	public Modele() {
@@ -29,7 +30,7 @@ public class Modele extends Observable implements Runnable {
 
 	private void initAndReset() {
 		threadLaunch = false;
-		threadSleep = false;
+		mouvCalc = false;
 	}
 
 	/**
@@ -61,13 +62,21 @@ public class Modele extends Observable implements Runnable {
 	}*/
 	public void run() {
 		setThreadLaunch(true);
-		AlgoTest algo = new AlgoTest(lesCases);
-		algo.trier();
-/*		IAnimation affectCases = new AffectationCaseCase();
-		affectCases.executer(lesCases, 0, 1);
-		affectCases.executer(lesCases, 1, 3);*/
-
 		refreshUI();
+		if (!isMouvCalc()) {
+			AlgoTest algo = new AlgoTest(lesCases);
+			algo.trier();
+			/*IAnimation affectCases = new AffectationCaseCase();
+			affectCases.executer(lesCases, 0, 1);
+			affectCases.executer(lesCases, 1, 3);*/
+			setMouvCalc(true);
+		}
+		setThreadLaunch(false);
+	}
+
+	public void genererMouvements() {
+		Thread creerMouv = new Thread((Runnable) this);
+		creerMouv.start();
 	}
 
 	public Case getCase(int i) {
@@ -126,32 +135,26 @@ public class Modele extends Observable implements Runnable {
 		return lesCases.getNbVariables();
 	}
 
-	public void setThreadLaunch(boolean threadLaunch) {
-		this.threadLaunch = threadLaunch;
+	public boolean isMouvCalc() {
+		return mouvCalc;
 	}
 
-	public void setThreadSleep(boolean threadSleep) {
-		this.threadSleep = threadSleep;
+	public void setMouvCalc(boolean mouvCalc) {
+		this.mouvCalc = mouvCalc;
+		refreshUI();
+	}
+
+	public void setThreadLaunch(boolean threadLaunch) {
+		this.threadLaunch = threadLaunch;
 	}
 
 	public boolean isThreadLaunch() {
 		return threadLaunch;
 	}
 
-	public boolean isThreadSleep() {
-		return threadSleep;
-	}
-
-	public void inversThreadState() {
-		threadSleep = !threadSleep;
-		refreshUI();	// Pour relancer l'UI si elle sort de pause
-	}
-
 	public void stopAndReset() {
-		setThreadSleep(true);
 		lesCases.resetMouv();
-		setThreadSleep(false);
-		setThreadLaunch(false);
+		initAndReset();
 		refreshUI();
 	}
 }
