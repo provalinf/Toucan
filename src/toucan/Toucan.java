@@ -43,7 +43,7 @@ public class Toucan extends JFrame {
 		modele.creerCase(360, 60, 2);
 		modele.creerCase(440, 60, 4);
 		modele.creerVariable(10, 300, 0); //Case de stockage pour swap
-		modele.creerVariable(10, 360, 0); //Case de stockage pour swap
+		//modele.creerVariable(10, 360, 0); //Case de stockage pour swap
 		//modele.genererMouvements();
 		//modele.creerLesMouvements();
 		/*Thread creerMouv = new Thread((Runnable) modele, "Toucan");

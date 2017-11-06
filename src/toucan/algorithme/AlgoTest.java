@@ -17,14 +17,14 @@ public class AlgoTest extends Algo {
 	}
 
 	public void trier() {
-		System.out.println("Début calculs");
+		//System.out.println("Début calculs");
         //affectationCaseCase.executer(lesCases, 0, 1);
         equilibreStable();
 		lesCases.getVariable(1).setVisible(false);
         //equilibreStable();
         //affectationVarCase.executer(lesCases, 0);
 		new AlgoBulle(lesCases).trier();
-		System.out.println("Début boucles");
+		//System.out.println("Début boucles");
 		int j = 30;
 		for (int i = 0; i < 1000000000; i++) {
 			j = (i + j) * 10;
@@ -33,11 +33,11 @@ public class AlgoTest extends Algo {
 		}for (int i = 0; i < 1000000000; i++) {
 			j = (i + j) * 10;
 		}
-		System.out.println("Fin boucles");
+		//System.out.println("Fin boucles");
 
 		//affectationCaseCase.executer(lesCases, 0, 1);
 
-		System.out.println("Fin calculs");
+		//System.out.println("Fin calculs");
 		new AlgoSelection(lesCases).trier();
 		//new AlgoInsert(lesCases).trier();
 		/*affectationVarCase.executer(lesCases, 3);

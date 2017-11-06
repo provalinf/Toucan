@@ -32,7 +32,7 @@ public class PanneauAnimation extends JPanel {
 		GradientPaint gp = new GradientPaint(-w, -h, Color.LIGHT_GRAY, w, h, Color.WHITE);
 		g2.setPaint(gp);
 		g2.fillRect(0, 0, w, h);
-		System.out.println(". " + modele.getMaxTemps() + " " + tempsActuel);
+		//System.out.println(". " + modele.getMaxTemps() + " " + tempsActuel);
 		lesCasesAnimation.dessiner(g, tempsActuel);    // temps à incrementer
 
 		try {
@@ -62,7 +62,6 @@ public class PanneauAnimation extends JPanel {
 	}
 
 	public void inversPause() {
-		System.out.println("TAC");
 		pause = !pause;
 	}
 
@@ -72,14 +71,12 @@ public class PanneauAnimation extends JPanel {
 	}
 
 	public void defineDebTemps() {
-		System.out.println("direction début");
 		tempsActuel = 0;
 		setPause(true);
 		repaint();
 	}
 
 	public void defineFinTemps() {
-		System.out.println("direction fin");
 		tempsActuel = modele.getMaxTemps();
 		setPause(true);    // Facultatif
 		repaint();

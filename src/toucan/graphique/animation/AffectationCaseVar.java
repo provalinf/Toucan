@@ -16,7 +16,7 @@ public class AffectationCaseVar implements IAnimation {
 	public void executer(LesCases cases, int... indices) {
 		if (indices.length != 1) throw new AssertionError("Attention uniquement 1 indice");
 		Case c1 = cases.getCase(indices[0]);
-		Case v1 = cases.getCase(cases.getNbCases() + cases.getNbVariables() - 2);
+		Case v1 = cases.getVariable(0);
 
 		c1.setColor(new Color(23, 148, 16));
 		v1.setColor(new Color(23, 148, 16));

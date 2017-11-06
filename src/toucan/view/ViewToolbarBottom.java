@@ -25,6 +25,7 @@ public class ViewToolbarBottom extends JToolBar implements Observer {
 	}
 
 	private void init(Modele m) {
+		addSeparator();
 		debut = (JButton) add(new JButton("Début"));
 		debut.addActionListener(e -> {
 			panAnim.defineDebTemps();
@@ -53,10 +54,13 @@ public class ViewToolbarBottom extends JToolBar implements Observer {
 			panAnim.defineFinTemps();
 			m.refreshUI();
 		});
+		addSeparator();
 
 		slideControl = (JSlider) add(new JSlider(0, 100, 1));
 		slideControl.addChangeListener(e -> {
 			panAnim.defineCustomTemps(slideControl.getValue());
+			//System.out.println(slideControl.getValue());
+			panAnim.repaint();
 			m.refreshUI();
 		});
 
@@ -81,7 +85,7 @@ public class ViewToolbarBottom extends JToolBar implements Observer {
 		fin.setEnabled(m.getMaxTemps() > 0 && m.isMouvCalc() && !panAnim.isEnd());
 
 		slideControl.setEnabled(m.isMouvCalc());
-		slideControl.setMaximum(m.getMaxTemps() + 10);
+		slideControl.setMaximum(m.getMaxTemps());
 		slideControl.setValue(panAnim.getTempsActuel());
 	}
 
