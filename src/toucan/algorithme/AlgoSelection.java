@@ -3,12 +3,8 @@ package toucan.algorithme;
 import toucan.graphique.animation.AffectationCaseCase;
 import toucan.graphique.animation.AffectationCaseVar;
 import toucan.graphique.animation.AffectationVarCase;
-import toucan.graphique.animation.ComparaisonCaseCase;
 import toucan.modele.LesCases;
 
-/**
- * Classe qui utilise l'algorithme du tri par selection avec des animations
- */
 public class AlgoSelection extends Algo {
 	public AlgoSelection(LesCases lesCases) {
 		super(lesCases);
@@ -19,23 +15,20 @@ public class AlgoSelection extends Algo {
 		for (int i = 0; i < lesCases.getNbCases() - 1; i++) {
 			int mini = i;
 			for (int j = i + 1; j < lesCases.getNbCases(); j++) {
-				ComparaisonCaseCase comparaisonCaseCase = new ComparaisonCaseCase();
-				comparaisonCaseCase.executer(lesCases, j, mini);
-				equilibreStable();
 				if (lesCases.getCase(j).getValeurActuel() < lesCases.getCase(mini).getValeurActuel()) {
 					mini = j;
 				}
 			}
 			if(mini!=i) {
-				AffectationVarCase affectationVarCase = new AffectationVarCase();
-				AffectationCaseCase affectationCaseCase = new AffectationCaseCase();
-				AffectationCaseVar affectationCaseVar = new AffectationCaseVar();
+				AffectationVarCase v1 = new AffectationVarCase();
+				AffectationCaseCase c1 = new AffectationCaseCase();
+				AffectationCaseVar c2 = new AffectationCaseVar();
 
-				affectationVarCase.executer(lesCases, mini);
+				v1.executer(lesCases, mini);
 				equilibreStable();
-				affectationCaseCase.executer(lesCases, mini, i);
+				c1.executer(lesCases, mini, i);
 				equilibreStable();
-				affectationCaseVar.executer(lesCases, i);
+				c2.executer(lesCases, i);
 				equilibreStable();
 				/*Case temp = lesCases.getCase(mini);
 				Case casei = lesCases.getCase(i);

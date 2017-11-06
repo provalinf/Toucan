@@ -1,53 +1,67 @@
 package toucan.algorithme;
 
-import toucan.graphique.animation.AffectationCaseCase;
-import toucan.graphique.animation.AffectationCaseVar;
-import toucan.graphique.animation.AffectationVarCase;
 import toucan.modele.Case;
 import toucan.modele.LesCases;
 
 import static toucan.modele.Modele.TAILLE_CASE;
 
-
-/**
- *Classe qui utilise l'algorithme du tri par insertion avec des animations
- */
 public class AlgoInsert extends Algo {
-    public AlgoInsert(LesCases lesCases) {
-        super(lesCases);
-    }
+	public AlgoInsert(LesCases lesCases) {
+		super(lesCases);
+	}
 
-    public void trier() {
-        for (int i = 1; i < lesCases.getNbCases(); i++) {
-            Case c1 = lesCases.getCase(i);
-            Case c2;
+	public void trier() {
+		for (int i = 1; i < lesCases.getNbCases(); i++) {
+			Case c1 = lesCases.getCase(i);
+			int[] posC1 = c1.getPosActuel();
 
-            int j = i - 1;
-            boolean verif = true;
-            do{
-                verif = false;
-                c2 = lesCases.getCase(j);
-                if (c2.getValeurActuel() > c1.getValeurActuel()) {
-                    AffectationVarCase aVC1 = new AffectationVarCase();
-                    AffectationCaseCase aCC1 = new AffectationCaseCase();
-                    AffectationCaseVar aCV1 = new AffectationCaseVar();
-                    aVC1.executer(lesCases, i);
-                    equilibreStable();
-                    aCC1.executer(lesCases, i, j - 1);
-                    equilibreStable();
-                    aCV1.executer(lesCases, j - 1);
-                    equilibreStable();
-                    j--;
-                    verif = true;
-                } else {
-                    // couleur : on ne modifie pas la place de cette case car bien placée
-                    verif = false;
-                }
-            }
-            while (j > 0 && verif);
-            equilibreStable();
-        }
-    }
+			c1.descendre(TAILLE_CASE * 2);
+
+			Case c2, c3;
+
+			int j = i;
+			boolean verif = true;
+			while (j > 0 && verif) {
+				c2 = lesCases.getCase(j - 1);
+				int[] posC2 = c2.getPosActuel();
+				c3 = lesCases.getCase(j);
+				int[] posC3 = c3.getPosActuel();
+
+				c2.descendre(TAILLE_CASE * 2);
+				if (c2.getValeurActuel() > c1.getValeurActuel()) {
+					int diff = (posC1[0] - posC2[0]) / 2;
+					c1.gauche(diff);
+					c2.droite(diff);
+					//c1.setValeur(c2.getValeurActuel());
+					//c2.setValeur(valC1);
+					c1.droite(diff);
+					c2.monter(TAILLE_CASE * 2);
+					c1.gauche(diff * 2);
+					c2.droite(diff);
+				} else {
+					int diff = (posC1[0] - posC2[0]) / 2 - TAILLE_CASE / 5;
+
+					c1.gauche(diff);
+					c2.droite(diff);
+
+					c1.droite(diff);
+					c2.gauche(diff);
+					c1.monter(TAILLE_CASE * 2);
+
+					verif = false;
+				}
+				c2.monter(TAILLE_CASE * 2);
+
+				lesCases.setCase(j, c2);
+				j = j - 1;
+
+			}
+			lesCases.setCase(j, c1);
+			c1.monter(TAILLE_CASE * 2);
+			equilibreStable();
+
+		}
+	}
 }
 
 /*			while (j > 0 && (c2 = lesCases.getCase(j - 1)).getValeurActuel() > c1.getValeurActuel()) {
