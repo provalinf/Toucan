@@ -36,7 +36,7 @@ public class PanneauAnimation extends JPanel {
 		lesCasesAnimation.dessiner(g, tempsActuel);    // temps à incrementer
 
 		try {
-			Thread.sleep(modele.getVitesseAnimation());
+			Thread.sleep(modele.getTempsDeLatence());
 		} catch (InterruptedException ex) {
 			Logger.getLogger(PanneauAnimation.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -85,21 +85,11 @@ public class PanneauAnimation extends JPanel {
 		repaint();
 	}
 
-	public int getTempsActuel() {
-		return tempsActuel;
-	}
-
 	public boolean isStart() {
 		return tempsActuel == 0;
 	}
 
 	public boolean isEnd() {
 		return tempsActuel == modele.getMaxTemps();
-	}
-
-	public void defineCustomTemps(int temps) {
-		if (temps < 0) temps = 0;
-		else if (temps > modele.getMaxTemps()) temps = modele.getMaxTemps();
-		else tempsActuel = temps;
 	}
 }

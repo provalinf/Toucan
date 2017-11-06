@@ -3,10 +3,12 @@ package toucan.graphique.animation;
 import toucan.modele.Case;
 import toucan.modele.LesCases;
 
+import java.awt.*;
+
 import static toucan.modele.Modele.TAILLE_CASE;
 
 /**
- * Created by Cyril on 05/10/2017.
+ * Classe qui permet d'animer une affectation Variable à Case
  */
 public class AffectationVarCase implements IAnimation {
 	@Override
@@ -14,6 +16,8 @@ public class AffectationVarCase implements IAnimation {
 		if (indices.length != 1) throw new AssertionError("Attention uniquement 1 indice");
 		Case c1 = cases.getCase(indices[0]);
 		Case v1 = cases.getCase(cases.getNbCases()+cases.getNbVariables()-2);
+		c1.setColor(Color.BLUE);
+		v1.setColor(Color.BLUE);
 
 		int posC1[] = c1.getPosActuel();
 		int posv1[] = v1.getPosActuel();
@@ -68,5 +72,7 @@ public class AffectationVarCase implements IAnimation {
 				cases.getCase(i).stable(sumTemps);
 			}
 		}
+		c1.setColor(Color.BLACK);
+		v1.setColor(Color.BLACK);
 	}
 }

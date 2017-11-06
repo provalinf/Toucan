@@ -29,9 +29,9 @@ public class Toucan extends JFrame {
 		setMinimumSize(new Dimension(400, 200));
 
 		Observable model = new Modele();
-		ViewGraphique vueGraph = new ViewGraphique(model);
 
-		add(new ViewMenubar(model, vueGraph.getPanAnim()), BorderLayout.PAGE_START);
+		add(new ViewMenubar(model), BorderLayout.PAGE_START);
+		ViewGraphique vueGraph = new ViewGraphique(model);
 		add(vueGraph, BorderLayout.CENTER);
 		add(new ViewToolbar(model, vueGraph.getPanAnim()), BorderLayout.PAGE_END);
 		Modele modele = (Modele) model;

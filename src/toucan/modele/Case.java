@@ -37,6 +37,13 @@ public class Case {
 		return pos.getPosY(nbTmps);
 	}
 
+	public void setColor(Color couleur){
+		cAnim.setColor(couleur);
+	}
+
+	public Color getColor(){
+		return cAnim.getColor();
+	}
 	public int getMaxTemps() {
 		return pos.tempsMax();
 	}

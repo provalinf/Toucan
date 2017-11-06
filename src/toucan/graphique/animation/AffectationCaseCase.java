@@ -6,7 +6,7 @@ import toucan.modele.LesCases;
 import static toucan.modele.Modele.TAILLE_CASE;
 
 /**
- * Created by bonnal4u.
+ * Classe qui permet d'animer une affectation case à case
  */
 public class AffectationCaseCase implements IAnimation {
 

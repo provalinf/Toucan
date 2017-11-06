@@ -66,4 +66,11 @@ public class CaseAnimation extends BufferedImage {
 		g.drawImage(this, positionX, positionY, null);
 	}
 
+    public void setColor(Color color) {
+        couleur = color;
+    }
+
+	public Color getColor() {
+		return couleur;
+	}
 }

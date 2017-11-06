@@ -5,7 +5,7 @@ import toucan.graphique.animation.AffectationVarCase;
 import toucan.modele.LesCases;
 
 /**
- * Created by Cyril on 05/10/2017.
+ * Classe qui permet de choisir les algorithmes que l'on veut utiliser
  */
 public class AlgoTest extends Algo {
 
@@ -18,7 +18,7 @@ public class AlgoTest extends Algo {
 
 	public void trier() {
 		System.out.println("Début calculs");
-        affectationCaseCase.executer(lesCases, 0, 1);
+        //affectationCaseCase.executer(lesCases, 0, 1);
         equilibreStable();
 		lesCases.getVariable(1).setVisible(false);
         //equilibreStable();
@@ -35,10 +35,10 @@ public class AlgoTest extends Algo {
 		}
 		System.out.println("Fin boucles");
 
-		affectationCaseCase.executer(lesCases, 0, 1);
+		//affectationCaseCase.executer(lesCases, 0, 1);
 
 		System.out.println("Fin calculs");
-		//new AlgoSelection(lesCases).trier();
+		new AlgoSelection(lesCases).trier();
 		//new AlgoInsert(lesCases).trier();
 		/*affectationVarCase.executer(lesCases, 3);
 		affectationVarCase.executer(lesCases, 1);*/

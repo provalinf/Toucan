@@ -1,6 +1,5 @@
 package toucan.view;
 
-import toucan.graphique.PanneauAnimation;
 import toucan.view.ViewMenuItem.ViewMenuAlgo;
 import toucan.view.ViewMenuItem.ViewMenuFichier;
 
@@ -13,17 +12,14 @@ import java.util.Observer;
  */
 public class ViewMenubar extends JMenuBar implements Observer {
 
-	private PanneauAnimation panAnim;
-
-	public ViewMenubar(Observable model, PanneauAnimation panAnim) {
+	public ViewMenubar(Observable model) {
 		model.addObserver(this);
-		this.panAnim = panAnim;
 		init(model);
 	}
 
 	private void init(Observable m) {
 		add(new ViewMenuFichier(m));
-		add(new ViewMenuAlgo(m, panAnim));
+		add(new ViewMenuAlgo(m));
 	}
 
 	@Override

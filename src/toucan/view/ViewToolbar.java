@@ -15,7 +15,6 @@ public class ViewToolbar extends JToolBar implements Observer {
 
 	private PanneauAnimation panAnim;
 	private JButton debut, playPause, stop, fin;
-	private JSlider slideControl, slideSpeed;
 
 	public ViewToolbar(Observable model, PanneauAnimation panAnim) {
 		model.addObserver(this);
@@ -53,23 +52,6 @@ public class ViewToolbar extends JToolBar implements Observer {
 			panAnim.defineFinTemps();
 			m.refreshUI();
 		});
-
-		slideControl = (JSlider) add(new JSlider(0, 100, 1));
-		slideControl.addChangeListener(e -> {
-			panAnim.defineCustomTemps(slideControl.getValue());
-			m.refreshUI();
-		});
-
-
-		JLabel lent = (JLabel) add(new JLabel("Lent"));
-		slideSpeed = (JSlider) add(new JSlider(0, 14, 1));
-		slideSpeed.addChangeListener(e -> {
-			m.setVitesseAnimation(slideSpeed.getMaximum() - slideSpeed.getValue());
-		});
-		slideSpeed.setMajorTickSpacing(1);
-		slideSpeed.setPaintTicks(true);
-		JLabel speed = (JLabel) add(new JLabel("Rapide"));
-
 		setButtonState(m);
 	}
 
@@ -79,15 +61,6 @@ public class ViewToolbar extends JToolBar implements Observer {
 		stop.setEnabled(m.getMaxTemps() > 0);
 		fin.setText(m.isMouvCalc() ? "Fin" : "Tous les mouvements ne sont pas calculés");
 		fin.setEnabled(m.getMaxTemps() > 0 && m.isMouvCalc() && !panAnim.isEnd());
-
-		slideSpeed.setValue(m.getVitesseAnimation() + slideSpeed.getMaximum());
-
-		slideControl.setEnabled(m.isMouvCalc());
-		if (m.isMouvCalc()) {
-			slideControl.setMaximum(m.getMaxTemps() + 10);
-			slideControl.setValue(panAnim.getTempsActuel());
-			System.out.println("TAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-		}
 	}
 
 	@Override
