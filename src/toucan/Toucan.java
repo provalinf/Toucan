@@ -3,7 +3,8 @@ package toucan;
 import toucan.modele.Modele;
 import toucan.view.ViewGraphique;
 import toucan.view.ViewMenubar;
-import toucan.view.ViewToolbar;
+import toucan.view.ViewToolbarBottom;
+import toucan.view.ViewToolbarTop;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,9 +32,10 @@ public class Toucan extends JFrame {
 		Observable model = new Modele();
 		ViewGraphique vueGraph = new ViewGraphique(model);
 
-		add(new ViewMenubar(model, vueGraph.getPanAnim()), BorderLayout.PAGE_START);
+		setJMenuBar(new ViewMenubar(model, vueGraph.getPanAnim()));
+		add(new ViewToolbarTop(model, vueGraph.getPanAnim()), BorderLayout.PAGE_START);
 		add(vueGraph, BorderLayout.CENTER);
-		add(new ViewToolbar(model, vueGraph.getPanAnim()), BorderLayout.PAGE_END);
+		add(new ViewToolbarBottom(model, vueGraph.getPanAnim()), BorderLayout.PAGE_END);
 		Modele modele = (Modele) model;
 
 		modele.creerCase(200, 60, 3);

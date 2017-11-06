@@ -11,13 +11,13 @@ import java.util.Observer;
 /**
  * Created by Valentin.
  */
-public class ViewToolbar extends JToolBar implements Observer {
+public class ViewToolbarBottom extends JToolBar implements Observer {
 
 	private PanneauAnimation panAnim;
 	private JButton debut, playPause, stop, fin;
 	private JSlider slideControl, slideSpeed;
 
-	public ViewToolbar(Observable model, PanneauAnimation panAnim) {
+	public ViewToolbarBottom(Observable model, PanneauAnimation panAnim) {
 		model.addObserver(this);
 		this.panAnim = panAnim;
 		setFloatable(false);
@@ -68,6 +68,7 @@ public class ViewToolbar extends JToolBar implements Observer {
 		});
 		slideSpeed.setMajorTickSpacing(1);
 		slideSpeed.setPaintTicks(true);
+		slideSpeed.setValue(m.getVitesseAnimation());
 		JLabel speed = (JLabel) add(new JLabel("Rapide"));
 
 		setButtonState(m);
@@ -79,8 +80,6 @@ public class ViewToolbar extends JToolBar implements Observer {
 		stop.setEnabled(m.getMaxTemps() > 0);
 		fin.setText(m.isMouvCalc() ? "Fin" : "Tous les mouvements ne sont pas calculés");
 		fin.setEnabled(m.getMaxTemps() > 0 && m.isMouvCalc() && !panAnim.isEnd());
-
-		slideSpeed.setValue(m.getVitesseAnimation() + slideSpeed.getMaximum());
 
 		slideControl.setEnabled(m.isMouvCalc());
 		if (m.isMouvCalc()) {

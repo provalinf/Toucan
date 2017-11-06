@@ -80,6 +80,10 @@ public class Case {
 		pos.setValeur(valeur);
 	}
 
+	public void setValeurInit(int valeurInit) {
+		pos.setValeurInit(valeurInit);
+	}
+
 	@Override
 	public String toString() {
 		return "Case{" +

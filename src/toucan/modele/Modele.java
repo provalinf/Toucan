@@ -7,6 +7,8 @@ import toucan.algorithme.AlgoSelection;
 
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Modele extends Observable implements Runnable {
 
@@ -192,5 +194,11 @@ public class Modele extends Observable implements Runnable {
 		lesCases.resetMouv();
 		initAndReset();
 		refreshUI();
+	}
+
+	public void setRandomValeurs() {
+		for (int i = 0; i < getNbCases(); i++) {
+			getCase(i).setValeurInit(ThreadLocalRandom.current().nextInt(-100, 100));
+		}
 	}
 }
