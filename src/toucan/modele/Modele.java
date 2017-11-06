@@ -19,7 +19,7 @@ public class Modele extends Observable implements Runnable {
 	public static final int TAILLE_CASE = 50;
 
 	private LesCases lesCases;
-	private final int tempsDeLatence = 1;
+	private int vitesseAnimation = 1;
 	private boolean threadLaunch;
 	private boolean mouvCalc;
 
@@ -93,6 +93,11 @@ public class Modele extends Observable implements Runnable {
 		setThreadLaunch(false);
 	}
 
+	public void setVitesseAnimation(int vitesseAnimation) {
+		this.vitesseAnimation = vitesseAnimation;
+	}
+
+
 	public int getNbAlgo() {
 		return collectionAlgo.size();
 	}
@@ -118,8 +123,8 @@ public class Modele extends Observable implements Runnable {
 		return lesCases.getNbCases();
 	}
 
-	public int getTempsDeLatence() {
-		return tempsDeLatence;
+	public int getVitesseAnimation() {
+		return vitesseAnimation;
 	}
 
 	public int getMaxTemps() {
