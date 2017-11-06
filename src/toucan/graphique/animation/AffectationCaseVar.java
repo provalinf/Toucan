@@ -6,6 +6,9 @@ import toucan.modele.LesCases;
 import static toucan.modele.Modele.TAILLE_CASE;
 
 
+/**
+ * Classe qui permet d'animer une affectation Case à Variable
+ */
 public class AffectationCaseVar implements IAnimation {
     @Override
     public void executer(LesCases cases, int... indices) {
