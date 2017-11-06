@@ -4,7 +4,9 @@ import toucan.algorithme.Algo;
 import toucan.algorithme.AlgoBulle;
 import toucan.algorithme.AlgoInsert;
 import toucan.algorithme.AlgoSelection;
+import toucan.graphique.animation.ComparaisonCaseCase;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Random;
@@ -19,9 +21,10 @@ public class Modele extends Observable implements Runnable {
 	public static final int STABLE = 4;
 
 	public static final int TAILLE_CASE = 50;
+	public static final Color DEFAULT_COLOR_CASE = Color.BLACK;
 
 	private LesCases lesCases;
-	private int vitesseAnimation = 1;
+	private int vitesseAnimation = 2;
 	private boolean threadLaunch;
 	private boolean mouvCalc;
 
@@ -87,6 +90,8 @@ public class Modele extends Observable implements Runnable {
 			/*AlgoTest algo = new AlgoTest(lesCases);
 			algo.trier();*/
 			collectionAlgo.get(getSelectionAlgo()).trier();
+			/*ComparaisonCaseCase comp = new ComparaisonCaseCase();
+			comp.executer(lesCases, 0, 1);*/
 			/*IAnimation affectCases = new AffectationCaseCase();
 			affectCases.executer(lesCases, 0, 1);
 			affectCases.executer(lesCases, 1, 3);*/

@@ -9,6 +9,7 @@ public class Mouvement {
 
 	protected boolean mouvVal;
 	protected boolean mouvVisib;
+	protected boolean mouvColor;
 
 	public Mouvement(int xDepl, int yDepl, int xInit, int yInit) {
 		this(0, xInit, yInit);
@@ -29,6 +30,7 @@ public class Mouvement {
 		tStable = 0;
 		mouvVal = false;
 		mouvVisib = false;
+		mouvColor = false;
 	}
 
 	public int getPosX() {
@@ -78,6 +80,10 @@ public class Mouvement {
 
 	public boolean isMouvVisib() {
 		return mouvVisib;
+	}
+
+	public boolean isMouvColor() {
+		return mouvColor;
 	}
 
 	@Override

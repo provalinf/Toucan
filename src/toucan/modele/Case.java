@@ -10,7 +10,7 @@ public class Case {
 
 	public Case(int xInit, int yInit, int valInit) {
 		pos = new LesMouvements(xInit, yInit, valInit);
-		cAnim = new CaseAnimation(pos, Color.BLACK);
+		cAnim = new CaseAnimation(pos);
 	}
 
 	public void dessiner(Graphics g, int tmps) {
@@ -37,13 +37,6 @@ public class Case {
 		return pos.getPosY(nbTmps);
 	}
 
-	public void setColor(Color couleur){
-		cAnim.setColor(couleur);
-	}
-
-	public Color getColor(){
-		return cAnim.getColor();
-	}
 	public int getMaxTemps() {
 		return pos.tempsMax();
 	}
@@ -66,6 +59,14 @@ public class Case {
 
 	public void stable(int tmps) {
 		pos.stable(tmps);
+	}
+
+	public Color getColor(int tmps) {
+		return pos.getColor(tmps);
+	}
+
+	public void setColor(Color couleur) {
+		pos.setColor(couleur);
 	}
 
 	public void setVisible(boolean visible) {

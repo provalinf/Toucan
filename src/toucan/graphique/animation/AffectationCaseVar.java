@@ -3,25 +3,30 @@ package toucan.graphique.animation;
 import toucan.modele.Case;
 import toucan.modele.LesCases;
 
-import static toucan.modele.Modele.TAILLE_CASE;
+import java.awt.*;
+
+import static toucan.modele.Modele.DEFAULT_COLOR_CASE;
 
 
 /**
  * Classe qui permet d'animer une affectation Case à Variable
  */
 public class AffectationCaseVar implements IAnimation {
-    @Override
-    public void executer(LesCases cases, int... indices) {
-        if (indices.length != 1) throw new AssertionError("Attention uniquement 1 indice");
-        Case c1 = cases.getCase(indices[0]);
-        Case v1 = cases.getCase(cases.getNbCases()+cases.getNbVariables()-2);
+	@Override
+	public void executer(LesCases cases, int... indices) {
+		if (indices.length != 1) throw new AssertionError("Attention uniquement 1 indice");
+		Case c1 = cases.getCase(indices[0]);
+		Case v1 = cases.getCase(cases.getNbCases() + cases.getNbVariables() - 2);
 
-        int posC1[] = c1.getPosActuel();
-        int posv1[] = v1.getPosActuel();
-        int sumTemps = 0;
+		c1.setColor(new Color(23, 148, 16));
+		v1.setColor(new Color(23, 148, 16));
 
-        int tempsC1init = c1.getMaxTemps();
-        int tempsv1init = v1.getMaxTemps();
+		int posC1[] = c1.getPosActuel();
+		int posv1[] = v1.getPosActuel();
+		int sumTemps = 0;
+
+		int tempsC1init = c1.getMaxTemps();
+		int tempsv1init = v1.getMaxTemps();
 
        /* for (int i = 0; i < cases.getNbCases(); i++) {
 		  sumTemps = sumTemps + cases.getCase(i).getMaxTemps();
@@ -34,12 +39,12 @@ public class AffectationCaseVar implements IAnimation {
             }
         }*/
 
-        c1.stable(posC1[0]-posv1[0]+posv1[1]-posC1[1]);
-        v1.droite(posC1[0]-posv1[0]);
-        v1.monter(posv1[1]-posC1[1]);
-        c1.setValeur(v1.getValeurActuel());
-        v1.descendre(posv1[1]-posC1[1]);
-        v1.gauche(posC1[0]-posv1[0]);
+		c1.stable(posC1[0] - posv1[0] + posv1[1] - posC1[1]);
+		v1.droite(posC1[0] - posv1[0]);
+		v1.monter(posv1[1] - posC1[1]);
+		c1.setValeur(v1.getValeurActuel());
+		v1.descendre(posv1[1] - posC1[1]);
+		v1.gauche(posC1[0] - posv1[0]);
 		/*v1.stable(posv1[1] - posC1[1] + posC1[0] - posv1[0] - 2 * TAILLE_CASE); // somme de tout les temps que c1 travaille
 		c1.descendre(posv1[1] - posC1[1]);
 		c1.gauche(posC1[0] - posv1[0] - 2 * TAILLE_CASE);
@@ -61,19 +66,30 @@ public class AffectationCaseVar implements IAnimation {
 		c1.droite(posC1[0] - posv1[0] - 2 * TAILLE_CASE);
 		c1.monter(posv1[1] - posC1[1]);*/
 
-        int tempsC1initactuel = c1.getMaxTemps() - tempsC1init;
-        int tempsv1initactuel = v1.getMaxTemps() - tempsv1init;
+		/*int tempsC1initactuel = c1.getMaxTemps() - tempsC1init;
+		int tempsv1initactuel = v1.getMaxTemps() - tempsv1init;
 
-        if (tempsC1initactuel < tempsv1initactuel) {
-            sumTemps = tempsv1initactuel;
-        } else {
-            sumTemps = tempsC1initactuel;
-        }
+		if (tempsC1initactuel < tempsv1initactuel) {
+			sumTemps = tempsv1initactuel;
+		} else {
+			sumTemps = tempsC1initactuel;
+		}
 
-        for (int i = 0; i < cases.getNbCases(); i++) {
-            if (i != cases.getNbCases() - 1 && i != indices[0]) {
-                cases.getCase(i).stable(sumTemps);
-            }
-        }
-    }
+		for (int i = 0; i < cases.getNbCases(); i++) {
+			if (i != cases.getNbCases() - 1 && i != indices[0]) {
+				cases.getCase(i).stable(sumTemps);
+			}
+		}*/
+
+		int maxtemps = cases.getMaxTemps();
+		for (int i = 0; i < cases.getNbCases() + cases.getNbVariables(); i++) {
+			Case cTmp = cases.getCase(i);
+			if (cTmp.getMaxTemps() != maxtemps) {
+				cTmp.stable(maxtemps - cTmp.getMaxTemps());
+			}
+		}
+
+		c1.setColor(DEFAULT_COLOR_CASE);
+		v1.setColor(DEFAULT_COLOR_CASE);
+	}
 }

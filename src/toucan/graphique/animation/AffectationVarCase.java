@@ -5,6 +5,7 @@ import toucan.modele.LesCases;
 
 import java.awt.*;
 
+import static toucan.modele.Modele.DEFAULT_COLOR_CASE;
 import static toucan.modele.Modele.TAILLE_CASE;
 
 /**
@@ -15,9 +16,9 @@ public class AffectationVarCase implements IAnimation {
 	public void executer(LesCases cases, int... indices) {
 		if (indices.length != 1) throw new AssertionError("Attention uniquement 1 indice");
 		Case c1 = cases.getCase(indices[0]);
-		Case v1 = cases.getCase(cases.getNbCases()+cases.getNbVariables()-2);
-		c1.setColor(Color.BLUE);
-		v1.setColor(Color.BLUE);
+		Case v1 = cases.getCase(cases.getNbCases() + cases.getNbVariables() - 2);
+		c1.setColor(new Color(172, 101, 11));
+		v1.setColor(new Color(172, 101, 11));
 
 		int posC1[] = c1.getPosActuel();
 		int posv1[] = v1.getPosActuel();
@@ -43,36 +44,30 @@ public class AffectationVarCase implements IAnimation {
 
 		c1.monter(TAILLE_CASE);
 		v1.monter(TAILLE_CASE);
-        v1.stable(TAILLE_CASE+TAILLE_CASE/5);
+		v1.stable(TAILLE_CASE + TAILLE_CASE / 5);
 		v1.setValeur(c1.getValeurActuel());
 		v1.stable(TAILLE_CASE);
-        c1.gauche(TAILLE_CASE+TAILLE_CASE/5);
+		c1.gauche(TAILLE_CASE + TAILLE_CASE / 5);
 
-        c1.droite(TAILLE_CASE+TAILLE_CASE/5);
-        v1.descendre(TAILLE_CASE);
+		c1.droite(TAILLE_CASE + TAILLE_CASE / 5);
+		v1.descendre(TAILLE_CASE);
 		c1.descendre(TAILLE_CASE);
 
 		v1.stable(posC1[0] - posv1[0] - 2 * TAILLE_CASE + posv1[1] - TAILLE_CASE);
-		v1.stable(TAILLE_CASE/5);
+		v1.stable(TAILLE_CASE / 5);
 
 		c1.droite(posC1[0] - posv1[0] - 2 * TAILLE_CASE);
 		c1.monter(posv1[1] - posC1[1]);
 
-		int tempsC1initactuel = c1.getMaxTemps() - tempsC1init;
-		int tempsv1initactuel = v1.getMaxTemps() - tempsv1init;
-
-		if (tempsC1initactuel < tempsv1initactuel) {
-			sumTemps = tempsv1initactuel;
-		} else {
-			sumTemps = tempsC1initactuel;
-		}
-
-		for (int i = 0; i < cases.getNbCases(); i++) {
-			if (i != cases.getNbCases() - 1 && i != indices[0]) {
-				cases.getCase(i).stable(sumTemps);
+		int maxtemps = cases.getMaxTemps();
+		for (int i = 0; i < cases.getNbCases() + cases.getNbVariables(); i++) {
+			Case cTmp = cases.getCase(i);
+			if (cTmp.getMaxTemps() != maxtemps) {
+				cTmp.stable(maxtemps - cTmp.getMaxTemps());
 			}
 		}
-		c1.setColor(Color.BLACK);
-		v1.setColor(Color.BLACK);
+
+		c1.setColor(DEFAULT_COLOR_CASE);
+		v1.setColor(DEFAULT_COLOR_CASE);
 	}
 }

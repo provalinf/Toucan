@@ -15,7 +15,7 @@ public class ViewMenuFichier extends JMenu implements Observer {
 	}
 
 	private void init(Observable model) {
-		add(new JMenuItem("First item"));
+		//add(new JMenuItem("First item"));
 		add(new JSeparator());
 		add(new JMenuItem("Quitter")).addActionListener(e -> System.exit(0));
 	}

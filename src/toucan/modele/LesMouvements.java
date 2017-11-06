@@ -2,7 +2,10 @@ package toucan.modele;
 
 import toucan.mouvement.*;
 
+import java.awt.*;
 import java.util.ArrayList;
+
+import static toucan.modele.Modele.DEFAULT_COLOR_CASE;
 
 public class LesMouvements {
 	private ArrayList<Mouvement> lesMouvs;
@@ -15,6 +18,10 @@ public class LesMouvements {
 		this.xInit = xInit;
 		this.yInit = yInit;
 		this.valInit = valInit;
+	}
+
+	public void setColor(Color color) {
+		lesMouvs.add(new MouvementCouleur(color, getPosXInit(), getPosYInit()));
 	}
 
 	public void setValeur(int valeur) {
@@ -164,7 +171,7 @@ public class LesMouvements {
 	}
 
 	public int getValeur(int nbTemps) {
-		if (lesMouvs.size() == 0) return getValeurInit();
+		if (lesMouvs.size() == 0 || nbTemps == 0) return getValeurInit();
 		int i = 0;
 		int valtmp = getValeurInit();
 
@@ -182,7 +189,7 @@ public class LesMouvements {
 	}
 
 	public boolean isVisible(int nbTemps) {
-		if (lesMouvs.size() == 0) return isVisibleInit();
+		if (lesMouvs.size() == 0 || nbTemps == 0) return isVisibleInit();
 		int i = 0;
 		boolean visibtmp = isVisibleInit();
 
@@ -213,5 +220,27 @@ public class LesMouvements {
 
 	public void setValeurInit(int valInit) {
 		this.valInit = valInit;
+	}
+
+	public Color getColorInit() {
+		return DEFAULT_COLOR_CASE;
+	}
+
+	public Color getColor(int nbTemps) {
+		if (lesMouvs.size() == 0 || nbTemps == 0) return getColorInit();
+		int i = 0;
+		Color colortmp = getColorInit();
+
+		while (i + 1 < lesMouvs.size() && nbTemps >= lesMouvs.get(i).getTMax()) {
+			i++;
+			nbTemps -= lesMouvs.get(i - 1).getTMax();
+			if (lesMouvs.get(i - 1).isMouvColor()) {        // Ou alors instance of
+				colortmp = ((MouvementCouleur) lesMouvs.get(i - 1)).getCouleur();
+			}
+		}
+		if (lesMouvs.get(i).isMouvColor()) {
+			return ((MouvementCouleur) lesMouvs.get(i)).getCouleur();
+		}
+		return colortmp;
 	}
 }

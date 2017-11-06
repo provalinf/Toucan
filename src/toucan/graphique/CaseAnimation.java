@@ -18,14 +18,13 @@ public class CaseAnimation extends BufferedImage {
 	 * Instanciation d'un élément graphique à dessiner (ici un carré)
 	 *
 	 * @param pos
-	 * @param coul
 	 */
-	public CaseAnimation(LesMouvements pos, Color coul) {
+	public CaseAnimation(LesMouvements pos) {
 		super(150, 150, BufferedImage.TYPE_INT_ARGB);
 		this.pos = pos;
 		rond = createGraphics();
 		valeur = Integer.toString(pos.getValeurInit());
-		couleur = coul;
+		couleur = pos.getColorInit();
 
 		if (pos.isVisibleInit()) dessinerCase();
 	}
@@ -58,19 +57,12 @@ public class CaseAnimation extends BufferedImage {
 	public void dessiner(Graphics g, int t) {
 		if (!pos.isVisible(t)) return;
 		valeur = Integer.toString(pos.getValeur(t));
+		couleur = pos.getColor(t);
 		dessinerCase();
 
 		int positionX = pos.getPosX(t);
 		int positionY = pos.getPosY(t);
 
 		g.drawImage(this, positionX, positionY, null);
-	}
-
-    public void setColor(Color color) {
-        couleur = color;
-    }
-
-	public Color getColor() {
-		return couleur;
 	}
 }

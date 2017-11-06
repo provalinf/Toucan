@@ -3,6 +3,9 @@ package toucan.graphique.animation;
 import toucan.modele.Case;
 import toucan.modele.LesCases;
 
+import java.awt.*;
+
+import static toucan.modele.Modele.DEFAULT_COLOR_CASE;
 import static toucan.modele.Modele.TAILLE_CASE;
 
 /**
@@ -19,6 +22,8 @@ public class AffectationCaseCase implements IAnimation {
 
 		Case c1 = cases.getCase(indices[0]);
 		Case c2 = cases.getCase(indices[1]);
+		c1.setColor(new Color(158, 8, 0));
+		c2.setColor(new Color(158, 8, 0));
 		int[] c1Pos = c1.getPosActuel();
 		int[] c2Pos = c2.getPosActuel();
 		int sumTemps = 0;
@@ -57,6 +62,9 @@ public class AffectationCaseCase implements IAnimation {
 				cTmp.stable(maxtemps - cTmp.getMaxTemps());
 			}
 		}
+
+		c1.setColor(DEFAULT_COLOR_CASE);
+		c2.setColor(DEFAULT_COLOR_CASE);
 
 		System.out.println("↡ -- STOP --- STOP -- ↡");
 		for (int i = 0; i < cases.getNbCases(); i++) {

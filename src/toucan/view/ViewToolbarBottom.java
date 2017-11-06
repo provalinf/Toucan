@@ -60,7 +60,6 @@ public class ViewToolbarBottom extends JToolBar implements Observer {
 			m.refreshUI();
 		});
 
-
 		JLabel lent = (JLabel) add(new JLabel("Lent"));
 		slideSpeed = (JSlider) add(new JSlider(0, 14, 1));
 		slideSpeed.addChangeListener(e -> {
@@ -68,7 +67,7 @@ public class ViewToolbarBottom extends JToolBar implements Observer {
 		});
 		slideSpeed.setMajorTickSpacing(1);
 		slideSpeed.setPaintTicks(true);
-		slideSpeed.setValue(m.getVitesseAnimation());
+		slideSpeed.setValue(slideSpeed.getMaximum() - m.getVitesseAnimation());
 		JLabel speed = (JLabel) add(new JLabel("Rapide"));
 
 		setButtonState(m);
@@ -82,11 +81,8 @@ public class ViewToolbarBottom extends JToolBar implements Observer {
 		fin.setEnabled(m.getMaxTemps() > 0 && m.isMouvCalc() && !panAnim.isEnd());
 
 		slideControl.setEnabled(m.isMouvCalc());
-		if (m.isMouvCalc()) {
-			slideControl.setMaximum(m.getMaxTemps() + 10);
-			slideControl.setValue(panAnim.getTempsActuel());
-			System.out.println("TAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-		}
+		slideControl.setMaximum(m.getMaxTemps() + 10);
+		slideControl.setValue(panAnim.getTempsActuel());
 	}
 
 	@Override
