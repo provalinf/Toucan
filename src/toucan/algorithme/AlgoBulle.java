@@ -15,7 +15,7 @@ import static toucan.modele.Modele.TAILLE_CASE;
 public class AlgoBulle extends Algo {
 
 	public AlgoBulle(LesCases lesCases) {
-		super(lesCases);
+		super(lesCases, "Tri à bulle");
 	}
 
 	@Override

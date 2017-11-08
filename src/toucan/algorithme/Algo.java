@@ -4,13 +4,19 @@ import toucan.modele.Case;
 import toucan.modele.LesCases;
 
 public abstract class Algo {
+	private final String nomAlgo;
 	protected LesCases lesCases;
 
-	public Algo(LesCases lesCases) {
+	public Algo(LesCases lesCases, String nomAlgo) {
 		this.lesCases = lesCases;
+		this.nomAlgo = nomAlgo;
 	}
 
 	public abstract void trier();
+
+	public String getNomAlgo() {
+		return nomAlgo;
+	}
 
 	protected void equilibreStable() {
 		int maxtemps = lesCases.getMaxTemps();

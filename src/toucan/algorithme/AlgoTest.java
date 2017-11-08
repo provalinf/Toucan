@@ -13,7 +13,7 @@ public class AlgoTest extends Algo {
 	private AffectationVarCase affectationVarCase = new AffectationVarCase();
 
 	public AlgoTest(LesCases lesCases) {
-		super(lesCases);
+		super(lesCases,"");
 	}
 
 	public void trier() {
