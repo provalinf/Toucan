@@ -1,8 +1,8 @@
 package toucan.view;
 
 import toucan.graphique.PanneauAnimation;
-import toucan.view.ViewMenuItem.ViewMenuAlgo;
-import toucan.view.ViewMenuItem.ViewMenuFichier;
+import toucan.view.viewMenuItem.ViewMenuAlgo;
+import toucan.view.viewMenuItem.ViewMenuFichier;
 
 import javax.swing.*;
 import java.util.Observable;

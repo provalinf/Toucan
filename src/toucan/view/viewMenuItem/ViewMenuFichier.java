@@ -1,4 +1,4 @@
-package toucan.view.ViewMenuItem;
+package toucan.view.viewMenuItem;
 
 import javax.swing.*;
 import java.util.Observable;
