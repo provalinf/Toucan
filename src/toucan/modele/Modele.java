@@ -1,9 +1,6 @@
 package toucan.modele;
 
-import toucan.algorithme.Algo;
-import toucan.algorithme.AlgoBulle;
-import toucan.algorithme.AlgoInsert;
-import toucan.algorithme.AlgoSelection;
+import toucan.algorithme.*;
 import toucan.graphique.animation.ComparaisonCaseCase;
 
 import java.awt.*;
@@ -30,6 +27,8 @@ public class Modele extends Observable implements Runnable {
 
 	private HashMap<Integer, Algo> collectionAlgo;
 	private int selectionAlgo;
+
+	private String algoPersoText;
 
 	public Modele(int nbCases) {
 		lesCases = new LesCases(nbCases);
@@ -87,9 +86,11 @@ public class Modele extends Observable implements Runnable {
 		setThreadLaunch(true);
 		refreshUI();
 		if (!isMouvCalc()) {
+			AlgoFacade algoFacade = new AlgoFacade(this, lesCases);
+			algoFacade.trier();
 			/*AlgoTest algo = new AlgoTest(lesCases);
 			algo.trier();*/
-			collectionAlgo.get(getSelectionAlgo()).trier();
+			//collectionAlgo.get(getSelectionAlgo()).trier();
 			/*ComparaisonCaseCase comp = new ComparaisonCaseCase();
 			comp.executer(lesCases, 0, 1);*/
 			/*IAnimation affectCases = new AffectationCaseCase();
@@ -205,5 +206,13 @@ public class Modele extends Observable implements Runnable {
 		for (int i = 0; i < getNbCases(); i++) {
 			getCase(i).setValeurInit(ThreadLocalRandom.current().nextInt(-100, 100));
 		}
+	}
+
+	public void setAlgoPersoText(String text) {
+		algoPersoText = text;
+	}
+
+	public String getAlgoPersoText() {
+		return algoPersoText;
 	}
 }

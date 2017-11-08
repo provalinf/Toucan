@@ -14,7 +14,7 @@ import java.util.Observer;
 public class ViewToolbarTop extends JToolBar implements Observer {
 
 	private PanneauAnimation panAnim;
-	private JButton random, playPause, stop, fin;
+	private JButton random;
 	private JSlider slideControl, slideSpeed;
 
 	public ViewToolbarTop(Observable model, PanneauAnimation panAnim) {
@@ -36,7 +36,6 @@ public class ViewToolbarTop extends JToolBar implements Observer {
 	}
 
 	private void setButtonState(Modele m) {
-
 	}
 
 	@Override
