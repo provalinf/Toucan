@@ -12,6 +12,7 @@ import static toucan.modele.Modele.TAILLE_CASE;
 /**
  * Classe qui utilise l'algorithme du tri à bulles avec des animations
  */
+
 public class AlgoBulle extends Algo {
 
 	public AlgoBulle(LesCases lesCases) {
