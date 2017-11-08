@@ -18,7 +18,7 @@ import static toucan.modele.Modele.TAILLE_CASE;
 public class AlgoFacade extends Algo {
     Modele m;
     public AlgoFacade(Modele m, LesCases lesCases) {
-        super(lesCases);
+        super(lesCases, "AlgoFacade");
         this.m = m;
     }
 

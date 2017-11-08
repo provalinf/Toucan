@@ -10,7 +10,7 @@ import toucan.modele.LesCases;
  */
 public class AlgoPerso extends Algo {
     public AlgoPerso(LesCases lesCases) {
-        super(lesCases);
+        super(lesCases, "AlgoPerso");
     }
     @Override
     public void trier() {

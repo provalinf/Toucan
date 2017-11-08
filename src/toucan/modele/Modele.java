@@ -1,9 +1,6 @@
 package toucan.modele;
 
-import toucan.algorithme.Algo;
-import toucan.algorithme.AlgoBulle;
-import toucan.algorithme.AlgoInsert;
-import toucan.algorithme.AlgoSelection;
+import toucan.algorithme.*;
 import toucan.graphique.animation.ComparaisonCaseCase;
 
 import java.awt.*;
