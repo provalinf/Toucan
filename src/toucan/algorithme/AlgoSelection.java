@@ -11,7 +11,7 @@ import toucan.modele.LesCases;
  */
 public class AlgoSelection extends Algo {
 	public AlgoSelection(LesCases lesCases) {
-		super(lesCases);
+		super(lesCases, "Tri par sélection");
 	}
 
 	@Override
