@@ -163,11 +163,11 @@ public class Modele extends Observable implements Runnable {
 		setThreadLaunch(true);
 		refreshUI();
 		if (!isMouvCalc()) {
-			AlgoFacade algoFacade = new AlgoFacade(this, lesCases);
-			algoFacade.trier();
+			/*AlgoFacade algoFacade = new AlgoFacade(this, lesCases);
+			algoFacade.trier();*/
 			/*AlgoTest algo = new AlgoTest(lesCases);
 			algo.trier();*/
-			//collectionAlgo.get(getSelectionAlgo()).trier();
+			collectionAlgo.get(getSelectionAlgo()).trier();
 			/*ComparaisonCaseCase comp = new ComparaisonCaseCase();
 			comp.executer(lesCases, 0, 1);*/
 			/*IAnimation affectCases = new AffectationCaseCase();

@@ -46,7 +46,7 @@ public class ViewMenuAlgo extends JMenu implements Observer {
 			});
 		}
 
-		algo[1].setEnabled(false);		// Tempo algo non terminé
+		//algo[1].setEnabled(false);		// Tempo algo non terminé
 
 		setButtonsStates(m);
 	}
