@@ -1,16 +1,18 @@
 package toucan.modele;
 
-import toucan.algorithme.*;
-import toucan.graphique.animation.ComparaisonCaseCase;
+import toucan.algorithme.Algo;
+import toucan.algorithme.AlgoFacade;
 
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Observable;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Modele extends Observable implements Runnable {
@@ -24,12 +26,15 @@ public class Modele extends Observable implements Runnable {
 	public static final int TAILLE_CASE = 50;
 	public static final Color DEFAULT_COLOR_CASE = Color.BLACK;
 
+	private static final String ALGO_PACKAGE = "toucan.algorithme";
+	private static final List<String> EXCLUDE_ALGO_CLASSES = Arrays.asList("Algo.class", "");
+
 	private LesCases lesCases;
 	private int vitesseAnimation;
 	private boolean threadLaunch;
 	private boolean mouvCalc;
 
-	private HashMap<Integer, Algo> collectionAlgo;
+	private List<Algo> collectionAlgo;
 	private int selectionAlgo;
 
 	private String algoPersoText;
@@ -45,47 +50,14 @@ public class Modele extends Observable implements Runnable {
 		this(0);
 	}
 
-	/**
-	 * Temporaire, sera remplacé par une detection des classes afin de rendre le tout automatique et propre
-	 */
 	private void declareAlgo() {
-		ArrayList<Algo> collectionAlgo2 = new ArrayList<>();
-		/*try {*/
-		Object o = null;
-
-
-		/*try {
-			URLClassLoader loader = new URLClassLoader(new URL[]{file.toURI().toURL()});
-			Class c = Class.forName("editeur.styles."+file.getName().split(".jar")[0], true, loader);
-			Object o = null;
-			try {
-				o = c.getConstructor().newInstance();
-			} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-				e.printStackTrace();
-			}
-			return (Style) o;
-		} catch (ClassNotFoundException | MalformedURLException e) {
-			e.printStackTrace();
-		}
-		*/
-		getClassesForPackage();
-
-
-		collectionAlgo = new HashMap<>(3);
-		collectionAlgo.put(0, new AlgoBulle(lesCases));
-		collectionAlgo.put(1, new AlgoInsert(lesCases));
-		collectionAlgo.put(2, new AlgoSelection(lesCases));
+		collectionAlgo = new ArrayList<>();
+		getAlgoClasses();
 	}
 
-
-	private List<Class> getClassesForPackage(){
-		String pkgname = "toucan.algorithme";
-
-		List<Class> classes = new ArrayList<Class>();
-		List<String> exclude = Arrays.asList("Algo.class");
-
+	private void getAlgoClasses() {
 		File directory = null;
-		String relPath = pkgname.replace('.', '/');
+		String relPath = ALGO_PACKAGE.replace('.', '/');
 
 		URL resource = ClassLoader.getSystemClassLoader().getResource(relPath);
 		if (resource == null) {
@@ -95,36 +67,38 @@ public class Modele extends Observable implements Runnable {
 		try {
 			directory = new File(resource.toURI());
 		} catch (URISyntaxException e) {
-			throw new RuntimeException(pkgname + " (" + resource + ") does not appear to be a valid URL / URI.  Strange, since we got it from the system...", e);
+			throw new RuntimeException(ALGO_PACKAGE + " (" + resource + ") Invalid algos folder !", e);
 		} catch (IllegalArgumentException e) {
 			directory = null;
 		}
-		//System.out.println("ClassDiscovery: Directory = " + directory);
 
 		if (directory != null && directory.exists()) {
 
 			// Get the list of the files contained in the package
 			String[] files = directory.list();
-			for (int i = 0; i < files.length; i++) {
-
-				if (files[i].endsWith(".class") && !exclude.contains(files[i])) {
-					System.out.println(files[i]);
-					// removes the .class extension
-					String className = pkgname + '.' + files[i].substring(0, files[i].length() - 6);
-
-					//System.out.println("ClassDiscovery: className = " + className);
-
+			Class c = null;
+			for (String file : directory.list()) {
+				if (file.endsWith(".class") && !EXCLUDE_ALGO_CLASSES.contains(file)) {
+					String className = ALGO_PACKAGE + '.' + file.substring(0, file.length() - 6);
 					try {
-						classes.add(Class.forName(className));
-					} catch (ClassNotFoundException e) {
-						throw new RuntimeException("ClassNotFoundException loading " + className);
+						c = Class.forName(className);
+						for (Constructor co : c.getConstructors()) {
+							Object o;
+							if (co.getParameterTypes().length == 1) {
+								o = co.newInstance(lesCases);
+							} else if (co.getParameterTypes().length == 2) {
+								o = co.newInstance(this, lesCases);
+							} else throw new AssertionError("Algo non supporté");
+
+							if (o instanceof Algo) collectionAlgo.add((Algo) o);
+						}
+					} catch (ClassNotFoundException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+						e.printStackTrace();
 					}
 				}
 			}
 		}
-		return classes;
 	}
-
 
 
 	private void initAndReset() {
@@ -163,11 +137,11 @@ public class Modele extends Observable implements Runnable {
 		setThreadLaunch(true);
 		refreshUI();
 		if (!isMouvCalc()) {
-			AlgoFacade algoFacade = new AlgoFacade(this, lesCases);
-			algoFacade.trier();
+			/*AlgoFacade algoFacade = new AlgoFacade(this, lesCases);
+			algoFacade.trier();*/
 			/*AlgoTest algo = new AlgoTest(lesCases);
 			algo.trier();*/
-			//collectionAlgo.get(getSelectionAlgo()).trier();
+			collectionAlgo.get(getSelectionAlgo()).trier();
 			/*ComparaisonCaseCase comp = new ComparaisonCaseCase();
 			comp.executer(lesCases, 0, 1);*/
 			/*IAnimation affectCases = new AffectationCaseCase();
@@ -185,6 +159,10 @@ public class Modele extends Observable implements Runnable {
 
 	public int getNbAlgo() {
 		return collectionAlgo.size();
+	}
+
+	public String getNomAlgo(int indice) {
+		return collectionAlgo.get(indice).getNomAlgo();
 	}
 
 	public int getSelectionAlgo() {
