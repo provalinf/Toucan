@@ -18,33 +18,21 @@ public class AlgoInsert extends Algo {
     }
 
     public void trier() {
-        for (int i = 1; i < lesCases.getNbCases(); i++) {
+        AffectationVarCase aVC1 = new AffectationVarCase();
+        AffectationCaseCase aCC1 = new AffectationCaseCase();
+        AffectationCaseVar aCV1 = new AffectationCaseVar();
+        for (int i = 0; i < lesCases.getNbCases(); i++) {
             Case c1 = lesCases.getCase(i);
-            Case c2;
+            aVC1.executer(lesCases, i);
+            int j = i;
 
-            int j = i - 1;
-            boolean verif = true;
-            do{
-                verif = false;
-                c2 = lesCases.getCase(j);
-                if (c2.getValeurActuel() > c1.getValeurActuel()) {
-                    AffectationVarCase aVC1 = new AffectationVarCase();
-                    AffectationCaseCase aCC1 = new AffectationCaseCase();
-                    AffectationCaseVar aCV1 = new AffectationCaseVar();
-                    aVC1.executer(lesCases, i);
-                    equilibreStable();
-                    aCC1.executer(lesCases, i, j - 1);
-                    equilibreStable();
-                    aCV1.executer(lesCases, j - 1);
-                    equilibreStable();
-                    j--;
-                    verif = true;
-                } else {
-                    // couleur : on ne modifie pas la place de cette case car bien placée
-                    verif = false;
-                }
+            while (j > 0 && lesCases.getCase(j-1).getValeurActuel() > lesCases.getVariable(0).getValeurActuel()){
+                aCC1.executer(lesCases, j, j-1);
+                equilibreStable();
+                j--;
             }
-            while (j > 0 && verif);
+
+            aCV1.executer(lesCases, j);
             equilibreStable();
         }
     }
