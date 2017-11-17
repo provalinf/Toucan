@@ -1,10 +1,7 @@
 package toucan;
 
 import toucan.modele.Modele;
-import toucan.view.ViewGraphique;
-import toucan.view.ViewMenubar;
-import toucan.view.ViewToolbarBottom;
-import toucan.view.ViewToolbarTop;
+import toucan.view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +32,7 @@ public class Toucan extends JFrame {
 		setJMenuBar(new ViewMenubar(model, vueGraph.getPanAnim()));
 		add(new ViewToolbarTop(model, vueGraph.getPanAnim()), BorderLayout.PAGE_START);
 		add(vueGraph, BorderLayout.CENTER);
+		add(new ViewEditorPane(model), BorderLayout.WEST);
 		add(new ViewToolbarBottom(model, vueGraph.getPanAnim()), BorderLayout.PAGE_END);
 		Modele modele = (Modele) model;
 

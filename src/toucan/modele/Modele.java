@@ -1,15 +1,16 @@
 package toucan.modele;
 
-import toucan.algorithme.Algo;
-import toucan.algorithme.AlgoBulle;
-import toucan.algorithme.AlgoInsert;
-import toucan.algorithme.AlgoSelection;
+import toucan.algorithme.*;
 import toucan.graphique.animation.ComparaisonCaseCase;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Observable;
-import java.util.Random;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.*;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Modele extends Observable implements Runnable {
@@ -24,15 +25,18 @@ public class Modele extends Observable implements Runnable {
 	public static final Color DEFAULT_COLOR_CASE = Color.BLACK;
 
 	private LesCases lesCases;
-	private int vitesseAnimation = 2;
+	private int vitesseAnimation;
 	private boolean threadLaunch;
 	private boolean mouvCalc;
 
 	private HashMap<Integer, Algo> collectionAlgo;
 	private int selectionAlgo;
 
+	private String algoPersoText;
+
 	public Modele(int nbCases) {
 		lesCases = new LesCases(nbCases);
+		vitesseAnimation = 2;
 		declareAlgo();
 		initAndReset();
 	}
@@ -45,11 +49,83 @@ public class Modele extends Observable implements Runnable {
 	 * Temporaire, sera remplacé par une detection des classes afin de rendre le tout automatique et propre
 	 */
 	private void declareAlgo() {
+		ArrayList<Algo> collectionAlgo2 = new ArrayList<>();
+		/*try {*/
+		Object o = null;
+
+
+		/*try {
+			URLClassLoader loader = new URLClassLoader(new URL[]{file.toURI().toURL()});
+			Class c = Class.forName("editeur.styles."+file.getName().split(".jar")[0], true, loader);
+			Object o = null;
+			try {
+				o = c.getConstructor().newInstance();
+			} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
+			return (Style) o;
+		} catch (ClassNotFoundException | MalformedURLException e) {
+			e.printStackTrace();
+		}
+		*/
+		getClassesForPackage();
+
+
 		collectionAlgo = new HashMap<>(3);
 		collectionAlgo.put(0, new AlgoBulle(lesCases));
 		collectionAlgo.put(1, new AlgoInsert(lesCases));
 		collectionAlgo.put(2, new AlgoSelection(lesCases));
 	}
+
+
+	private List<Class> getClassesForPackage(){
+		String pkgname = "toucan.algorithme";
+
+		List<Class> classes = new ArrayList<Class>();
+		List<String> exclude = Arrays.asList("Algo.class");
+
+		File directory = null;
+		String relPath = pkgname.replace('.', '/');
+
+		URL resource = ClassLoader.getSystemClassLoader().getResource(relPath);
+		if (resource == null) {
+			throw new RuntimeException("No resource for " + relPath);
+		}
+
+		try {
+			directory = new File(resource.toURI());
+		} catch (URISyntaxException e) {
+			throw new RuntimeException(pkgname + " (" + resource + ") does not appear to be a valid URL / URI.  Strange, since we got it from the system...", e);
+		} catch (IllegalArgumentException e) {
+			directory = null;
+		}
+		//System.out.println("ClassDiscovery: Directory = " + directory);
+
+		if (directory != null && directory.exists()) {
+
+			// Get the list of the files contained in the package
+			String[] files = directory.list();
+			for (int i = 0; i < files.length; i++) {
+
+				if (files[i].endsWith(".class") && !exclude.contains(files[i])) {
+					System.out.println(files[i]);
+					// removes the .class extension
+					String className = pkgname + '.' + files[i].substring(0, files[i].length() - 6);
+
+					//System.out.println("ClassDiscovery: className = " + className);
+
+					try {
+						classes.add(Class.forName(className));
+					} catch (ClassNotFoundException e) {
+						throw new RuntimeException("ClassNotFoundException loading " + className);
+					}
+				}
+			}
+		}
+		return classes;
+	}
+
+
 
 	private void initAndReset() {
 		threadLaunch = false;
@@ -87,9 +163,11 @@ public class Modele extends Observable implements Runnable {
 		setThreadLaunch(true);
 		refreshUI();
 		if (!isMouvCalc()) {
+			AlgoFacade algoFacade = new AlgoFacade(this, lesCases);
+			algoFacade.trier();
 			/*AlgoTest algo = new AlgoTest(lesCases);
 			algo.trier();*/
-			collectionAlgo.get(getSelectionAlgo()).trier();
+			//collectionAlgo.get(getSelectionAlgo()).trier();
 			/*ComparaisonCaseCase comp = new ComparaisonCaseCase();
 			comp.executer(lesCases, 0, 1);*/
 			/*IAnimation affectCases = new AffectationCaseCase();
@@ -205,5 +283,13 @@ public class Modele extends Observable implements Runnable {
 		for (int i = 0; i < getNbCases(); i++) {
 			getCase(i).setValeurInit(ThreadLocalRandom.current().nextInt(-100, 100));
 		}
+	}
+
+	public void setAlgoPersoText(String text) {
+		algoPersoText = text;
+	}
+
+	public String getAlgoPersoText() {
+		return algoPersoText;
 	}
 }

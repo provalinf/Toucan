@@ -1,4 +1,4 @@
-package toucan.view.ViewMenuItem;
+package toucan.view.viewMenuItem;
 
 import toucan.graphique.PanneauAnimation;
 import toucan.modele.Modele;

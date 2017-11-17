@@ -14,7 +14,7 @@ import static toucan.modele.Modele.TAILLE_CASE;
  */
 public class AlgoInsert extends Algo {
     public AlgoInsert(LesCases lesCases) {
-        super(lesCases);
+        super(lesCases, "Tri par insertion");
     }
 
     public void trier() {
