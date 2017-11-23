@@ -9,7 +9,7 @@ import static toucan.modele.Modele.DEFAULT_COLOR_CASE;
 import static toucan.modele.Modele.TAILLE_CASE;
 
 /**
- * Classe qui permet d'aninmer une comparaison de cases
+ * Classe qui permet d'animer une comparaison de cases
  */
 public class ComparaisonCaseCase implements IAnimation {
 	@Override

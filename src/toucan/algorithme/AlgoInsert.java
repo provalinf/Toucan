@@ -3,6 +3,7 @@ package toucan.algorithme;
 import toucan.graphique.animation.AffectationCaseCase;
 import toucan.graphique.animation.AffectationCaseVar;
 import toucan.graphique.animation.AffectationVarCase;
+import toucan.graphique.animation.ComparaisonVarCase;
 import toucan.modele.Case;
 import toucan.modele.LesCases;
 
@@ -21,15 +22,21 @@ public class AlgoInsert extends Algo {
         AffectationVarCase aVC1 = new AffectationVarCase();
         AffectationCaseCase aCC1 = new AffectationCaseCase();
         AffectationCaseVar aCV1 = new AffectationCaseVar();
+        ComparaisonVarCase cVC1 = new ComparaisonVarCase();
         for (int i = 0; i < lesCases.getNbCases(); i++) {
             Case c1 = lesCases.getCase(i);
             aVC1.executer(lesCases, i);
             int j = i;
 
-            while (j > 0 && lesCases.getCase(j-1).getValeurActuel() > lesCases.getVariable(0).getValeurActuel()){
-                aCC1.executer(lesCases, j, j-1);
-                equilibreStable();
-                j--;
+            boolean test = true;
+            while (j > 0 && test){
+                cVC1.executer(lesCases, j-1);
+                if(lesCases.getCase(j-1).getValeurActuel() > lesCases.getVariable(0).getValeurActuel()){
+                    aCC1.executer(lesCases, j, j-1);
+                    equilibreStable();
+                    j--;
+                }
+                else test = false;
             }
 
             aCV1.executer(lesCases, j);
@@ -37,12 +44,3 @@ public class AlgoInsert extends Algo {
         }
     }
 }
-
-/*			while (j > 0 && (c2 = lesCases.getCase(j - 1)).getValeurActuel() > c1.getValeurActuel()) {
-				int[] posC2 = c2.getPosActuel();
-				if () {
-					c3 = lesCases.getCase(j);
-				}
-				lesCases.setCase(j, c2);
-				j = j - 1;
-			}*/
