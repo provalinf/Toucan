@@ -27,7 +27,7 @@ public class Modele extends Observable implements Runnable {
 	public static final Color DEFAULT_COLOR_CASE = Color.BLACK;
 
 	private static final String ALGO_PACKAGE = "toucan.algorithme";
-	private static final List<String> EXCLUDE_ALGO_CLASSES = Arrays.asList("Algo.class", "");
+	private static final List<String> EXCLUDE_ALGO_CLASSES = Arrays.asList("Algo.class", "AlgoPerso.class");
 
 	private LesCases lesCases;
 	private int vitesseAnimation;

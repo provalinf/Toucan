@@ -12,7 +12,7 @@ public class AlgoFacade extends Algo {
 	Modele m;
 
 	public AlgoFacade(Modele m, LesCases lesCases) {
-		super(lesCases, "AlgoFacade");
+		super(lesCases, "Algo Personnel");
 		this.m = m;
 	}
 
