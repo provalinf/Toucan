@@ -20,6 +20,8 @@ public class AlgoFacade extends Algo {
 	public void trier() {
 		KitJava kit = new KitJava();
 		kit.construireClasse(m.getAlgoPersoText());
+		kit.compiler();
+		kit.executer();
 		System.out.println(kit.getLaClasse());
 	}
 }

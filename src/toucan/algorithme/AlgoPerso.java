@@ -14,6 +14,5 @@ public class AlgoPerso extends Algo {
     }
     @Override
     public void trier() {
-        int i = 0;
     }
 }

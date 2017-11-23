@@ -31,7 +31,7 @@ public class TestOutils{
             "}\n" ;
                  
     protected static String nomClasse = "Essai" ;
-    protected static String nomPackage = "toucan.outils" ;
+    protected static String nomPackage = "toucan.outils";
     
     protected JavaCompiler compiler ;
     protected ClassFileManager fileManager ;
