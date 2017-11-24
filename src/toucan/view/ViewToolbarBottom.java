@@ -84,7 +84,7 @@ public class ViewToolbarBottom extends JToolBar implements Observer {
 		fin.setText(m.isMouvCalc() ? "Fin" : "Tous les mouvements ne sont pas calculés");
 		fin.setEnabled(m.getMaxTemps() > 0 && m.isMouvCalc() && !panAnim.isEnd());
 
-		slideControl.setEnabled(m.isMouvCalc());
+		slideControl.setEnabled(m.isMouvCalc() && m.getMaxTemps() != 0);
 		slideControl.setMaximum(m.getMaxTemps());
 		slideControl.setValue(panAnim.getTempsActuel());
 	}

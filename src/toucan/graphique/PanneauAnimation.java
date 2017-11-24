@@ -47,8 +47,9 @@ public class PanneauAnimation extends JPanel {
 				//System.out.println("ça dessine un temps sup");
 				repaint();
 			}
-		} else if (modele.isMouvCalc()) {
+		} else if (modele.isMouvCalc() && !isPause()) {
 			//System.out.println("hooopppp");
+			setPause(true);
 			modele.refreshUI();    // Pour update l'état des boutons (/!\ à ne pas faire de loop)
 		}
 	}
