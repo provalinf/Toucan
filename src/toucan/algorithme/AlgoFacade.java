@@ -21,7 +21,7 @@ public class AlgoFacade extends Algo {
 		KitJava kit = new KitJava();
 		kit.construireClasse(m.getAlgoPersoText());
 		kit.compiler();
-		kit.executer();
+		kit.executer(lesCases);
 		System.out.println(kit.getLaClasse());
 	}
 }
