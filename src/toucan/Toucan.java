@@ -32,7 +32,7 @@ public class Toucan extends JFrame {
 		setJMenuBar(new ViewMenubar(model, vueGraph.getPanAnim()));
 		add(new ViewToolbarTop(model, vueGraph.getPanAnim()), BorderLayout.PAGE_START);
 		add(vueGraph, BorderLayout.CENTER);
-		add(new ViewEditorPane(model), BorderLayout.WEST);
+		add(new ViewEditorPane(model, vueGraph.getPanAnim()), BorderLayout.WEST);
 		add(new ViewToolbarBottom(model, vueGraph.getPanAnim()), BorderLayout.PAGE_END);
 		Modele modele = (Modele) model;
 

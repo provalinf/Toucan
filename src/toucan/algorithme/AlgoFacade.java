@@ -9,17 +9,17 @@ import toucan.outils.KitJava;
  */
 
 public class AlgoFacade extends Algo {
-	Modele m;
+	private Modele modele;
 
-	public AlgoFacade(Modele m, LesCases lesCases) {
-		super(lesCases, "Algo Personnel");
-		this.m = m;
+	public AlgoFacade(Modele modele, LesCases lesCases) {
+		super(lesCases, "Tri Personnel");
+		this.modele = modele;
 	}
 
 	@Override
 	public void trier() {
 		KitJava kit = new KitJava();
-		kit.construireClasse(m.getAlgoPersoText());
+		kit.construireClasse(modele.getAlgoPersoText());
 		kit.compiler();
 		kit.executer(lesCases);
 		System.out.println(kit.getLaClasse());

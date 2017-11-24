@@ -30,9 +30,6 @@ public class ViewMenuAlgo extends JMenu implements Observer {
 	 */
 	private void init(Modele m, PanneauAnimation panAnim) {
 		algo = new JCheckBoxMenuItem[m.getNbAlgo()];
-		/*algo[0] = (JCheckBoxMenuItem) add(new JCheckBoxMenuItem("Algo Bulle"));
-		algo[1] = (JCheckBoxMenuItem) add(new JCheckBoxMenuItem("Algo Insertion"));
-		algo[2] = (JCheckBoxMenuItem) add(new JCheckBoxMenuItem("Algo Sélection"));*/
 
 		for (int i = 0; i < m.getNbAlgo(); i++) {
 			algo[i] = (JCheckBoxMenuItem) add(new JCheckBoxMenuItem(m.getNomAlgo(i)));
@@ -46,8 +43,6 @@ public class ViewMenuAlgo extends JMenu implements Observer {
 				m.refreshUI();
 			});
 		}
-
-		//algo[1].setEnabled(false);		// Tempo algo non terminé
 
 		setButtonsStates(m);
 	}

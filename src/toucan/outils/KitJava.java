@@ -45,7 +45,7 @@ public class KitJava {
 				"}\n" +
 				"@Override\n" +
 				"public void trier() {\n" +
-				code + "\n" +
+				((code == null) ? "" : code) + "\n" +
 				"}\n" +
 				"}\n"
 		);
@@ -84,9 +84,9 @@ public class KitJava {
 			String nomExecutable = nomPackage + "." + nomClasse;
 			System.out.println("nomexécutable : " + nomExecutable);
 			//Object instance = fileManager.getClassLoader(javax.tools.StandardLocation.CLASS_PATH).loadClass("toucan.algorithme.AlgoPerso");
-			ClassLoader cl = fileManager.getClassLoader(javax.tools.StandardLocation.CLASS_PATH) ;
-			Class<?> classe = Class.forName("toucan.algorithme.AlgoPerso", true, cl) ;
-			Constructor<?> constructeur = classe.getConstructor(Class.forName("toucan.modele.LesCases")) ;
+			ClassLoader cl = fileManager.getClassLoader(javax.tools.StandardLocation.CLASS_PATH);
+			Class<?> classe = Class.forName("toucan.algorithme.AlgoPerso", true, cl);
+			Constructor<?> constructeur = classe.getConstructor(Class.forName("toucan.modele.LesCases"));
 			Algo instance = (Algo) constructeur.newInstance(lesCases);
 
 			((Algo) instance).trier();
