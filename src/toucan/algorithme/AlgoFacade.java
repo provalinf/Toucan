@@ -12,8 +12,9 @@ public class AlgoFacade extends Algo {
 	private Modele modele;
 
 	public AlgoFacade(Modele modele, LesCases lesCases) {
-		super(lesCases, "Tri Personnel");
+		super(lesCases, "Tri personnel");
 		this.modele = modele;
+		algoCustom = true;	// Donc EditorPan & DebugPan requis
 	}
 
 	@Override

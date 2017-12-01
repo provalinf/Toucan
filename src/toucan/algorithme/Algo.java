@@ -6,10 +6,16 @@ import toucan.modele.LesCases;
 public abstract class Algo {
 	private final String nomAlgo;
 	protected LesCases lesCases;
+	protected boolean algoCustom;
 
 	public Algo(LesCases lesCases, String nomAlgo) {
 		this.lesCases = lesCases;
 		this.nomAlgo = nomAlgo;
+		algoCustom = false;
+	}
+
+	public boolean isAlgoCustom() {
+		return algoCustom;
 	}
 
 	public abstract void trier();

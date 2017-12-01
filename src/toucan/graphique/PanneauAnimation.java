@@ -19,13 +19,17 @@ public class PanneauAnimation extends JPanel {
 		this.modele = modele;
 		lesCasesAnimation = new LesCasesAnimation(modele);
 		resetAndInit();
-		this.setPreferredSize(new Dimension(600, 500));
+		setMinimumSize(new Dimension(600, 400));
+		setPreferredSize(new Dimension(600, 400));
 		repaint();    // Appel paintComponent(...)
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createTitledBorder("Visualisation "+modele.getNomAlgo(modele.getSelectionAlgo())),
+				BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		Graphics2D g2 = (Graphics2D) g;
 		int w = getWidth();
 		int h = getHeight();

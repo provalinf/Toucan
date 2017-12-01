@@ -1,7 +1,6 @@
 package toucan.modele;
 
 import toucan.algorithme.Algo;
-import toucan.algorithme.AlgoFacade;
 
 import java.awt.*;
 import java.io.File;
@@ -73,7 +72,6 @@ public class Modele extends Observable implements Runnable {
 		}
 
 		if (directory != null && directory.exists()) {
-
 			// Get the list of the files contained in the package
 			String[] files = directory.list();
 			Class c = null;
@@ -100,53 +98,16 @@ public class Modele extends Observable implements Runnable {
 		}
 	}
 
-
 	private void initAndReset() {
 		threadLaunch = false;
 		mouvCalc = false;
 	}
 
-	/**
-	 * Créer les mouvements à partir d'un tableau de int
-	 *
-	 * @param mouvs : Numéro de la case, Direction du mouvement, Distance
-	 */
-	/*public void creerLesMouvements(int... mouvs) {
-		for (int i = 0; i + 3 <= mouvs.length; i += 3) {
-			switch (mouvs[i + 1]) {
-				case SUD:
-					lesCases.monter(mouvs[i], mouvs[i + 2]);
-					break;
-				case NORD:
-					lesCases.descendre(mouvs[i], mouvs[i + 2]);
-					break;
-				case EST:
-					lesCases.droite(mouvs[i], mouvs[i + 2]);
-					break;
-				case OUEST:
-					lesCases.gauche(mouvs[i], mouvs[i + 2]);
-					break;
-				case STABLE:
-					lesCases.stable(mouvs[i], mouvs[i + 2]);
-			}
-		}
-		setChanged();
-		notifyObservers();
-	}*/
 	public void run() {
 		setThreadLaunch(true);
 		refreshUI();
 		if (!isMouvCalc()) {
-			/*AlgoFacade algoFacade = new AlgoFacade(this, lesCases);
-			algoFacade.trier();*/
-			/*AlgoTest algo = new AlgoTest(lesCases);
-			algo.trier();*/
 			collectionAlgo.get(getSelectionAlgo()).trier();
-			/*ComparaisonCaseCase comp = new ComparaisonCaseCase();
-			comp.executer(lesCases, 0, 1);*/
-			/*IAnimation affectCases = new AffectationCaseCase();
-			affectCases.executer(lesCases, 0, 1);
-			affectCases.executer(lesCases, 1, 3);*/
 			setMouvCalc(true);
 		}
 		setThreadLaunch(false);
@@ -156,13 +117,16 @@ public class Modele extends Observable implements Runnable {
 		this.vitesseAnimation = vitesseAnimation;
 	}
 
-
 	public int getNbAlgo() {
 		return collectionAlgo.size();
 	}
 
 	public String getNomAlgo(int indice) {
 		return collectionAlgo.get(indice).getNomAlgo();
+	}
+
+	public boolean isAlgoCustom() {
+		return collectionAlgo.get(selectionAlgo).isAlgoCustom();
 	}
 
 	public int getSelectionAlgo() {
