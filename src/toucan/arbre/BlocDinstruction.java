@@ -9,5 +9,4 @@ import java.util.ArrayList;
  */
 public class BlocDinstruction extends ArbreAbstrait {
     ArrayList<Instruction> bloc = new ArrayList<>();
-
 }
