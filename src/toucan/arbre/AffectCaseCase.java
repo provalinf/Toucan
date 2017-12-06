@@ -3,16 +3,14 @@ package toucan.arbre;
 /**
  * Created by Cyril on 06/12/2017.
  */
-public class AffectCaseCase extends ArbreAbstrait {
-    private int x, y;
-    public AffectCaseCase(int x, int y) {
-        getCodeDecore();
-        this.x = x;
-        this.y = y;
-    }
+public class AffectCaseCase extends Affectation {
 
-    @Override
-    public String getCodeDecore() {
-        return "affectationCaseCase.executer(LesCases, "+x+", "+y+");\ntab["+x+"] = "+"tab["+y+"];\n";
-    }
+	public AffectCaseCase(int x, int y) {
+		getCodeDecore(x, y);
+	}
+
+	@Override
+	public String getCodeDecore(int... indices) {
+		return "affectationCaseCase.executer(LesCases, " + indices[0] + ", " + indices[1] + ");\ntab[" + indices[0] + "] = " + "tab[" + indices[1] + "];\n";
+	}
 }
