@@ -1,5 +1,6 @@
 package toucan.graphique.animation;
 
+import toucan.arbre.Instruction;
 import toucan.modele.Case;
 import toucan.modele.LesCases;
 
@@ -11,7 +12,7 @@ import static toucan.modele.Modele.TAILLE_CASE;
 /**
  * Classe qui permet d'animer une affectation case à case
  */
-public class AffectationCaseCase implements IAnimation {
+public class AffectationCaseCase extends Instruction implements IAnimation {
 
 	private int tempsC1init;
 	private int tempsC2init;

@@ -40,6 +40,9 @@ public class KitJava {
 				"* Classe qui utilise l'algorithme personnalisé\n" +
 				"*/\n" +
 				"public class AlgoPerso extends Algo {\n" +
+				"int nbCases;\n" +
+				"int tab[] = new int[nbCases];\n" +
+				"\n" +
 				"public AlgoPerso(LesCases lesCases) {\n" +
 				"super(lesCases, \"\");\n" +
 				"}\n" +
