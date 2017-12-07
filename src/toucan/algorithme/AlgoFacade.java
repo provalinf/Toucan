@@ -19,7 +19,7 @@ public class AlgoFacade extends Algo {
 
 	@Override
 	public void trier() {
-		KitJava kit = new KitJava();
+		KitJava kit = KitJava.getInstance();
 		kit.construireClasse(modele.getAlgoPersoText());
 		kit.compiler();
 		kit.executer(lesCases);

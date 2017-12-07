@@ -18,17 +18,22 @@ import java.util.logging.Logger;
  * Created by Cyril on 08/11/2017.
  */
 public class KitJava {
-	protected JavaCompiler compiler;
-	protected ClassFileManager fileManager;
-	protected static String nomClasse = "AlgoPerso";
-	protected static String nomPackage = "toucan.algorithme";
+	private  static KitJava instance = new KitJava();
+	private JavaCompiler compiler;
+	private ClassFileManager fileManager;
+	private static String nomClasse = "AlgoPerso";
+	private static String nomPackage = "toucan.algorithme";
 
-	public KitJava() {
+	private KitJava() {
 		compiler = ToolProvider.getSystemJavaCompiler();
 		fileManager = new ClassFileManager(compiler.getStandardFileManager(null, null, null));
 	}
 
 	private String laClasse;
+
+	public static KitJava getInstance() {
+		return instance;
+	}
 
 	public void construireClasse(String code) {
 		StringBuilder stringBuilder = new StringBuilder();
@@ -110,7 +115,7 @@ public class KitJava {
 	}
 
 	public static void main(String[] args) {
-		KitJava kit = new KitJava();
+		KitJava kit = KitJava.getInstance();
 		kit.construireClasse("int i = 0; System.out.println(\"toto\");");
 		System.out.println(kit.getLaClasse());
 		kit.compiler();
