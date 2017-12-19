@@ -10,7 +10,12 @@ public class AffectCaseCase extends Affectation {
 	}
 
 	@Override
-	public String getCodeDecore(int... indices) {
-		return "affectationCaseCase.executer(LesCases, " + indices[0] + ", " + indices[1] + ");\ntab[" + indices[0] + "] = " + "tab[" + indices[1] + "];\n";
+	public void getCodeDecore(int... indices) {
+		codeDecore = "affectationCaseCase.executer(LesCases, " + indices[0] + ", " + indices[1] + ");\ntab[" + indices[0] + "] = " + "tab[" + indices[1] + "];\n";
+	}
+
+	@Override
+	public String getCodeDecore() {
+		return codeDecore;
 	}
 }

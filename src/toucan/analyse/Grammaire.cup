@@ -1,5 +1,6 @@
 package toucan.analyse ;
 import java_cup.runtime.*;
+import toucan.arbre.*;
 
 action code {: /* vide pour le moment */
 	    :} ;
@@ -55,28 +56,53 @@ parser code {:
    Terminals that have no value are listed first and then terminals that do have a value, in this 
    case a String value, are listed on the next line down. */
 
-terminal Symbol    POINTVIRGULE ;
-terminal String    TYPEPRIMITIF, IDF ;
+terminal Symbol    CROOUV, CROFER, PARENTHEOUV, PARENTHEFERM, POINTVIRGULE, EGAL, DOUBLEEGAL, TAB;
+terminal String    TYPEPRIMITIF, IDF, CSTE, OP;
    
 /* Non terminals used in the grammar section.  
    Non terminals that have an object value are listed first and then non terminals that have an 
    integer value are listed.  An object value means that it can be any type, it isn't set to a 
    specific type.  So it could be an Integer or a String or whatever. */
 
-non terminal String	PROG, LDECL, DECL ;
+non terminal String	EXP, INDICE;
+non terminal ArbreAbstrait PROG, LINST, INST, DECL, AFF;
 
 /* ----------------------------Grammar Section-------------------- */
 
 start with PROG ;
 
-PROG	::=	LDECL 
-		{: System.out.println("fini !") ; :}
+PROG	::=	LINST:li
+		{: RESULT = li; :}
 		;
 
-LDECL	::=	LDECL DECL
-	|	DECL
+LINST	::=	LINST:li INST:i
+		{: BlocDinstruction bdi = ((BlocDinstruction)li).ajouter(i);
+		 RESULT = bdi; :}
+	|	INST:i
+	{: BlocDinstruction bdi = new BlocDinstruction().ajouter(i);
+	 RESULT = bdi; :}
 		;
 
-DECL	::=	TYPEPRIMITIF:t IDF:i POINTVIRGULE
-		{: System.out.println(i + " de type primitif " + t) ; :}
+INST	::=	DECL:d POINTVIRGULE
+		{: RESULT = d; :}
+	|	AFF:a POINTVIRGULE
+	{: RESULT = a; :}
 		;
+
+DECL	::=	TYPEPRIMITIF:t IDF:i
+		{: System.out.println(i + " de type primitif " + t) ;
+		 RESULT = new DeclarationVariable(t, i); :}
+		;
+
+AFF		::=	TAB CROOUV INDICE:c1 CROFER EGAL TAB CROOUV INDICE:c2 CROFER
+		{: ArbreAbstrait test = new AffectCaseCase(Integer.parseInt(c1), Integer.parseInt(c2));
+		 RESULT = test; :}
+		;
+
+EXP   	::=	CSTE:c
+		{:  RESULT = c ;  :}
+	;
+
+INDICE 	::=	EXP:e
+		{:  RESULT = e ;  :}
+	;

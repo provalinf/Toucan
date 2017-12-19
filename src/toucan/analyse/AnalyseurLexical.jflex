@@ -1,7 +1,8 @@
 package toucan.analyse ;
 
 import java_cup.runtime.*;
-      
+import toucan.arbre.*;
+
 %%
    
 %class AnalyseurLexical
@@ -31,29 +32,31 @@ import java_cup.runtime.*;
 
 idf = [A-Za-z_][A-Za-z_0-9]*
 typePrimitif = int|char|boolean|byte|short|long|float|double
-
+constante = [0-9]+
 commentaireSlashSlash = [/][/].*
 commentaireSlashEtoile = [/][*]
 commentaireEtoileSlash = [*][/]
 
 %%
 
-/*<YYINITIAL> "["                	{ return symbol(CodesLexicaux.CROOUV); }
+<YYINITIAL> "tab"              	{ return symbol(CodesLexicaux.TAB); }
+<YYINITIAL> "["                	{ return symbol(CodesLexicaux.CROOUV); }
 <YYINITIAL> "]"                	{ return symbol(CodesLexicaux.CROFER); }
 <YYINITIAL> "("                	{ return symbol(CodesLexicaux.PARENTHEOUV); }
 <YYINITIAL> ")"                	{ return symbol(CodesLexicaux.PARENTHEFERM); }
 
-<YYINITIAL> "+"                	{ return symbol(CodesLexicaux.PLUS, yytext()); }
-<YYINITIAL> "-"                	{ return symbol(CodesLexicaux.MOINS, yytext()); }
-<YYINITIAL> "*"                	{ return symbol(CodesLexicaux.FOIS, yytext()); }
-<YYINITIAL> "/"                	{ return symbol(CodesLexicaux.DIVISE, yytext()); }
-<YYINITIAL> "%"                	{ return symbol(CodesLexicaux.MODULO, yytext()); }
+<YYINITIAL> "+"                	{ return symbol(CodesLexicaux.OP); }
+<YYINITIAL> "-"                	{ return symbol(CodesLexicaux.OP); }
+<YYINITIAL> "*"                	{ return symbol(CodesLexicaux.OP); }
+<YYINITIAL> "/"                	{ return symbol(CodesLexicaux.OP); }
+<YYINITIAL> "%"                	{ return symbol(CodesLexicaux.OP); }
 
 <YYINITIAL> "=="               	{ return symbol(CodesLexicaux.DOUBLEEGAL); }
 <YYINITIAL> "="                	{ return symbol(CodesLexicaux.EGAL); }
-*/<YYINITIAL> ";"                	{ return symbol(CodesLexicaux.POINTVIRGULE); }
+<YYINITIAL> ";"                	{ return symbol(CodesLexicaux.POINTVIRGULE); }
 
 <YYINITIAL> {typePrimitif}		{ return symbol(CodesLexicaux.TYPEPRIMITIF, yytext()); }
+<YYINITIAL> {constante}			{ return symbol(CodesLexicaux.CSTE, yytext()); }
 <YYINITIAL> {commentaireSlashSlash}			{}
 <YYINITIAL> {commentaireSlashEtoile}		{ yybegin(commentaire); }
 <YYINITIAL> {commentaireEtoileSlash}		{ yybegin(YYINITIAL); }
