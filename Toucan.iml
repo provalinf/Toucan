@@ -37,5 +37,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="java-cup-11a" level="project" />
   </component>
 </module>

@@ -1,4 +1,4 @@
-package analyse ;
+package toucan.analyse ;
 import java_cup.runtime.*;
 
 action code {: /* vide pour le moment */
