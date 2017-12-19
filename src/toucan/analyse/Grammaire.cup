@@ -57,14 +57,15 @@ parser code {:
    case a String value, are listed on the next line down. */
 
 terminal Symbol    CROOUV, CROFER, PARENTHEOUV, PARENTHEFERM, POINTVIRGULE, EGAL, DOUBLEEGAL, TAB;
-terminal String    TYPEPRIMITIF, IDF, CSTE, OP;
-   
-/* Non terminals used in the grammar section.  
-   Non terminals that have an object value are listed first and then non terminals that have an 
-   integer value are listed.  An object value means that it can be any type, it isn't set to a 
+terminal String    TYPEPRIMITIF, IDF, OP, CSTE;
+
+precedence left OP ;
+/* Non terminals used in the grammar section.
+   Non terminals that have an object value are listed first and then non terminals that have an
+   integer value are listed.  An object value means that it can be any type, it isn't set to a
    specific type.  So it could be an Integer or a String or whatever. */
 
-non terminal String	EXP, INDICE;
+non terminal ExpressionT EXP, INDICE;
 non terminal ArbreAbstrait PROG, LINST, INST, DECL, AFF;
 
 /* ----------------------------Grammar Section-------------------- */
@@ -95,12 +96,21 @@ DECL	::=	TYPEPRIMITIF:t IDF:i
 		;
 
 AFF		::=	TAB CROOUV INDICE:c1 CROFER EGAL TAB CROOUV INDICE:c2 CROFER
-		{: ArbreAbstrait test = new AffectCaseCase(Integer.parseInt(c1), Integer.parseInt(c2));
-		 RESULT = test; :}
+		{: ArbreAbstrait aCC = new AffectCaseCase(Integer.parseInt(((ExpressionT)c1).getCodeDecore()), Integer.parseInt(((ExpressionT)c2).getCodeDecore()));
+		 RESULT = aCC; :}
+		| TAB CROOUV INDICE:c CROFER EGAL EXP:v
+        {: ArbreAbstrait aCE = new AffectCaseExpression(Integer.parseInt(((ExpressionT)c).getCodeDecore()), v);
+         RESULT = aCE; :}
 		;
 
 EXP   	::=	CSTE:c
-		{:  RESULT = c ;  :}
+		{:  RESULT = new ExpressionT(c) ;  :}
+		|   EXP:e1 OP:o EXP:e2
+		{:   RESULT = new ExpressionT(e1+""+o+""+e2);   :}
+		|   PAROUV EXP:e PARFER
+		{:  RESULT = new ExpressionT("("+e+")"); :}
+		|   IDF:i
+		{:   RESULT = i;   :}
 	;
 
 INDICE 	::=	EXP:e
