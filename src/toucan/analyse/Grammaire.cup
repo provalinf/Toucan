@@ -56,19 +56,19 @@ parser code {:
    Terminals that have no value are listed first and then terminals that do have a value, in this 
    case a String value, are listed on the next line down. */
 
-terminal Symbol    CROOUV, CROFER, PARENTHEOUV, PARENTHEFERM, POINTVIRGULE, EGAL, DOUBLEEGAL, TAB;
+terminal Symbol    CROOUV, CROFER, PAROUV, PARFER, POINTVIRGULE, EGAL, DOUBLEEGAL, TAB;
 terminal String    TYPEPRIMITIF, IDF, OP, CSTE;
 
-precedence left OP ;
 /* Non terminals used in the grammar section.
    Non terminals that have an object value are listed first and then non terminals that have an
    integer value are listed.  An object value means that it can be any type, it isn't set to a
    specific type.  So it could be an Integer or a String or whatever. */
 
-non terminal ExpressionT EXP, INDICE;
+non terminal String EXP, INDICE;
 non terminal ArbreAbstrait PROG, LINST, INST, DECL, AFF;
 
 /* ----------------------------Grammar Section-------------------- */
+precedence left OP ;
 
 start with PROG ;
 
@@ -96,21 +96,27 @@ DECL	::=	TYPEPRIMITIF:t IDF:i
 		;
 
 AFF		::=	TAB CROOUV INDICE:c1 CROFER EGAL TAB CROOUV INDICE:c2 CROFER
-		{: ArbreAbstrait aCC = new AffectCaseCase(Integer.parseInt(((ExpressionT)c1).getCodeDecore()), Integer.parseInt(((ExpressionT)c2).getCodeDecore()));
+		{: ArbreAbstrait aCC = new AffectCaseCase(Integer.parseInt(c1), Integer.parseInt(c2));
 		 RESULT = aCC; :}
 		| TAB CROOUV INDICE:c CROFER EGAL EXP:v
-        {: ArbreAbstrait aCE = new AffectCaseExpression(Integer.parseInt(((ExpressionT)c).getCodeDecore()), v);
+        {: ArbreAbstrait aCE = new AutreInstruction("tab["+c+"]="+v);
          RESULT = aCE; :}
+        | IDF:n EGAL TAB CROOUV INDICE:i CROFER
+        {:   RESULT = new AffectVarCase(Integer.parseInt(i));   :}
+        | IDF:i EGAL EXP:e
+        {:   System.out.println("prout");
+        RESULT = new AutreInstruction(i+"="+e); :}
 		;
 
-EXP   	::=	CSTE:c
-		{:  RESULT = new ExpressionT(c) ;  :}
-		|   EXP:e1 OP:o EXP:e2
-		{:   RESULT = new ExpressionT(e1+""+o+""+e2);   :}
+EXP
+		::=EXP:e1 OP:o EXP:e2
+		{:   RESULT = e1+""+o+""+e2;   :}
 		|   PAROUV EXP:e PARFER
-		{:  RESULT = new ExpressionT("("+e+")"); :}
+		{:  RESULT = "("+e+")"; :}
 		|   IDF:i
 		{:   RESULT = i;   :}
+		|   CSTE:c
+        		{:  RESULT = c;  :}
 	;
 
 INDICE 	::=	EXP:e

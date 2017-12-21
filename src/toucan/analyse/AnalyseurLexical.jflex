@@ -42,8 +42,8 @@ commentaireEtoileSlash = [*][/]
 <YYINITIAL> "tab"              	{ return symbol(CodesLexicaux.TAB); }
 <YYINITIAL> "["                	{ return symbol(CodesLexicaux.CROOUV); }
 <YYINITIAL> "]"                	{ return symbol(CodesLexicaux.CROFER); }
-<YYINITIAL> "("                	{ return symbol(CodesLexicaux.PARENTHEOUV); }
-<YYINITIAL> ")"                	{ return symbol(CodesLexicaux.PARENTHEFERM); }
+<YYINITIAL> "("                	{ return symbol(CodesLexicaux.PAROUV); }
+<YYINITIAL> ")"                	{ return symbol(CodesLexicaux.PARFER); }
 
 <YYINITIAL> "+"                	{ return symbol(CodesLexicaux.OP); }
 <YYINITIAL> "-"                	{ return symbol(CodesLexicaux.OP); }

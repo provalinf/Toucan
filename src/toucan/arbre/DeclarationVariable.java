@@ -3,7 +3,7 @@ package toucan.arbre;
 /**
  * Created by Cyril on 14/12/2017.
  */
-public class DeclarationVariable extends ArbreAbstrait {
+public class DeclarationVariable extends Instruction {
 	private String type;
 	private String name;
 

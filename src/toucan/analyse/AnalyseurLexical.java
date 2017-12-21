@@ -675,11 +675,11 @@ public class AnalyseurLexical implements java_cup.runtime.Scanner {
             }
           case 21: break;
           case 7: 
-            { return symbol(CodesLexicaux.PARENTHEOUV);
+            { return symbol(CodesLexicaux.PAROUV);
             }
           case 22: break;
           case 8: 
-            { return symbol(CodesLexicaux.PARENTHEFERM);
+            { return symbol(CodesLexicaux.PARFER);
             }
           case 23: break;
           case 9: 
