@@ -11,7 +11,7 @@ public class AffectCaseCase extends Affectation {
 
 	@Override
 	public void getCodeDecore(String... indices) {
-		codeDecore = "affectationCaseCase.executer(LesCases, " + indices[0] + ", " + indices[1] + ");\ntab[" + indices[0] + "] = " + "tab[" + indices[1] + "];\n";
+		codeDecore = "affectationCaseCase.executer(lesCases, " + indices[0] + ", " + indices[1] + ");\n";
 	}
 
 	@Override

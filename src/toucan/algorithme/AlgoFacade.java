@@ -31,18 +31,18 @@ public class AlgoFacade extends Algo {
 		try {
 			AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new StringReader(modele.getAlgoPersoText())));
 			//analyseur.parse();
-			System.out.println(((ArbreAbstrait) analyseur.parse().value).getCodeDecore());
-			//algoUtil = (ArbreAbstrait) analyseur.parse().value;
+			//System.out.println(((ArbreAbstrait) analyseur.parse().value).getCodeDecore());
+			algoUtil = (ArbreAbstrait) analyseur.parse().value;
 		} catch (FileNotFoundException e) {
 			System.out.println("Fichier non trouve");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
-		/*kit.construireClasse(algoUtil.getCodeDecore());
+		kit.construireClasse(algoUtil.getCodeDecore());
 		kit.compiler();
 		kit.executer(lesCases);
-		System.out.println(kit.getLaClasse());*/
+		System.out.println(kit.getLaClasse());
 
 	}
 }

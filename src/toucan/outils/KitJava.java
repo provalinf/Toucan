@@ -46,10 +46,21 @@ public class KitJava {
 				"*/\n" +
 				"public class AlgoPerso extends Algo {\n" +
 				"int nbCases;\n" +
-				"int tab[] = new int[nbCases];\n" +
+				"int tab[];\n" +
+				"ComparaisonCaseCase comparaisonCaseCase;\n" +
+				"ComparaisonVarCase comparaisonVarCase;\n" +
+				"AffectationVarCase affectationVarCase;\n" +
+				"AffectationCaseCase affectationCaseCase;\n" +
+				"AffectationCaseVar affectationCaseVar;\n" +
 				"\n" +
 				"public AlgoPerso(LesCases lesCases) {\n" +
 				"super(lesCases, \"\");\n" +
+				"tab = new int[nbCases];\n" +
+				"comparaisonCaseCase = new ComparaisonCaseCase();\n" +
+				"comparaisonVarCase = new ComparaisonVarCase();\n" +
+				"affectationVarCase = new AffectationVarCase();\n" +
+				"affectationCaseCase = new AffectationCaseCase();\n" +
+				"affectationCaseVar = new AffectationCaseVar();\n" +
 				"}\n" +
 				"@Override\n" +
 				"public void trier() {\n" +

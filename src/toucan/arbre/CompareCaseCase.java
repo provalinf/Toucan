@@ -10,7 +10,7 @@ public class CompareCaseCase extends Comparaison {
 
 	@Override
 	public void getCodeDecore(String... indices) {
-		codeDecore = "ComparaisonCaseCase.executer(LesCases, "+indices[0]+", "+indices[1]+");\n";
+		codeDecore = "ComparaisonCaseCase.executer(lesCases, "+indices[0]+", "+indices[1]+");\n";
 	}
 
 	@Override

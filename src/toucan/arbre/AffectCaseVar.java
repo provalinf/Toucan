@@ -10,7 +10,7 @@ public class AffectCaseVar extends Affectation {
 
 	@Override
 	public void getCodeDecore(String... indices) {
-		codeDecore = "affectationCaseVar.executer(LesCases, " + indices[0] + ");\nvar = tab[" + indices[0] + "]\n";
+		codeDecore = "affectationCaseVar.executer(lesCases, " + indices[0] + ");\n";
 	}
 
 	@Override
