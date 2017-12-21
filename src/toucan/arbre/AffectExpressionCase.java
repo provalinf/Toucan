@@ -5,9 +5,9 @@ package toucan.arbre;
  */
 public class AffectExpressionCase extends Affectation {
 	private ExpressionT variable;
-	private int indice;
+	private String indice;
 
-	public AffectExpressionCase(ExpressionT variable, int indice) {
+	public AffectExpressionCase(ExpressionT variable, String indice) {
 		this.indice = indice;
 		this.variable = variable;
 	}

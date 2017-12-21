@@ -5,12 +5,12 @@ package toucan.arbre;
  */
 public class AffectVarCase extends Affectation {
 
-	public AffectVarCase(int x) {
+	public AffectVarCase(String x) {
 		getCodeDecore(x);
 	}
 
 	@Override
-	public void getCodeDecore(int... indices) {
+	public void getCodeDecore(String... indices) {
 		codeDecore = "affectationVarCase.executer(LesCases, " + indices[0] + ");\nvar = tab[" + indices[0] + "];";
 	}
 

@@ -7,7 +7,7 @@ public abstract class ArbreAbstrait {
 
 	protected String codeDecore;
 
-	public void getCodeDecore(int... indices) {
+	public void getCodeDecore(String... indices) {
 	}
 
 	public String getCodeDecore() {

@@ -17,7 +17,7 @@ import toucan.arbre.*;
 %eofval}
 
 %cup
-   
+
 %{
   private Symbol symbol(int type) {
 	return new Symbol(type, yyline, yycolumn) ;
@@ -28,16 +28,29 @@ import toucan.arbre.*;
   }
 %}
 
-%state commentaire
 
 idf = [A-Za-z_][A-Za-z_0-9]*
 typePrimitif = int|char|boolean|byte|short|long|float|double
 constante = [0-9]+
-commentaireSlashSlash = [/][/].*
-commentaireSlashEtoile = [/][*]
-commentaireEtoileSlash = [*][/]
+
+LineTerminator = \r|\n|\r\n
+InputCharacter = [^\r\n]
+WhiteSpace     = {LineTerminator} | [ \t\f]
+/* comments */
+Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
+TraditionalComment   = "/*" [^*] ~"*/" | "/*" "*"+ "/"
+// Comment can be the last line of the file, without line terminator.
+EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}?
+DocumentationComment = "/**" {CommentContent} "*"+ "/"
+CommentContent       = ( [^*] | \*+ [^/*] )*
+
 
 %%
+
+/* comments */
+<YYINITIAL> {Comment}           { /* ignore */ }
+/* whitespace */
+<YYINITIAL> {WhiteSpace}        { /* ignore */ }
 
 <YYINITIAL> "tab"              	{ return symbol(CodesLexicaux.TAB); }
 <YYINITIAL> "["                	{ return symbol(CodesLexicaux.CROOUV); }
@@ -45,11 +58,11 @@ commentaireEtoileSlash = [*][/]
 <YYINITIAL> "("                	{ return symbol(CodesLexicaux.PAROUV); }
 <YYINITIAL> ")"                	{ return symbol(CodesLexicaux.PARFER); }
 
-<YYINITIAL> "+"                	{ return symbol(CodesLexicaux.OP); }
-<YYINITIAL> "-"                	{ return symbol(CodesLexicaux.OP); }
-<YYINITIAL> "*"                	{ return symbol(CodesLexicaux.OP); }
-<YYINITIAL> "/"                	{ return symbol(CodesLexicaux.OP); }
-<YYINITIAL> "%"                	{ return symbol(CodesLexicaux.OP); }
+<YYINITIAL> "+"                	{ return symbol(CodesLexicaux.OP, yytext()); }
+<YYINITIAL> "-"                	{ return symbol(CodesLexicaux.OP, yytext()); }
+<YYINITIAL> "*"                	{ return symbol(CodesLexicaux.OP, yytext()); }
+<YYINITIAL> "/"                	{ return symbol(CodesLexicaux.OP, yytext()); }
+<YYINITIAL> "%"                	{ return symbol(CodesLexicaux.OP, yytext()); }
 
 <YYINITIAL> "=="               	{ return symbol(CodesLexicaux.DOUBLEEGAL); }
 <YYINITIAL> "="                	{ return symbol(CodesLexicaux.EGAL); }
@@ -57,11 +70,8 @@ commentaireEtoileSlash = [*][/]
 
 <YYINITIAL> {typePrimitif}		{ return symbol(CodesLexicaux.TYPEPRIMITIF, yytext()); }
 <YYINITIAL> {constante}			{ return symbol(CodesLexicaux.CSTE, yytext()); }
-<YYINITIAL> {commentaireSlashSlash}			{}
-<YYINITIAL> {commentaireSlashEtoile}		{ yybegin(commentaire); }
-<YYINITIAL> {commentaireEtoileSlash}		{ yybegin(YYINITIAL); }
 
-{idf}			{ return symbol(CodesLexicaux.IDF, yytext()) ; }
+<YYINITIAL> {idf}			{ return symbol(CodesLexicaux.IDF, yytext()) ; }
 
 .                       {}
-\n                      {}
+\n|\r                   {}

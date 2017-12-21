@@ -74,49 +74,48 @@ start with PROG ;
 
 PROG	::=	LINST:li
 		{: RESULT = li; :}
-		;
+	;
 
 LINST	::=	LINST:li INST:i
 		{: BlocDinstruction bdi = ((BlocDinstruction)li).ajouter(i);
 		 RESULT = bdi; :}
-	|	INST:i
-	{: BlocDinstruction bdi = new BlocDinstruction().ajouter(i);
-	 RESULT = bdi; :}
-		;
+		|	INST:i
+		{: BlocDinstruction bdi = new BlocDinstruction().ajouter(i);
+		 RESULT = bdi; :}
+	;
 
 INST	::=	DECL:d POINTVIRGULE
 		{: RESULT = d; :}
-	|	AFF:a POINTVIRGULE
-	{: RESULT = a; :}
-		;
+		|	AFF:a POINTVIRGULE
+		{: RESULT = a; :}
+	;
 
 DECL	::=	TYPEPRIMITIF:t IDF:i
 		{: System.out.println(i + " de type primitif " + t) ;
 		 RESULT = new DeclarationVariable(t, i); :}
-		;
+	;
 
-AFF		::=	TAB CROOUV INDICE:c1 CROFER EGAL TAB CROOUV INDICE:c2 CROFER
-		{: ArbreAbstrait aCC = new AffectCaseCase(Integer.parseInt(c1), Integer.parseInt(c2));
+AFF		::=	TAB CROOUV INDICE:c1 CROFER EGAL TAB CROOUV INDICE:c2 CROFER		// tab[1]=tab[2]
+		{: ArbreAbstrait aCC = new AffectCaseCase(c1, c2);
 		 RESULT = aCC; :}
-		| TAB CROOUV INDICE:c CROFER EGAL EXP:v
-        {: ArbreAbstrait aCE = new AutreInstruction("tab["+c+"]="+v);
-         RESULT = aCE; :}
-        | IDF:n EGAL TAB CROOUV INDICE:i CROFER
-        {:   RESULT = new AffectVarCase(Integer.parseInt(i));   :}
-        | IDF:i EGAL EXP:e
-        {:   System.out.println("prout");
-        RESULT = new AutreInstruction(i+"="+e); :}
-		;
+		| TAB CROOUV INDICE:c CROFER EGAL EXP:v									// tab[1]=exp
+		{: ArbreAbstrait aCE = new AutreInstruction("tab["+c+"]="+v);
+		 RESULT = aCE; :}
+		| IDF:n EGAL TAB CROOUV INDICE:i CROFER									// toto=tab[2]
+		{:   RESULT = new AffectVarCase(i);   :}
+		| IDF:i EGAL EXP:e														// toto=exp
+		{:   RESULT = new AutreInstruction(i+"="+e); :}
+	;
 
 EXP
-		::=EXP:e1 OP:o EXP:e2
+		::=	EXP:e1 OP:o EXP:e2
 		{:   RESULT = e1+""+o+""+e2;   :}
 		|   PAROUV EXP:e PARFER
 		{:  RESULT = "("+e+")"; :}
 		|   IDF:i
 		{:   RESULT = i;   :}
 		|   CSTE:c
-        		{:  RESULT = c;  :}
+		{:  RESULT = c;  :}
 	;
 
 INDICE 	::=	EXP:e
