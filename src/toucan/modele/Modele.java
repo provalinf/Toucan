@@ -1,7 +1,9 @@
 package toucan.modele;
 
 import toucan.algorithme.Algo;
+import toucan.exceptions.ToucanException;
 
+import javax.swing.tree.ExpandVetoException;
 import java.awt.*;
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -107,7 +109,11 @@ public class Modele extends Observable implements Runnable {
 		setThreadLaunch(true);
 		refreshUI();
 		if (!isMouvCalc()) {
-			collectionAlgo.get(getSelectionAlgo()).trier();
+			try {
+				collectionAlgo.get(getSelectionAlgo()).trier();
+			}
+			catch (Exception e){
+			}
 			setMouvCalc(true);
 		}
 		setThreadLaunch(false);

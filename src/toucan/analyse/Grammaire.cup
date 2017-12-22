@@ -93,18 +93,22 @@ INST	::=	DECL:d POINTVIRGULE
 DECL	::=	TYPEPRIMITIF:t IDF:i
 		{: System.out.println(i + " de type primitif " + t) ;
 		 RESULT = new DeclarationVariable(t, i); :}
+		 |  TYPEPRIMITIF:t IDF:i EGAL EXP:e
+		 {:  RESULT = new DeclarationVariableInitialisation(t, i, e);   :}
+		 |  TYPEPRIMITIF:t IDF:i EGAL TAB CROOUV INDICE:e CROFER
+		 {:  RESULT = new AutreInstruction(t+" "+i+"= tab["+e+"];");   :}
 	;
 
 AFF		::=	TAB CROOUV INDICE:c1 CROFER EGAL TAB CROOUV INDICE:c2 CROFER		// tab[1]=tab[2]
 		{: ArbreAbstrait aCC = new AffectCaseCase(c1, c2);
 		 RESULT = aCC; :}
 		| TAB CROOUV INDICE:c CROFER EGAL EXP:v									// tab[1]=exp
-		{: ArbreAbstrait aCE = new AutreInstruction("tab["+c+"]="+v);
+		{: ArbreAbstrait aCE = new AffectCaseVar(c);
 		 RESULT = aCE; :}
 		| IDF:n EGAL TAB CROOUV INDICE:i CROFER									// toto=tab[2]
 		{:   RESULT = new AffectVarCase(i);   :}
 		| IDF:i EGAL EXP:e														// toto=exp
-		{:   RESULT = new AutreInstruction(i+"="+e); :}
+		{:   RESULT = new AutreInstruction(i+"="+e+";"); :}
 	;
 
 EXP

@@ -55,6 +55,7 @@ public class KitJava {
 				"\n" +
 				"public AlgoPerso(LesCases lesCases) {\n" +
 				"super(lesCases, \"\");\n" +
+				"nbCases = lesCases.getNbCases();\n" +
 				"tab = new int[nbCases];\n" +
 				"comparaisonCaseCase = new ComparaisonCaseCase();\n" +
 				"comparaisonVarCase = new ComparaisonVarCase();\n" +

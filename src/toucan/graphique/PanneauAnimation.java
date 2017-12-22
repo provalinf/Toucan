@@ -2,8 +2,11 @@ package toucan.graphique;
 
 import toucan.modele.Modele;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,6 +17,7 @@ public class PanneauAnimation extends JPanel {
 	private int tempsActuel;
 
 	private boolean pause;
+	private Image img;
 
 	public PanneauAnimation(Modele modele) {
 		this.modele = modele;
@@ -21,6 +25,11 @@ public class PanneauAnimation extends JPanel {
 		resetAndInit();
 		setMinimumSize(new Dimension(600, 400));
 		setPreferredSize(new Dimension(600, 400));
+		try {
+			img = ImageIO.read(new File("C:/Users/Cyril/Desktop/toucan.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		repaint();    // Appel paintComponent(...)
 	}
 
@@ -33,9 +42,10 @@ public class PanneauAnimation extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;
 		int w = getWidth();
 		int h = getHeight();
-		GradientPaint gp = new GradientPaint(-w, -h, Color.LIGHT_GRAY, w, h, Color.WHITE);
-		g2.setPaint(gp);
-		g2.fillRect(0, 0, w, h);
+		//GradientPaint gp = new GradientPaint(-w, -h, Color.LIGHT_GRAY, w, h, Color.WHITE);
+		//g2.setPaint(gp);
+		g2.drawImage(img, 118, 116, 960/2, 562/2, null);
+		//g2.fillRect(0, 0, w, h);
 		//System.out.println(". " + modele.getMaxTemps() + " " + tempsActuel);
 		lesCasesAnimation.dessiner(g, tempsActuel);    // temps à incrementer
 
