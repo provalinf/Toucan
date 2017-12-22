@@ -3,9 +3,11 @@ package toucan.modele;
 import toucan.algorithme.Algo;
 import toucan.exceptions.ToucanException;
 
+import javax.imageio.ImageIO;
 import javax.swing.tree.ExpandVetoException;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
@@ -40,15 +42,26 @@ public class Modele extends Observable implements Runnable {
 
 	private String algoPersoText;
 
+	private Image background;
+
 	public Modele(int nbCases) {
 		lesCases = new LesCases(nbCases);
 		vitesseAnimation = 2;
+		loadImage();
 		declareAlgo();
 		initAndReset();
 	}
 
 	public Modele() {
 		this(0);
+	}
+
+	private void loadImage() {
+		try {
+			background = ImageIO.read(getClass().getResource("/toucan/img/toucan.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void declareAlgo() {
@@ -244,6 +257,10 @@ public class Modele extends Observable implements Runnable {
 
 	public String getAlgoPersoText() {
 		return algoPersoText;
+	}
+
+	public Image getBackground() {
+		return background;
 	}
 
 	public void setNbCases(int nbCases) {
