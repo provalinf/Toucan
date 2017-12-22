@@ -33,24 +33,16 @@ idf = [A-Za-z_][A-Za-z_0-9]*
 typePrimitif = int|char|boolean|byte|short|long|float|double
 constante = [0-9]+
 
-LineTerminator = \r|\n|\r\n
 InputCharacter = [^\r\n]
-WhiteSpace     = {LineTerminator} | [ \t\f]
-/* comments */
+LineTerminator = \r|\n|\r\n
 Comment = {TraditionalComment} | {EndOfLineComment} | {DocumentationComment}
-TraditionalComment   = "/*" [^*] ~"*/" | "/*" "*"+ "/"
-// Comment can be the last line of the file, without line terminator.
-EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}?
+TraditionalComment = "/*" [^*] ~"*/" | "/*" "*"+ "/"
+EndOfLineComment = "//" {InputCharacter}* {LineTerminator}
 DocumentationComment = "/**" {CommentContent} "*"+ "/"
-CommentContent       = ( [^*] | \*+ [^/*] )*
+CommentContent = ( [^*] | \*+ [^/*] )*
 
 
 %%
-
-/* comments */
-<YYINITIAL> {Comment}           { /* ignore */ }
-/* whitespace */
-<YYINITIAL> {WhiteSpace}        { /* ignore */ }
 
 <YYINITIAL> "tab"              	{ return symbol(CodesLexicaux.TAB); }
 <YYINITIAL> "["                	{ return symbol(CodesLexicaux.CROOUV); }
@@ -72,6 +64,6 @@ CommentContent       = ( [^*] | \*+ [^/*] )*
 <YYINITIAL> {constante}			{ return symbol(CodesLexicaux.CSTE, yytext()); }
 
 <YYINITIAL> {idf}			{ return symbol(CodesLexicaux.IDF, yytext()) ; }
-
+<YYINITIAL> {Comment}                   { /*Ignore */ }
 .                       {}
 \n|\r                   {}
