@@ -40,23 +40,29 @@ public class AffectationVarCase implements IAnimation {
 
 		v1.stable(posv1[1] - posC1[1] + posC1[0] - posv1[0] - 2 * TAILLE_CASE); // somme de tout les temps que c1 travaille
 		c1.descendre(posv1[1] - posC1[1]);
-		c1.gauche(posC1[0] - posv1[0] - 2 * TAILLE_CASE);
+		if(posC1[0] - posv1[0] > 2 * TAILLE_CASE) {
+			c1.gauche(posC1[0] - posv1[0] - 2 * TAILLE_CASE);
+		}
 
 		c1.monter(TAILLE_CASE);
 		v1.monter(TAILLE_CASE);
 		v1.stable(TAILLE_CASE + TAILLE_CASE / 5);
 		v1.setValeur(c1.getValeurActuel());
 		v1.stable(TAILLE_CASE);
-		c1.gauche(TAILLE_CASE + TAILLE_CASE / 5);
 
+		c1.gauche(TAILLE_CASE + TAILLE_CASE / 5);
 		c1.droite(TAILLE_CASE + TAILLE_CASE / 5);
+
 		v1.descendre(TAILLE_CASE);
 		c1.descendre(TAILLE_CASE);
 
 		v1.stable(posC1[0] - posv1[0] - 2 * TAILLE_CASE + posv1[1] - TAILLE_CASE);
 		v1.stable(TAILLE_CASE / 5);
 
-		c1.droite(posC1[0] - posv1[0] - 2 * TAILLE_CASE);
+		if(posC1[0] - posv1[0] > 2 * TAILLE_CASE){
+			c1.droite(posC1[0] - posv1[0] - 2 * TAILLE_CASE);
+		}
+
 		c1.monter(posv1[1] - posC1[1]);
 
 		int maxtemps = cases.getMaxTemps();
