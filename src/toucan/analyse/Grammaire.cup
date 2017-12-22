@@ -1,7 +1,7 @@
 package toucan.analyse ;
-import toucan.exceptions.CompilationException;
 import java_cup.runtime.*;
 import toucan.arbre.*;
+import toucan.exceptions.*;
 
 action code {: /* vide pour le moment */
 	    :} ;
@@ -42,7 +42,8 @@ parser code {:
    
         /* Print the contents of the StringBuffer 'm', which contains an error message, out on 
            a line. */
-        System.err.println(m);
+        //System.err.println(m);
+        throw new CompilationException(m.toString());
     }
     /* Change the method report_fatal_error so when it reports a fatal error it will display the 
        line and column number of where the fatal error occurred in the input as well as the reason
@@ -92,7 +93,7 @@ INST	::=	DECL:d POINTVIRGULE
 	;
 
 DECL	::=	TYPEPRIMITIF:t IDF:i
-		{: System.out.println(i + " de type primitif " + t) ;
+		{: /*System.out.println(i + " de type primitif " + t) ;*/
 		 RESULT = new DeclarationVariable(t, i); :}
 		 |  TYPEPRIMITIF:t IDF:i EGAL EXP:e
 		 {:  RESULT = new DeclarationVariableInitialisation(t, i, e);   :}

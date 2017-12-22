@@ -1,10 +1,8 @@
 package toucan.modele;
 
 import toucan.algorithme.Algo;
-import toucan.exceptions.ToucanException;
 
 import javax.imageio.ImageIO;
-import javax.swing.tree.ExpandVetoException;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -20,11 +18,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Modele extends Observable implements Runnable {
 
-	public static final int NORD = 0;
+	/*public static final int NORD = 0;
 	public static final int SUD = 1;
 	public static final int EST = 2;
 	public static final int OUEST = 3;
-	public static final int STABLE = 4;
+	public static final int STABLE = 4;*/
 
 	public static final int TAILLE_CASE = 50;
 	public static final Color DEFAULT_COLOR_CASE = Color.BLACK;
@@ -43,6 +41,7 @@ public class Modele extends Observable implements Runnable {
 	private String algoPersoText;
 
 	private Image background;
+	private String compilationErrorMessage;
 
 	public Modele(int nbCases) {
 		lesCases = new LesCases(nbCases);
@@ -124,9 +123,11 @@ public class Modele extends Observable implements Runnable {
 		if (!isMouvCalc()) {
 			try {
 				collectionAlgo.get(getSelectionAlgo()).trier();
-			}
-			catch (Exception e){
-				e.printStackTrace();
+				setCompilationErrorMessage("Compilation & exécution !");
+			} catch (Exception e) {
+				//System.out.println(e.getMessage());
+				setCompilationErrorMessage(e.getMessage());
+				refreshUI();
 			}
 			setMouvCalc(true);
 		}
@@ -158,7 +159,7 @@ public class Modele extends Observable implements Runnable {
 	}
 
 	public void genererMouvements() {
-		Thread creerMouv = new Thread((Runnable) this);
+		Thread creerMouv = new Thread(this);
 		creerMouv.start();
 	}
 
@@ -263,15 +264,23 @@ public class Modele extends Observable implements Runnable {
 		return background;
 	}
 
+	public String getCompilationErrorMessage() {
+		return compilationErrorMessage;
+	}
+
 	public void setNbCases(int nbCases) {
-		if(nbCases!=getNbCases()){
-			while (nbCases>getNbCases()){
+		if (nbCases != getNbCases()) {
+			while (nbCases > getNbCases()) {
 				Case prevVar = getCase(getNbCases() - 1);
 				creerCase(prevVar.getPosX(0) + 60, prevVar.getPosY(0), ThreadLocalRandom.current().nextInt(-100, 100));
 			}
-			while (nbCases<getNbCases()){
+			while (nbCases < getNbCases()) {
 				supprCase();
 			}
 		}
+	}
+
+	public void setCompilationErrorMessage(String compilationErrorMessage) {
+		this.compilationErrorMessage = compilationErrorMessage;
 	}
 }

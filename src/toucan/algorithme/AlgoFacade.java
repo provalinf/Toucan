@@ -7,7 +7,6 @@ import toucan.modele.LesCases;
 import toucan.modele.Modele;
 import toucan.outils.KitJava;
 
-import java.io.FileNotFoundException;
 import java.io.StringReader;
 
 /**
@@ -24,25 +23,20 @@ public class AlgoFacade extends Algo {
 	}
 
 	@Override
-	public void trier() {
+	public void trier() throws Exception {
 		KitJava kit = KitJava.getInstance();
 
 		ArbreAbstrait algoUtil = null;
-		try {
-			AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new StringReader(modele.getAlgoPersoText())));
-			//analyseur.parse();
-			//System.out.println(((ArbreAbstrait) analyseur.parse().value).getCodeDecore());
-			algoUtil = (ArbreAbstrait) analyseur.parse().value;
-		} catch (FileNotFoundException e) {
-			System.out.println("Fichier non trouve");
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		AnalyseurSyntaxique analyseur = new AnalyseurSyntaxique(new AnalyseurLexical(new StringReader(modele.getAlgoPersoText())));
+		//analyseur.parse();
+		//System.out.println(((ArbreAbstrait) analyseur.parse().value).getCodeDecore());
+		algoUtil = (ArbreAbstrait) analyseur.parse().value;
+
 
 		kit.construireClasse(algoUtil.getCodeDecore());
 		kit.compiler();
 		kit.executer(lesCases);
-		System.out.println(kit.getLaClasse());
+		//System.out.println(kit.getLaClasse());
 
 	}
 }

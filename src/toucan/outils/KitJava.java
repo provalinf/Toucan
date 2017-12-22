@@ -1,6 +1,7 @@
 package toucan.outils;
 
 import toucan.algorithme.Algo;
+import toucan.exceptions.CompilationException;
 import toucan.modele.LesCases;
 
 import javax.tools.JavaCompiler;
@@ -9,7 +10,6 @@ import javax.tools.ToolProvider;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * Created by Cyril on 08/11/2017.
  */
 public class KitJava {
-	private  static KitJava instance = new KitJava();
+	private static KitJava instance = new KitJava();
 	private JavaCompiler compiler;
 	private ClassFileManager fileManager;
 	private static String nomClasse = "AlgoPerso";
@@ -87,12 +87,14 @@ public class KitJava {
 			Logger.getLogger(KitJava.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
-		System.out.println("compilation du code : ");
+		/*System.out.println("compilation du code : ");
 		System.out.println(laClasse);
 		System.out.println("-------------------------------------");
 		System.out.println("sortie d'erreur de la compilation : ");
 		System.out.println(sortieErreur);
-		System.out.println("-------------------------------------");
+		System.out.println("-------------------------------------");*/
+
+		if (!sortieErreur.toString().isEmpty()) throw new CompilationException(sortieErreur.toString());
 	}
 
 	private Iterable<JavaSource> getJavaSourceFromString(String fileName, String code) {
@@ -102,7 +104,7 @@ public class KitJava {
 	public void executer(LesCases lesCases) {
 		try {
 			String nomExecutable = nomPackage + "." + nomClasse;
-			System.out.println("nomexécutable : " + nomExecutable);
+			//System.out.println("nomexécutable : " + nomExecutable);
 			//Object instance = fileManager.getClassLoader(javax.tools.StandardLocation.CLASS_PATH).loadClass("toucan.algorithme.AlgoPerso");
 			ClassLoader cl = fileManager.getClassLoader(javax.tools.StandardLocation.CLASS_PATH);
 			Class<?> classe = Class.forName("toucan.algorithme.AlgoPerso", true, cl);
@@ -111,13 +113,13 @@ public class KitJava {
 
 			((Algo) instance).trier();
 
-			System.out.println("Résultat de l'exécution : ");
-			//System.out.println(res);
-			System.out.println("-------------------------------------");
+			/*System.out.println("Résultat de l'exécution : ");
+			System.out.println(res);
+			System.out.println("-------------------------------------");*/
 
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
 			Logger.getLogger(KitJava.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (NoSuchMethodException | InvocationTargetException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

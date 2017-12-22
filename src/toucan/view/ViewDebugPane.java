@@ -30,5 +30,6 @@ public class ViewDebugPane extends JEditorPane implements Observer {
 	public void update(Observable o, Object arg) {
 		setEnabled(((Modele) o).isAlgoCustom());
 		setVisible(((Modele) o).isAlgoCustom());
+		setText(((Modele) o).getCompilationErrorMessage());
 	}
 }

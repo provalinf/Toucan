@@ -46,7 +46,7 @@ public class ViewEditorPane extends JEditorPane implements Observer {
 	private void setEditor(Modele m) {
 		m.setAlgoPersoText(this.getText());
 		if (!m.isMouvCalc()) return;
-		System.out.println("reset");
+		//System.out.println("reset");
 		m.stopAndReset();
 		panAnim.resetAndInit();
 		m.refreshUI();

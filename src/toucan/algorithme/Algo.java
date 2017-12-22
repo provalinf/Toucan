@@ -18,7 +18,7 @@ public abstract class Algo {
 		return algoCustom;
 	}
 
-	public abstract void trier();
+	public abstract void trier() throws Exception;
 
 	public String getNomAlgo() {
 		return nomAlgo;
