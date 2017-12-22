@@ -176,6 +176,10 @@ public class Modele extends Observable implements Runnable {
 		lesCases.creerCases(xInit, yInit, val);
 	}
 
+	public void supprCase() {
+		lesCases.supprCase();
+	}
+
 	public void creerVariable(int xInit, int yInit, int val) {
 		lesCases.creerVariable(xInit, yInit, val);
 	}
@@ -240,5 +244,17 @@ public class Modele extends Observable implements Runnable {
 
 	public String getAlgoPersoText() {
 		return algoPersoText;
+	}
+
+	public void setNbCases(int nbCases) {
+		if(nbCases!=getNbCases()){
+			while (nbCases>getNbCases()){
+				Case prevVar = getCase(getNbCases() - 1);
+				creerCase(prevVar.getPosX(0) + 60, prevVar.getPosY(0), ThreadLocalRandom.current().nextInt(-100, 100));
+			}
+			while (nbCases<getNbCases()){
+				supprCase();
+			}
+		}
 	}
 }

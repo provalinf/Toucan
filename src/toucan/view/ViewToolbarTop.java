@@ -4,6 +4,7 @@ import toucan.graphique.PanneauAnimation;
 import toucan.modele.Modele;
 
 import javax.swing.*;
+import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 import java.util.Observer;
@@ -15,7 +16,7 @@ public class ViewToolbarTop extends JToolBar implements Observer {
 
 	private PanneauAnimation panAnim;
 	private JButton random;
-	private JSlider slideControl, slideSpeed;
+	private JSlider slideArraySize;
 
 	public ViewToolbarTop(Observable model, PanneauAnimation panAnim) {
 		model.addObserver(this);
@@ -32,6 +33,20 @@ public class ViewToolbarTop extends JToolBar implements Observer {
 			m.setRandomValeurs();
 			m.refreshUI();
 		});
+
+		slideArraySize = (JSlider) add(new JSlider(2,7,4));
+		slideArraySize.setMajorTickSpacing(1);
+		slideArraySize.setMinorTickSpacing(1);
+		slideArraySize.setPaintTicks(true);
+		slideArraySize.setPaintLabels(true);
+		slideArraySize.addChangeListener(e -> {
+					m.setNbCases(slideArraySize.getValue());
+					m.stopAndReset();
+					panAnim.resetAndInit();
+					m.refreshUI();
+				}
+		);
+
 		setButtonState(m);
 	}
 

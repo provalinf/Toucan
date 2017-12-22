@@ -82,6 +82,10 @@ public class LesCases {
 		lesCases.add(getNbCases(), new Case(xInit, yInit, val));
 	}
 
+	public void supprCase(){
+		lesCases.remove(getNbCases()-1);
+	}
+
 	public void creerVariable(int xInit, int yInit, int val) {
 		lesCases.add(new Case(xInit, yInit, val));
 		NbVariable++;
@@ -124,5 +128,4 @@ public class LesCases {
 
 		return sb.toString();
 	}
-
 }
