@@ -113,6 +113,7 @@ public class Modele extends Observable implements Runnable {
 				collectionAlgo.get(getSelectionAlgo()).trier();
 			}
 			catch (Exception e){
+				e.printStackTrace();
 			}
 			setMouvCalc(true);
 		}

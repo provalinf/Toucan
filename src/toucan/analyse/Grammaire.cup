@@ -1,4 +1,5 @@
 package toucan.analyse ;
+import toucan.exceptions.CompilationException;
 import java_cup.runtime.*;
 import toucan.arbre.*;
 
@@ -12,10 +13,10 @@ parser code {:
        occurred in the input as well as the reason for the error which is passed into the method
        in the String 'message'. */
     public void report_error(String message, Object info) {
-   
+
         /* Create a StringBuffer called 'm' with the string 'Error' in it. */
         StringBuffer m = new StringBuffer("Error");
-   
+
         /* Check if the information passed to the method is the same type as the type 
            java_cup.runtime.Symbol. */
         if (info instanceof java_cup.runtime.Symbol) {
@@ -48,7 +49,7 @@ parser code {:
        for the fatal error which is passed into the method in the object 'message' and then exit.*/
     public void report_fatal_error(String message, Object info) {
         report_error(message, info);
-        System.exit(1);
+        //System.exit(1);
     }
 :};
 /* ------------Declaration of Terminals and Non Terminals Section----------- */
